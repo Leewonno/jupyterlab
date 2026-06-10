@@ -1,0 +1,14 @@
+/*-----------------------------------------------------------------------------
+| Copyright (c) Jupyter Development Team.
+| Distributed under the terms of the Modified BSD License.
+|----------------------------------------------------------------------------*/
+
+.jp-submit-button {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.jp-submit-button[aria-pressed='true'] {
+  /* pressed 스타일 무효화 */
+  box-shadow: none;
+}

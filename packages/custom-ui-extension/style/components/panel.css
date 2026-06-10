@@ -1,0 +1,48 @@
+/*-----------------------------------------------------------------------------
+| 패널 스타일 오버라이드 파일
+|----------------------------------------------------------------------------*/
+
+/* 메인 컨테이너 */
+#jp-main-content-panel {
+  top: 60px !important;
+  margin: 8px 0;
+  height: calc(100% - 100px) !important;
+}
+
+/* 메인 패널 컨테이너 (사이드 바 제외) */
+#jp-main-split-panel {
+  margin: 0 10px !important;
+  width: calc(100% - 20px) !important;
+}
+
+/* 상단 패널 */
+#jp-top-panel {
+  background-color: var(--layout-color);
+  height: 60px !important;
+  align-items: center;
+  border-bottom: none !important;
+}
+
+/* 상단 패널 메뉴 영역 Wrapper */
+#jp-menu-panel {
+  height: 100%;
+  background-color: var(--layout-color);
+  display: flex;
+  align-items: flex-end;
+}
+
+/* 상단 패널 메뉴 영역 (File, Edit, View, Run...) */
+#jp-MainMenu {
+  background-color: transparent;
+}
+
+/* 상단 패널 메인 로고 영역 */
+#jp-MainLogo {
+  /* 50px */
+  width: calc(
+    var(--jp-private-sidebar-tab-width) + var(--jp-border-width) + 17px
+  ) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

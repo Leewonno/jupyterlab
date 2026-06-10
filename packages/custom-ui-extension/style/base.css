@@ -1,0 +1,37 @@
+/*-----------------------------------------------------------------------------
+| Copyright (c) Jupyter Development Team.
+| Distributed under the terms of the Modified BSD License.
+|----------------------------------------------------------------------------*/
+
+/* 컴포넌트별 스타일을 여기서 관리합니다.
+   새 컴포넌트 파일을 만들면 아래에 @import를 추가하세요. */
+
+@import url('./components/sidebar.css');
+@import url('components/panel.css');
+@import url('./components/notebook.css');
+@import url('./components/launcher.css');
+@import url('./components/terminal.css');
+
+/* 전역 설정 */
+:root {
+  --layout-color: #f3fbf6;
+  --container-color: #ebf6f0;
+  --selected-color: #d2ead9;
+  --hover-color: #e1e5e9;
+}
+
+#main {
+  border: none;
+  margin: 8px 12px 0;
+}
+
+/* 툴바 */
+.jp-Toolbar {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.jp-ThemedContainer {
+  background-color: var(--layout-color);
+}
