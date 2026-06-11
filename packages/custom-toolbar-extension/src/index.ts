@@ -14,6 +14,7 @@ import { INotebookTracker } from '@jupyterlab/notebook';
 import { ToolbarButton } from '@jupyterlab/ui-components';
 
 const SUBMIT_API_URL = 'http://127.0.0.1:9000/file/';
+const CONFIRM_MESSAGE = '파일이 저장 후 전송됩니다. 계속하시겠습니까?';
 
 async function submitFile(
   path: string,
@@ -34,13 +35,13 @@ async function submitFile(
   }
 
   const result = await response.json();
-  alert(`전송 완료 (${result.saved?.length ?? 0}개 파일)`);
+  alert(`제출 완료 (${result.saved?.length ?? 0}개 파일)`);
 }
 
 function makeButton(onClick: () => Promise<void>): ToolbarButton {
   return new ToolbarButton({
-    label: '전송',
-    tooltip: '현재 파일 전송',
+    label: '저장 및 제출',
+    tooltip: '현재 파일 제출',
     className: 'jp-submit-button',
     onClick
   });
@@ -65,19 +66,21 @@ const plugin: JupyterFrontEndPlugin<void> = {
     // Notebook panels (.ipynb)
     notebookTracker.widgetAdded.connect((_, panel) => {
       const button = makeButton(async () => {
-        const path = panel.context?.path;
+        const context = panel.context;
+        const path = context?.path;
         if (!path) {
-          alert('전송할 파일이 없습니다.');
+          alert('제출할 파일이 없습니다.');
           return;
         }
+        if (!confirm(CONFIRM_MESSAGE)) return;
         try {
+          await context.save();
           const model = await contents.get(path, { content: true });
           const content = JSON.stringify(model.content, null, 2);
           await submitFile(path, content, 'application/json');
         } catch (err) {
-          console.error('전송 실패', err);
           alert(
-            `전송 실패: ${err instanceof Error ? err.message : String(err)}`
+            `제출 실패: ${err instanceof Error ? err.message : String(err)}`
           );
         }
       });
@@ -88,20 +91,20 @@ const plugin: JupyterFrontEndPlugin<void> = {
     // File editor panels (.js, .md, .py, .txt, etc.)
     editorTracker.widgetAdded.connect((_, panel) => {
       const button = makeButton(async () => {
-        const path = panel.context?.path;
-        console.log(path);
-        if (!confirm('저장된 파일을 전송합니다. 계속하시겠습니까?')) return;
+        const context = panel.context;
+        const path = context?.path;
         if (!path) {
-          alert('전송할 파일이 없습니다.');
+          alert('제출할 파일이 없습니다.');
           return;
         }
+        if (!confirm(CONFIRM_MESSAGE)) return;
         try {
+          await context.save();
           const model = await contents.get(path, { content: true });
           await submitFile(path, model.content as string, 'text/plain');
         } catch (err) {
-          console.error('전송 실패', err);
           alert(
-            `전송 실패: ${err instanceof Error ? err.message : String(err)}`
+            `제출 실패: ${err instanceof Error ? err.message : String(err)}`
           );
         }
       });

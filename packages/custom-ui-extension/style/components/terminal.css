@@ -4,7 +4,15 @@
 
 /* 터미널 컨테이너 */
 #jp-main-dock-panel .jp-Terminal {
-  border-radius: 20px;
+  padding-top: 8px;
+}
+
+#jp-main-dock-panel .jp-Terminal-body {
+  padding: 0;
+}
+
+#jp-main-dock-panel .xterm-viewport {
+  border-radius: var(--box-radius);
 }
 
 /* 터미널 컨테이너 body */
@@ -14,24 +22,7 @@
 
 /* 터미널 입력 canvas */
 #jp-main-dock-panel .jp-Terminal canvas {
-  padding: 0 10px;
+  padding: 20px;
   box-sizing: border-box;
-}
-
-/* 터미널 영역 스크롤 바 커스텀 */
-.xterm .xterm-viewport::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-/* 터미널 영역 스크롤 바 커스텀 */
-.xterm .xterm-viewport::-webkit-scrollbar-track {
-  background: transparent;
-  margin: 1rem;
-}
-
-/* 터미널 영역 스크롤 바 커스텀 */
-.xterm .xterm-viewport::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
+  border: none;
 }

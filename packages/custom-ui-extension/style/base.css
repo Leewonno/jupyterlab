@@ -11,13 +11,46 @@
 @import url('./components/notebook.css');
 @import url('./components/launcher.css');
 @import url('./components/terminal.css');
+@import url('./components/scroll.css');
+@import url('components/splash.css');
 
 /* 전역 설정 */
 :root {
-  --layout-color: #f3fbf6;
-  --container-color: #ebf6f0;
-  --selected-color: #d2ead9;
-  --hover-color: #e1e5e9;
+  /* size */
+  --box-radius: 20px;
+  --item-radius: 15px;
+  --box-spacing: 8px;
+
+  /* 라이트 모드 색상 */
+  --layout-color: #f8f5fc;
+  --container-color: #f0ebf9;
+  --selected-color: #d9ccf0;
+  --hover-color: #e2dee8;
+  --deep-hover-color: #beaddc;
+  --brand-normal-color: #7c3aed;
+  --brand-accent-color: #6d28d9;
+
+  /* 다크 모드 오버라이드 */
+  [data-jp-theme-light='false'] {
+    --layout-color: #130f1a;
+    --container-color: #1a1424;
+    --selected-color: #271a3d;
+    --hover-color: #272130;
+    --deep-hover-color: #382a51;
+    --brand-normal-color: #9e74e7;
+    --brand-accent-color: #c3abed;
+  }
+
+  /* jupyter 전역 변수 커스텀 */
+  --jp-brand-color0: var(--brand-accent-color) !important;
+  --jp-brand-color1: var(--brand-normal-color) !important;
+  --jp-warn-color1: var(--brand-accent-color) !important;
+  --jp-cell-editor-active-border-color: var(--brand-normal-color) !important;
+  --jp-cell-inprompt-font-color: var(--brand-accent-color) !important;
+  --jp-accept-color-normal: var(--brand-normal-color) !important;
+  --jp-accept-color-hover: var(--brand-accent-color) !important;
+  --jp-private-notebook-selected-color: var(--brand-normal-color) !important;
+  --jp-layout-color2: var(--deep-hover-color) !important ;
 }
 
 #main {
@@ -32,6 +65,12 @@
   box-shadow: none !important;
 }
 
+/* 툴바 버튼 */
+.jp-Toolbar .jp-ToolbarButtonComponent {
+  border-radius: var(--item-radius);
+}
+
+/* 전체 배경 색 */
 .jp-ThemedContainer {
   background-color: var(--layout-color);
 }

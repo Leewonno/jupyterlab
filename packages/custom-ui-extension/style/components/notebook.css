@@ -3,25 +3,19 @@
 |----------------------------------------------------------------------------*/
 
 /* 노트북 영역 컨테이너 */
-.jp-NotebookPanel-notebook {
-  position: static !important;
-  border-radius: 20px;
+
+/*.jp-NotebookPanel-notebook {*/
+
+/*}*/
+
+/* 노트북 영역 입력영역 컨테이너 */
+.jp-Notebook {
+  background: transparent !important;
+  padding-top: 24px;
 }
 
-/* 노트북 영역 스크롤 바 커스텀 */
-.jp-WindowedPanel-outer::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-/* 노트북 영역 스크롤 바 커스텀 */
-.jp-WindowedPanel-outer::-webkit-scrollbar-track {
-  background: transparent;
-  margin: 1rem;
-}
-
-/* 노트북 영역 스크롤 바 커스텀 */
-.jp-WindowedPanel-outer::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
+/* 노트북 영역 입력영역 내부 컨테이너 */
+.jp-WindowedPanel-outer {
+  background: var(--jp-layout-color0) !important;
+  border-radius: var(--box-radius);
 }
