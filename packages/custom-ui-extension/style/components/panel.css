@@ -2,25 +2,24 @@
 | 패널 스타일 오버라이드 파일
 |----------------------------------------------------------------------------*/
 
-/* 메인 컨테이너 */
-#jp-main-content-panel {
-  padding-top: var(--box-spacing);
-  padding-bottom: var(--box-spacing);
-}
+/* =======================================================================
+| 상단 패널
+| ======================================================================= */
 
-/* 메인 패널 컨테이너 (사이드 바 제외) */
-#jp-main-split-panel {
-  padding: 0 var(--box-spacing) !important;
-
-  /*margin: 0 10px !important;*/
-
-  /*width: calc(100% - 20px) !important;*/
-}
-
-/* 상단 패널 */
 #jp-top-panel {
   background-color: var(--layout-color);
   border-bottom: none !important;
+}
+
+/* 상단 패널 메인 로고 영역 */
+#jp-MainLogo {
+  /* 50px */
+  width: calc(
+    var(--jp-private-sidebar-tab-width) + var(--jp-border-width) + 17px
+  ) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* 상단 패널 메뉴 영역 Wrapper */
@@ -36,17 +35,6 @@
   background-color: transparent;
 }
 
-/* 상단 패널 메인 로고 영역 */
-#jp-MainLogo {
-  /* 50px */
-  width: calc(
-    var(--jp-private-sidebar-tab-width) + var(--jp-border-width) + 17px
-  ) !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 /* 상단 패널 메뉴 요소 */
 .lm-MenuBar-item {
   border-radius: var(--item-radius);
@@ -55,6 +43,30 @@
 .lm-MenuBar-item.lm-mod-active {
   border-radius: 0;
 }
+
+/* =======================================================================
+| 중앙 패널
+| ======================================================================= */
+
+/* 중앙 패널 전체 (사이드 바 포함) */
+#jp-main-content-panel {
+  padding-top: var(--box-spacing);
+  padding-bottom: var(--box-spacing);
+}
+
+/* 중앙 패널의 중앙 패널 (사이드 바 제외한 가운데 패널) */
+#jp-main-vsplit-panel {
+  /*background-color: var(--layout-color);*/
+}
+
+/* 중앙 패널의 중앙 패널의 중앙 패널 (jp-main-vsplit-panel 내부 컨테이너) */
+#jp-main-split-panel {
+  padding: 0 var(--box-spacing) !important;
+}
+
+/* =======================================================================
+| 하단 패널
+| ======================================================================= */
 
 /* 하단 패널 */
 #jp-down-stack {

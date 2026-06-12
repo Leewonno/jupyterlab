@@ -17,9 +17,8 @@ import { ISplashScreen } from '@jupyterlab/apputils';
 
 import '../style/components/sidebar.css';
 import '../style/components/panel.css';
-import '../style/components/notebook.css';
 import '../style/components/launcher.css';
-import '../style/components/splash.css';
+import '../style/components/loading.css';
 
 const plugin: JupyterFrontEndPlugin<void> = {
   id: '@jupyterlab/custom-ui-extension:plugin',

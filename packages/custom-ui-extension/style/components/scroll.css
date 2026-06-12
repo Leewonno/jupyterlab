@@ -2,7 +2,10 @@
 | 스크롤 스타일 오버라이드 파일
 |----------------------------------------------------------------------------*/
 
-/* 노트북 영역 스크롤 바 커스텀 */
+/* =======================================================================
+| 노트북 영역 스크롤 바 커스텀
+| ======================================================================= */
+
 .jp-WindowedPanel-outer::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -13,12 +16,10 @@
   margin: 1rem;
 }
 
-.jp-WindowedPanel-outer::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-}
+/* =======================================================================
+| 터미널 영역 스크롤 바 커스텀
+| ======================================================================= */
 
-/* 터미널 영역 스크롤 바 커스텀 */
 .xterm .xterm-viewport::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -29,12 +30,10 @@
   margin: 1rem;
 }
 
-.xterm .xterm-viewport::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-}
+/* =======================================================================
+| 파일 영역 스크롤 바 커스텀
+| ======================================================================= */
 
-/* 파일 영역 스크롤 바 커스텀 */
 .jp-DirListing-content::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -45,12 +44,10 @@
   margin-bottom: 1rem;
 }
 
-.jp-DirListing-content::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-}
+/* =======================================================================
+| 코드 영역 스크롤 바 커스텀
+| ======================================================================= */
 
-/* 코드 영역 스크롤 바 커스텀 */
 .jp-zoom-target::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -61,12 +58,10 @@
   margin: 1rem;
 }
 
-.jp-zoom-target::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-}
+/* =======================================================================
+| 기타 파일 영역 스크롤 바 커스텀
+| ======================================================================= */
 
-/* 기타 파일 영역 스크롤 바 커스텀 */
 .cm-scroller .jp-zoom-target::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -78,32 +73,15 @@
   margin: 1rem;
 }
 
-/* 기타 파일 영역 스크롤 바 커스텀 */
+/* =======================================================================
+| 공통 스크롤 커스텀
+| ======================================================================= */
+
+.jp-WindowedPanel-outer::-webkit-scrollbar-thumb,
+.xterm .xterm-viewport::-webkit-scrollbar-thumb,
+.jp-DirListing-content::-webkit-scrollbar-thumb,
+.jp-zoom-target::-webkit-scrollbar-thumb,
 .cm-scroller .jp-zoom-target::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.3);
   border-radius: 4px;
 }
-
-/* 좌측 사이드 패널 스크롤 바 커스텀 */
-
-/*.lm-SplitPanel-child::-webkit-scrollbar {*/
-
-/*    width: 8px;*/
-
-/*    height: 8px;*/
-
-/*}*/
-
-/*.lm-SplitPanel-child::-webkit-scrollbar-track {*/
-
-/*    background: transparent;*/
-
-/*}*/
-
-/*.lm-SplitPanel-child::-webkit-scrollbar-thumb {*/
-
-/*    background: rgba(0, 0, 0, 0.3);*/
-
-/*    border-radius: 4px;*/
-
-/*}*/

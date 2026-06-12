@@ -1,0 +1,15 @@
+/*-----------------------------------------------------------------------------
+| 공통 컴포넌트 overrides
+|----------------------------------------------------------------------------*/
+
+/* 툴바 */
+.jp-Toolbar {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 툴바 버튼 */
+.jp-Toolbar .jp-ToolbarButtonComponent {
+  border-radius: var(--item-radius);
+}
