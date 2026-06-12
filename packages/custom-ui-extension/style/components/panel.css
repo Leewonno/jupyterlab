@@ -44,6 +44,14 @@
   border-radius: 0;
 }
 
+/* 상단 메뉴 바 메뉴에 display : table 이라 border 보이는 문제 -> 배경과 그림자로 덮어서 해결 */
+.lm-Menu-item.lm-mod-active > div {
+  background: var(--deep-hover-color);
+  box-shadow:
+    1px 0 0 0 var(--deep-hover-color),
+    -1px 0 0 0 var(--deep-hover-color);
+}
+
 /* =======================================================================
 | 중앙 패널
 | ======================================================================= */

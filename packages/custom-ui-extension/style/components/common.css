@@ -13,3 +13,13 @@
 .jp-Toolbar .jp-ToolbarButtonComponent {
   border-radius: var(--item-radius);
 }
+
+/* 전체 배경 색 */
+.jp-ThemedContainer {
+  background-color: var(--layout-color);
+}
+
+/* jp 테마 내 select 아이템 */
+.jp-ThemedContainer select {
+  border-radius: var(--item-radius) !important;
+}

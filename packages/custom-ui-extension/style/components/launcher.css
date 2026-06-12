@@ -112,6 +112,10 @@
   fill: var(--deep-hover-color);
 }
 
+.jp-icon-hover :hover .jp-icon-accent2-hover[fill] {
+  fill: var(--brand-accent-color);
+}
+
 /* 파일 관리 탭 저장되지 않은 파일 표시 아이콘 */
 .lm-TabBar-tab.jp-mod-dirty
   > .lm-TabBar-tabCloseIcon
@@ -162,6 +166,8 @@
 #jp-main-dock-panel .jp-RenderedText {
   height: calc(100% - var(--box-spacing)) !important;
   margin-top: var(--box-spacing);
+  background-color: var(--jp-layout-color0);
+  border-radius: var(--box-radius);
 }
 
 /* =======================================================================
@@ -189,6 +195,26 @@
 #jp-main-dock-panel .jp-ConsolePanel .jp-Toolbar {
   background-color: var(--container-color) !important;
   border-radius: var(--box-radius);
+}
+
+/* 디버그로 콘솔 박스 여는 경우 콘솔 박스 */
+#jp-main-dock-panel .jp-DebugConsole {
+  margin-top: 0 !important;
+}
+
+/* 디버그로 콘솔 박스 여는 경우 버튼 박스 */
+#jp-main-dock-panel .jp-DebugConsole jp-toolbar {
+  display: none;
+}
+
+/* 디버그로 콘솔 박스 여는 경우 콘솔 박스 내부 컨테이너 */
+#jp-main-dock-panel .jp-DebugConsole .jp-CodeConsole-split {
+  height: calc(100% - var(--box-spacing) * 1) !important;
+}
+
+/* 디버그로 콘솔 박스 여는 경우 버튼 박스 */
+#jp-main-dock-panel .jp-DebugConsole .jp-Toolbar::part(positioning-region) {
+  background-color: var(--layout-color) !important;
 }
 
 /* =======================================================================
@@ -292,4 +318,79 @@
 .jp-Toolbar-responsive-popup.jp-ThemedContainer {
   border-radius: var(--box-radius);
   background-color: var(--container-color) !important;
+}
+
+/* =======================================================================
+| 디버그를 통해 파일을 보는 영역
+| ======================================================================= */
+
+/* 컨테이너 */
+[data-jp-debugger='true'].jp-Editor .jp-mod-readOnly {
+  margin-top: var(--box-spacing) !important;
+  background: var(--layout-color) !important;
+}
+
+/* 내부 코드 영역 컨테이너 */
+[data-jp-debugger='true'].jp-Editor .jp-mod-readOnly .cm-scroller {
+  height: calc(100% - var(--box-spacing));
+  border-radius: var(--box-radius);
+  background: var(--deep-hover-color) !important;
+}
+
+/* =======================================================================
+| 라이센스
+| ======================================================================= */
+
+/* 라이센스 영역 전체 컨테이너 */
+.jp-MainAreaWidget:has(.jp-Licenses) {
+  margin-top: calc(var(--box-spacing) * 2);
+}
+
+/* 라이센스 컨테이너*/
+.jp-Licenses {
+  border-radius: var(--box-radius);
+  margin-top: var(--box-spacing);
+  height: calc(100% - var(--box-spacing) * 7) !important;
+}
+
+/* 라이센스 영역의 툴바 */
+.jp-MainAreaWidget:has(.jp-Licenses) > jp-toolbar {
+  border-radius: var(--box-radius);
+  background-color: var(--container-color) !important;
+}
+
+/* =======================================================================
+| Jupyter Reference, FAQ 등 Iframe 영역
+| ======================================================================= */
+
+/* Iframe 컨테이너 */
+.jp-MainAreaWidget:has(.jp-IFrame) {
+  margin-top: calc(var(--box-spacing));
+}
+
+#jp-main-dock-panel .jp-IFrame {
+  border-radius: var(--box-radius);
+  height: calc(100% - var(--box-spacing) * 2) !important;
+}
+
+/* =======================================================================
+| Settings Editor
+| ======================================================================= */
+
+/* Settings Editor 컨테이너 */
+#setting-editor {
+  margin-top: var(--box-spacing);
+}
+
+/* Settings Editor Toolbar */
+#setting-editor jp-toolbar {
+  margin-top: var(--box-spacing);
+  background-color: var(--container-color) !important;
+  border-radius: var(--box-radius);
+}
+
+/* Settings Editor 세팅 영역 */
+#setting-editor .lm-SplitPanel {
+  margin-top: calc(var(--box-spacing) * 2);
+  height: calc(100% - var(--box-spacing) * 7) !important;
 }

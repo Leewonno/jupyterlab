@@ -56,8 +56,3 @@
   border: none;
   margin: 8px 12px 0;
 }
-
-/* 전체 배경 색 */
-.jp-ThemedContainer {
-  background-color: var(--layout-color);
-}
