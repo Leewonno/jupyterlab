@@ -10,10 +10,16 @@
       "path": "../application"
     },
     {
+      "path": "../docregistry"
+    },
+    {
       "path": "../fileeditor"
     },
     {
       "path": "../notebook"
+    },
+    {
+      "path": "../services"
     },
     {
       "path": "../ui-components"

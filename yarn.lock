@@ -3020,8 +3020,10 @@ __metadata:
   resolution: "@jupyterlab/custom-toolbar-extension@workspace:packages/custom-toolbar-extension"
   dependencies:
     "@jupyterlab/application": ^4.6.0-beta.1
+    "@jupyterlab/docregistry": ^4.6.0-beta.1
     "@jupyterlab/fileeditor": ^4.6.0-beta.1
     "@jupyterlab/notebook": ^4.6.0-beta.1
+    "@jupyterlab/services": ^7.6.0-beta.1
     "@jupyterlab/ui-components": ^4.6.0-beta.1
     rimraf: ~5.0.5
     typescript: ~5.9.3
