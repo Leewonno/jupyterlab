@@ -274,15 +274,16 @@
 
 /* 터미널 컨테이너 */
 #jp-main-dock-panel .jp-Terminal {
-  padding-top: 8px;
+  padding: 8px 0;
 }
 
 #jp-main-dock-panel .jp-Terminal-body {
-  padding: 0;
+  padding: 12px;
 }
 
 #jp-main-dock-panel .xterm-viewport {
   border-radius: var(--box-radius);
+  height: calc(100% - var(--box-spacing) * 2) !important;
 }
 
 /* 터미널 컨테이너 body */
@@ -290,10 +291,8 @@
   height: 100%;
 }
 
-/* 터미널 입력 canvas */
+/* 터미널 입력 canvas — 크기/패딩은 xterm이 직접 관리하므로 건드리지 않는다 */
 #jp-main-dock-panel .jp-Terminal canvas {
-  padding: 20px;
-  box-sizing: border-box;
   border: none;
 }
 
