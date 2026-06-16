@@ -12,3 +12,33 @@
   /* pressed 스타일 무효화 */
   box-shadow: none;
 }
+
+.jp-submit-dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 280px;
+}
+
+.jp-submit-dialog-note {
+  margin: 0;
+  color: var(--jp-ui-font-color2);
+  font-size: var(--jp-ui-font-size1);
+}
+
+.jp-submit-dialog-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--jp-ui-font-size1);
+}
+
+.jp-submit-dialog-field select,
+.jp-submit-dialog-field input {
+  width: 100%;
+}
+
+/* 마감된 주차: 글자는 보이되 선택 불가임을 회색으로 표시 */
+.jp-submit-option-disabled {
+  color: var(--jp-ui-font-color3);
+}

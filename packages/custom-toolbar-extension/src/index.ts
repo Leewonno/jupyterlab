@@ -9,24 +9,187 @@ import type {
   JupyterFrontEnd,
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
+import { Dialog } from '@jupyterlab/apputils';
+import type { DocumentRegistry } from '@jupyterlab/docregistry';
 import type { IDocumentWidget } from '@jupyterlab/docregistry';
 import { IEditorTracker } from '@jupyterlab/fileeditor';
 import { INotebookTracker } from '@jupyterlab/notebook';
 import type { Contents } from '@jupyterlab/services';
 import { ToolbarButton } from '@jupyterlab/ui-components';
+import { Widget } from '@lumino/widgets';
 
+// 과제 제출 URL
 const SUBMIT_API_URL = 'http://127.0.0.1:9000/file/';
-const CONFIRM_MESSAGE =
-  '파일이 저장 후 전송됩니다. 제출 후에는 수정할 수 없습니다. 계속하시겠습니까?';
+// 과목명/주차 목록을 받아오는 URL
+const METADATA_API_URL = 'http://127.0.0.1:9000/meta/';
 
+/** 주차 항목. isDeadline 이 true 면 마감되어 선택할 수 없다. */
+interface IWeek {
+  title: string;
+  isDeadline: boolean;
+}
+
+/** 서버에서 받아오는 과목/주차 목록 */
+interface ISubmitMetadata {
+  subjects: string[];
+  weeks: IWeek[];
+}
+
+/** select option */
+interface IOption {
+  value: string;
+  label: string;
+  disabled: boolean;
+}
+
+/** 모달에서 사용자가 입력/선택한 값 */
+interface ISubmitValue {
+  subject: string;
+  week: string;
+  filename: string;
+}
+
+/** 과목/주차 목록을 서버에서 가져옴 */
+async function fetchMetadata(): Promise<ISubmitMetadata> {
+  const response = await fetch(METADATA_API_URL);
+  if (!response.ok) {
+    throw new Error(
+      `목록을 불러오지 못했습니다: ${response.status} ${response.statusText}`
+    );
+  }
+  const data = (await response.json()) as Partial<ISubmitMetadata>;
+  return {
+    subjects: data.subjects ?? [],
+    weeks: (data.weeks ?? []).map(week => ({
+      title: week.title,
+      isDeadline: Boolean(week.isDeadline)
+    }))
+  };
+}
+
+/** 제출 모달의 본문 위젯 (과목명 select, 주차 select, 파일명 input). */
+class SubmitDialogBody
+  extends Widget
+  implements Dialog.IBodyWidget<ISubmitValue>
+{
+  constructor(metadata: ISubmitMetadata, defaultFilename: string) {
+    super();
+    this.addClass('jp-submit-dialog-body');
+
+    const note = document.createElement('p');
+    note.className = 'jp-submit-dialog-note';
+    note.textContent =
+      '파일이 저장 후 전송됩니다. 제출 후에는 수정할 수 없습니다.';
+    this.node.appendChild(note);
+
+    this._subject = SubmitDialogBody._createSelect(
+      '과목명',
+      metadata.subjects.map(subject => ({
+        value: subject,
+        label: subject,
+        disabled: false
+      }))
+    );
+    this._week = SubmitDialogBody._createSelect(
+      '주차',
+      metadata.weeks.map(week => ({
+        value: week.title,
+        // 마감된 주차는 라벨에 표시하고 선택을 막는다.
+        label: week.isDeadline ? `${week.title} (마감)` : week.title,
+        disabled: week.isDeadline
+      }))
+    );
+    this._filename = SubmitDialogBody._createInput('파일명', defaultFilename);
+
+    this.node.appendChild(this._subject.field);
+    this.node.appendChild(this._week.field);
+    this.node.appendChild(this._filename.field);
+  }
+
+  getValue(): ISubmitValue {
+    return {
+      subject: this._subject.element.value,
+      week: this._week.element.value,
+      filename: this._filename.element.value.trim()
+    };
+  }
+
+  /** label + select 묶음을 생성한다. */
+  private static _createSelect(
+    label: string,
+    options: IOption[]
+  ): { field: HTMLElement; element: HTMLSelectElement } {
+    const field = document.createElement('label');
+    field.className = 'jp-submit-dialog-field';
+    field.textContent = label;
+
+    const select = document.createElement('select');
+    select.classList.add('jp-mod-styled');
+
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = '선택하세요';
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    select.appendChild(placeholder);
+
+    for (const option of options) {
+      const opt = document.createElement('option');
+      opt.value = option.value;
+      opt.textContent = option.label;
+      if (option.disabled) {
+        opt.classList.add('jp-submit-option-disabled');
+        opt.dataset.blocked = 'true';
+      }
+      select.appendChild(opt);
+    }
+
+    // 선택 불가(마감) 옵션을 고르면 placeholder 로 되돌린다.
+    select.addEventListener('change', () => {
+      const selected = select.options[select.selectedIndex];
+      if (selected?.dataset.blocked === 'true') {
+        select.value = '';
+      }
+    });
+
+    field.appendChild(select);
+    return { field, element: select };
+  }
+
+  /** label + text input 묶음을 생성한다. */
+  private static _createInput(
+    label: string,
+    value: string
+  ): { field: HTMLElement; element: HTMLInputElement } {
+    const field = document.createElement('label');
+    field.className = 'jp-submit-dialog-field';
+    field.textContent = label;
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.classList.add('jp-mod-styled');
+    input.value = value;
+
+    field.appendChild(input);
+    return { field, element: input };
+  }
+
+  private _subject: { field: HTMLElement; element: HTMLSelectElement };
+  private _week: { field: HTMLElement; element: HTMLSelectElement };
+  private _filename: { field: HTMLElement; element: HTMLInputElement };
+}
+
+/** 저장된 파일 내용을 메타데이터와 함께 서버로 전송한다. */
 async function submitFile(
-  path: string,
+  filename: string,
   content: string,
-  mimeType: string
+  mimeType: string,
+  meta: { subject: string; week: string }
 ): Promise<void> {
-  const filename = path.split('/').pop() ?? path;
   const formData = new FormData();
   formData.append('files', new Blob([content], { type: mimeType }), filename);
+  formData.append('subject', meta.subject);
+  formData.append('week', meta.week);
 
   const response = await fetch(SUBMIT_API_URL, {
     method: 'POST',
@@ -51,6 +214,70 @@ function makeButton(onClick: () => Promise<void>): ToolbarButton {
   });
 }
 
+/**
+ * 제출 모달. 제출(accept) 버튼을 눌러도 입력이 비어 있으면
+ * 오버라이드하는 이유, 기존 showDialog는 제출 버튼 누르면 모달이 무조건 닫힘 (입력값 검증 실패해도 닫힘)
+ */
+class SubmitDialog extends Dialog<ISubmitValue> {
+  constructor(
+    private _form: SubmitDialogBody,
+    private _buttonList: ReadonlyArray<Dialog.IButton>,
+    options: Partial<Dialog.IOptions<ISubmitValue>>
+  ) {
+    super(options);
+  }
+
+  resolve(index: number): void {
+    const button = this._buttonList[index];
+    if (button?.accept) {
+      const { subject, week, filename } = this._form.getValue();
+
+      /* 파일 확장자 입력 확인 */
+      const lastDotIndex = filename.lastIndexOf('.');
+      if (lastDotIndex <= 0 || lastDotIndex === filename.length - 1) {
+        alert('확장자를 포함한 파일명을 입력해주세요.');
+        return;
+      }
+
+      /* 확장자 앞 텍스트 입력 확인 */
+      const sliceFilename = filename.slice(0, lastDotIndex);
+
+      // 과목명, 주차, 파일명 검증
+      if (!subject || !week || !sliceFilename) {
+        alert('과목명, 주차, 파일명을 모두 입력해주세요.');
+        return;
+      }
+    }
+    super.resolve(index);
+  }
+}
+
+/** 제출 모달을 열고 사용자가 입력한 값을 반환 */
+async function promptSubmit(
+  defaultFilename: string
+): Promise<ISubmitValue | null> {
+  const metadata = await fetchMetadata();
+  const body = new SubmitDialogBody(metadata, defaultFilename);
+  const buttons = [
+    // eslint-disable-next-line jupyter/no-untranslated-string
+    Dialog.cancelButton({ label: '취소' }),
+    // eslint-disable-next-line jupyter/no-untranslated-string
+    Dialog.okButton({ label: '제출' })
+  ];
+  const result = await new SubmitDialog(body, buttons, {
+    title: '제출',
+    body,
+    buttons,
+    defaultButton: buttons.length - 1
+  }).launch();
+
+  if (!result.button.accept || !result.value) {
+    return null;
+  }
+
+  return result.value;
+}
+
 // 버튼 생성 및 이벤트 등록
 function addButton(
   contents: Contents.IManager,
@@ -58,24 +285,42 @@ function addButton(
   fileType: 'ipynb' | 'etc'
 ): void {
   const button = makeButton(async () => {
-    const context = panel.context;
+    const context = panel.context as DocumentRegistry.Context;
     const path = context?.path;
     if (!path) {
       alert('제출할 파일이 없습니다.');
       return;
     }
-    if (!confirm(CONFIRM_MESSAGE)) return;
+
     try {
+      const currentName = path.split('/').pop() ?? path;
+      const value = await promptSubmit(currentName);
+      if (!value) return;
+
+      const { subject, week, filename } = value;
+
+      // 파일명이 바뀌었으면 열린 문서를 실제로 rename (context.path 갱신됨)
+      if (filename !== currentName) {
+        await context.rename(filename);
+      }
       await context.save();
-      const model = await contents.get(path, { content: true });
+
+      const model = await contents.get(context.path, { content: true });
       if (fileType === 'ipynb') {
         const content = JSON.stringify(model.content, null, 2);
-        await submitFile(path, content, 'application/json');
+        await submitFile(filename, content, 'application/json', {
+          subject,
+          week
+        });
       } else {
-        await submitFile(path, model.content as string, 'text/plain');
+        await submitFile(filename, model.content as string, 'text/plain', {
+          subject,
+          week
+        });
       }
-    } catch (err) {
-      alert(`제출 실패: ${err instanceof Error ? err.message : String(err)}`);
+    } catch (error) {
+      console.error(error);
+      alert(`제출에 실패했습니다.`);
     }
   });
   button.node.style.marginLeft = 'auto';
