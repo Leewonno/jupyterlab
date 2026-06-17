@@ -2368,6 +2368,7 @@ __metadata:
     "@jupyterlab/console-extension": ~4.6.0-beta.1
     "@jupyterlab/coreutils": ~6.6.0-beta.1
     "@jupyterlab/csvviewer-extension": ~4.6.0-beta.1
+    "@jupyterlab/custom-api-extension": ~4.6.0-beta.1
     "@jupyterlab/custom-sidebar-extension": ~4.6.0-beta.1
     "@jupyterlab/custom-toolbar-extension": ~4.6.0-beta.1
     "@jupyterlab/custom-ui-extension": ~4.6.0-beta.1
@@ -3002,6 +3003,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@jupyterlab/custom-api-extension@^4.6.0-beta.1, @jupyterlab/custom-api-extension@workspace:packages/custom-api-extension, @jupyterlab/custom-api-extension@~4.6.0-beta.1":
+  version: 0.0.0-use.local
+  resolution: "@jupyterlab/custom-api-extension@workspace:packages/custom-api-extension"
+  dependencies:
+    "@jupyterlab/application": ^4.6.0-beta.1
+    "@jupyterlab/docmanager": ^4.6.0-beta.1
+    "@lumino/coreutils": ^2.2.2
+    rimraf: ~5.0.5
+    typescript: ~5.9.3
+  languageName: unknown
+  linkType: soft
+
 "@jupyterlab/custom-sidebar-extension@^4.6.0-beta.1, @jupyterlab/custom-sidebar-extension@workspace:packages/custom-sidebar-extension, @jupyterlab/custom-sidebar-extension@~4.6.0-beta.1":
   version: 0.0.0-use.local
   resolution: "@jupyterlab/custom-sidebar-extension@workspace:packages/custom-sidebar-extension"
@@ -3021,6 +3034,7 @@ __metadata:
   dependencies:
     "@jupyterlab/application": ^4.6.0-beta.1
     "@jupyterlab/apputils": ^4.7.0-beta.1
+    "@jupyterlab/custom-api-extension": ^4.6.0-beta.1
     "@jupyterlab/docregistry": ^4.6.0-beta.1
     "@jupyterlab/fileeditor": ^4.6.0-beta.1
     "@jupyterlab/notebook": ^4.6.0-beta.1
@@ -4316,6 +4330,7 @@ __metadata:
     "@jupyterlab/coreutils": ^6.6.0-beta.1
     "@jupyterlab/csvviewer": ^4.6.0-beta.1
     "@jupyterlab/csvviewer-extension": ^4.6.0-beta.1
+    "@jupyterlab/custom-api-extension": ^4.6.0-beta.1
     "@jupyterlab/custom-sidebar-extension": ^4.6.0-beta.1
     "@jupyterlab/custom-toolbar-extension": ^4.6.0-beta.1
     "@jupyterlab/custom-ui-extension": ^4.6.0-beta.1

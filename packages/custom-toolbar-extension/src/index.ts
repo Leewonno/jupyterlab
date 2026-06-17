@@ -10,6 +10,8 @@ import type {
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { Dialog } from '@jupyterlab/apputils';
+import { ICustomApi } from '@jupyterlab/custom-api-extension';
+import type { ISubmitMetadata } from '@jupyterlab/custom-api-extension';
 import type { DocumentRegistry } from '@jupyterlab/docregistry';
 import type { IDocumentWidget } from '@jupyterlab/docregistry';
 import { IEditorTracker } from '@jupyterlab/fileeditor';
@@ -17,23 +19,6 @@ import { INotebookTracker } from '@jupyterlab/notebook';
 import type { Contents } from '@jupyterlab/services';
 import { ToolbarButton } from '@jupyterlab/ui-components';
 import { Widget } from '@lumino/widgets';
-
-// 과제 제출 URL
-const SUBMIT_API_URL = 'http://127.0.0.1:9000/file/';
-// 과목명/주차 목록을 받아오는 URL
-const METADATA_API_URL = 'http://127.0.0.1:9000/meta/';
-
-/** 주차 항목. isDeadline 이 true 면 마감되어 선택할 수 없다. */
-interface IWeek {
-  title: string;
-  isDeadline: boolean;
-}
-
-/** 서버에서 받아오는 과목/주차 목록 */
-interface ISubmitMetadata {
-  subjects: string[];
-  weeks: IWeek[];
-}
 
 /** select option */
 interface IOption {
@@ -47,24 +32,6 @@ interface ISubmitValue {
   subject: string;
   week: string;
   filename: string;
-}
-
-/** 과목/주차 목록을 서버에서 가져옴 */
-async function fetchMetadata(): Promise<ISubmitMetadata> {
-  const response = await fetch(METADATA_API_URL);
-  if (!response.ok) {
-    throw new Error(
-      `목록을 불러오지 못했습니다: ${response.status} ${response.statusText}`
-    );
-  }
-  const data = (await response.json()) as Partial<ISubmitMetadata>;
-  return {
-    subjects: data.subjects ?? [],
-    weeks: (data.weeks ?? []).map(week => ({
-      title: week.title,
-      isDeadline: Boolean(week.isDeadline)
-    }))
-  };
 }
 
 /** 제출 모달의 본문 위젯 (과목명 select, 주차 select, 파일명 input). */
@@ -179,31 +146,6 @@ class SubmitDialogBody
   private _filename: { field: HTMLElement; element: HTMLInputElement };
 }
 
-/** 저장된 파일 내용을 메타데이터와 함께 서버로 전송한다. */
-async function submitFile(
-  filename: string,
-  content: string,
-  mimeType: string,
-  meta: { subject: string; week: string }
-): Promise<void> {
-  const formData = new FormData();
-  formData.append('files', new Blob([content], { type: mimeType }), filename);
-  formData.append('subject', meta.subject);
-  formData.append('week', meta.week);
-
-  const response = await fetch(SUBMIT_API_URL, {
-    method: 'POST',
-    body: formData
-  });
-
-  if (!response.ok) {
-    throw new Error(`서버 오류: ${response.status} ${response.statusText}`);
-  }
-
-  const result = await response.json();
-  alert(`제출 완료 (${result.saved?.length ?? 0}개 파일)`);
-}
-
 // JupyterLab 내장 클래스를 통해 버튼 생성
 function makeButton(onClick: () => Promise<void>): ToolbarButton {
   return new ToolbarButton({
@@ -214,10 +156,8 @@ function makeButton(onClick: () => Promise<void>): ToolbarButton {
   });
 }
 
-/**
- * 제출 모달. 제출(accept) 버튼을 눌러도 입력이 비어 있으면
- * 오버라이드하는 이유, 기존 showDialog는 제출 버튼 누르면 모달이 무조건 닫힘 (입력값 검증 실패해도 닫힘)
- */
+// 제출 버튼을 눌러도 입력이 비어 있으면 제출 X (모달 닫히면 안됨)
+// 오버라이드하는 이유, 기존 showDialog는 제출 버튼 누르면 모달이 무조건 닫힘 (입력값 검증 실패해도 닫힘)
 class SubmitDialog extends Dialog<ISubmitValue> {
   constructor(
     private _form: SubmitDialogBody,
@@ -254,9 +194,10 @@ class SubmitDialog extends Dialog<ISubmitValue> {
 
 /** 제출 모달을 열고 사용자가 입력한 값을 반환 */
 async function promptSubmit(
+  api: ICustomApi,
   defaultFilename: string
 ): Promise<ISubmitValue | null> {
-  const metadata = await fetchMetadata();
+  const metadata = await api.getSubmitMetadata();
   const body = new SubmitDialogBody(metadata, defaultFilename);
   const buttons = [
     // eslint-disable-next-line jupyter/no-untranslated-string
@@ -271,15 +212,14 @@ async function promptSubmit(
     defaultButton: buttons.length - 1
   }).launch();
 
-  if (!result.button.accept || !result.value) {
-    return null;
-  }
+  if (!result.button.accept || !result.value) return null;
 
   return result.value;
 }
 
 // 버튼 생성 및 이벤트 등록
 function addButton(
+  api: ICustomApi,
   contents: Contents.IManager,
   panel: IDocumentWidget,
   fileType: 'ipynb' | 'etc'
@@ -288,69 +228,53 @@ function addButton(
     const context = panel.context as DocumentRegistry.Context;
     const path = context?.path;
     if (!path) {
-      alert('제출할 파일이 없습니다.');
+      alert('제출할 파일이 열려있지 않습니다.');
       return;
     }
-
     try {
       const currentName = path.split('/').pop() ?? path;
-      const value = await promptSubmit(currentName);
+      const value = await promptSubmit(api, currentName);
       if (!value) return;
-
-      const { subject, week, filename } = value;
-
+      const { filename } = value;
       // 파일명이 바뀌었으면 열린 문서를 실제로 rename (context.path 갱신됨)
       if (filename !== currentName) {
         await context.rename(filename);
       }
       await context.save();
-
-      const model = await contents.get(context.path, { content: true });
-      if (fileType === 'ipynb') {
-        const content = JSON.stringify(model.content, null, 2);
-        await submitFile(filename, content, 'application/json', {
-          subject,
-          week
-        });
-      } else {
-        await submitFile(filename, model.content as string, 'text/plain', {
-          subject,
-          week
-        });
-      }
+      alert(`제출 완료`);
     } catch (error) {
       console.error(error);
       alert(`제출에 실패했습니다.`);
     }
   });
+  // 오른쪽 정렬
   button.node.style.marginLeft = 'auto';
   panel.toolbar.addItem('submitButton', button);
 }
 
-/**
- * A plugin that adds a submit button to the toolbar of all document types.
- */
+// 노트북, 파일 열릴 때 감지해서 필요한 버튼 주입
 const plugin: JupyterFrontEndPlugin<void> = {
   id: '@jupyterlab/custom-toolbar-extension:plugin',
   description:
     'Sends the currently active document to the submission API when clicked.',
   autoStart: true,
-  requires: [INotebookTracker, IEditorTracker],
+  requires: [INotebookTracker, IEditorTracker, ICustomApi],
   activate: (
     app: JupyterFrontEnd,
     notebookTracker: INotebookTracker,
-    editorTracker: IEditorTracker
+    editorTracker: IEditorTracker,
+    api: ICustomApi
   ): void => {
     const contents = app.serviceManager.contents;
 
     // Notebook panels (.ipynb)
     notebookTracker.widgetAdded.connect((_, panel) =>
-      addButton(contents, panel, 'ipynb')
+      addButton(api, contents, panel, 'ipynb')
     );
 
     // File editor panels (.js, .md, .py, .txt, etc.)
     editorTracker.widgetAdded.connect((_, panel) =>
-      addButton(contents, panel, 'etc')
+      addButton(api, contents, panel, 'etc')
     );
   }
 };

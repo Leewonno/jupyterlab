@@ -67,6 +67,9 @@
       "path": "../csvviewer-extension"
     },
     {
+      "path": "../custom-api-extension"
+    },
+    {
       "path": "../custom-sidebar-extension"
     },
     {

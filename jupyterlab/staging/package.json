@@ -46,6 +46,7 @@
     "@jupyterlab/coreutils": "~6.6.0-beta.1",
     "@jupyterlab/csvviewer": "~4.6.0-beta.1",
     "@jupyterlab/csvviewer-extension": "~4.6.0-beta.1",
+    "@jupyterlab/custom-api-extension": "file:../../packages/custom-api-extension",
     "@jupyterlab/debugger": "~4.6.0-beta.1",
     "@jupyterlab/debugger-extension": "~4.6.0-beta.1",
     "@jupyterlab/docmanager": "~4.6.0-beta.1",
@@ -162,6 +163,7 @@
     "@jupyterlab/console-extension": "~4.6.0-beta.1",
     "@jupyterlab/coreutils": "~6.6.0-beta.1",
     "@jupyterlab/csvviewer-extension": "~4.6.0-beta.1",
+    "@jupyterlab/custom-api-extension": "file:../../packages/custom-api-extension",
     "@jupyterlab/custom-sidebar-extension": "file:../../packages/custom-sidebar-extension",
     "@jupyterlab/custom-toolbar-extension": "file:../../packages/custom-toolbar-extension",
     "@jupyterlab/custom-ui-extension": "file:../../packages/custom-ui-extension",
@@ -286,6 +288,7 @@
       "@jupyterlab/ui-components-extension": "",
       "@jupyterlab/video-extension": "",
       "@jupyterlab/workspaces-extension": "",
+      "@jupyterlab/custom-api-extension": "",
       "@jupyterlab/custom-sidebar-extension": "",
       "@jupyterlab/custom-toolbar-extension": "",
       "@jupyterlab/custom-ui-extension": ""
@@ -370,6 +373,7 @@
     ],
     "linkedPackages": {
       "@jupyterlab/application-extension": "../../packages/application-extension",
+      "@jupyterlab/custom-api-extension": "../../packages/custom-api-extension",
       "@jupyterlab/custom-sidebar-extension": "../../packages/custom-sidebar-extension",
       "@jupyterlab/custom-toolbar-extension": "../../packages/custom-toolbar-extension",
       "@jupyterlab/custom-ui-extension": "../../packages/custom-ui-extension"

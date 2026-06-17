@@ -63,6 +63,7 @@
     "@jupyterlab/coreutils": "^6.6.0-beta.1",
     "@jupyterlab/csvviewer": "^4.6.0-beta.1",
     "@jupyterlab/csvviewer-extension": "^4.6.0-beta.1",
+    "@jupyterlab/custom-api-extension": "^4.6.0-beta.1",
     "@jupyterlab/custom-sidebar-extension": "^4.6.0-beta.1",
     "@jupyterlab/custom-toolbar-extension": "^4.6.0-beta.1",
     "@jupyterlab/custom-ui-extension": "^4.6.0-beta.1",

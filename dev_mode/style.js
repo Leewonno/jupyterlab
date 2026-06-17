@@ -10,6 +10,7 @@ import '@jupyterlab/codemirror-extension/style/index.js';
 import '@jupyterlab/completer-extension/style/index.js';
 import '@jupyterlab/console-extension/style/index.js';
 import '@jupyterlab/csvviewer-extension/style/index.js';
+import '@jupyterlab/custom-api-extension/style/index.js';
 import '@jupyterlab/custom-sidebar-extension/style/index.js';
 import '@jupyterlab/custom-toolbar-extension/style/index.js';
 import '@jupyterlab/custom-ui-extension/style/index.js';

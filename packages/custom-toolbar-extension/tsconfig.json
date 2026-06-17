@@ -13,6 +13,9 @@
       "path": "../apputils"
     },
     {
+      "path": "../custom-api-extension"
+    },
+    {
       "path": "../docregistry"
     },
     {
