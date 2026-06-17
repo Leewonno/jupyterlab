@@ -14,7 +14,6 @@ import type { DocumentRegistry } from '@jupyterlab/docregistry';
 import type { IDocumentWidget } from '@jupyterlab/docregistry';
 import { IEditorTracker } from '@jupyterlab/fileeditor';
 import { INotebookTracker } from '@jupyterlab/notebook';
-import type { Contents } from '@jupyterlab/services';
 import { ToolbarButton } from '@jupyterlab/ui-components';
 import { Widget } from '@lumino/widgets';
 
@@ -218,7 +217,6 @@ async function promptSubmit(
 // 버튼 생성 및 이벤트 등록
 function addButton(
   api: ICustomApi,
-  contents: Contents.IManager,
   panel: IDocumentWidget,
   fileType: 'ipynb' | 'etc'
 ): void {
@@ -233,16 +231,26 @@ function addButton(
       const currentName = path.split('/').pop() ?? path;
       const value = await promptSubmit(api, currentName);
       if (!value) return;
-      const { filename } = value;
-      // 파일명이 바뀌었으면 열린 문서를 실제로 rename (context.path 갱신됨)
+      const { subject, week, filename } = value;
+
+      // 파일명 변경 시 바뀐 이름으로 Rename
       if (filename !== currentName) {
         await context.rename(filename);
       }
       await context.save();
+
+      // 저장된 파일 내용을 메타데이터와 함께 서버로 전송
+      const submittedName = context.path.split('/').pop() ?? context.path;
+      const content = context.model.toString();
+      const mimeType =
+        context.contentsModel?.mimetype ??
+        (fileType === 'ipynb' ? 'application/json' : 'text/plain');
+      await api.submitFile(submittedName, content, mimeType, { subject, week });
+
       alert(`제출 완료`);
     } catch (error) {
       console.error(error);
-      alert(`제출에 실패했습니다.`);
+      alert(`제출 실패`);
     }
   });
   // 오른쪽 정렬
@@ -258,21 +266,19 @@ export const toolbarPlugin: JupyterFrontEndPlugin<void> = {
   autoStart: true,
   requires: [INotebookTracker, IEditorTracker, ICustomApi],
   activate: (
-    app: JupyterFrontEnd,
+    _app: JupyterFrontEnd,
     notebookTracker: INotebookTracker,
     editorTracker: IEditorTracker,
     api: ICustomApi
   ): void => {
-    const contents = app.serviceManager.contents;
-
     // Notebook panels (.ipynb)
     notebookTracker.widgetAdded.connect((_, panel) =>
-      addButton(api, contents, panel, 'ipynb')
+      addButton(api, panel, 'ipynb')
     );
 
     // File editor panels (.js, .md, .py, .txt, etc.)
     editorTracker.widgetAdded.connect((_, panel) =>
-      addButton(api, contents, panel, 'etc')
+      addButton(api, panel, 'etc')
     );
   }
 };
