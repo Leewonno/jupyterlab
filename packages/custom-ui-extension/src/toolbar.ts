@@ -16,6 +16,7 @@ import { IEditorTracker } from '@jupyterlab/fileeditor';
 import { INotebookTracker } from '@jupyterlab/notebook';
 import { ToolbarButton } from '@jupyterlab/ui-components';
 import { Widget } from '@lumino/widgets';
+import { nullTranslator } from '@jupyterlab/translation';
 
 /** select option */
 interface IOption {
@@ -196,11 +197,10 @@ async function promptSubmit(
 ): Promise<ISubmitValue | null> {
   const metadata = await api.getSubmitMetadata();
   const body = new SubmitDialogBody(metadata, defaultFilename);
+  const trans = (Dialog.translator ?? nullTranslator).load('jupyterlab');
   const buttons = [
-    // eslint-disable-next-line jupyter/no-untranslated-string
-    Dialog.cancelButton({ label: '취소' }),
-    // eslint-disable-next-line jupyter/no-untranslated-string
-    Dialog.okButton({ label: '제출' })
+    Dialog.cancelButton({ label: trans.__('취소') }),
+    Dialog.okButton({ label: trans.__('제출') })
   ];
   const result = await new SubmitDialog(body, buttons, {
     title: '제출',
