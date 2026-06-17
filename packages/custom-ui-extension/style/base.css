@@ -12,6 +12,7 @@
 @import url('./components/launcher.css');
 @import url('./components/scroll.css');
 @import url('components/loading.css');
+@import url('./components/toolbar.css');
 
 /* 전역 설정 */
 :root {

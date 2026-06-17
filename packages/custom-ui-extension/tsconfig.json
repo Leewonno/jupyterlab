@@ -11,6 +11,27 @@
     },
     {
       "path": "../apputils"
+    },
+    {
+      "path": "../custom-api-extension"
+    },
+    {
+      "path": "../docregistry"
+    },
+    {
+      "path": "../fileeditor"
+    },
+    {
+      "path": "../notebook"
+    },
+    {
+      "path": "../services"
+    },
+    {
+      "path": "../translation"
+    },
+    {
+      "path": "../ui-components"
     }
   ]
 }

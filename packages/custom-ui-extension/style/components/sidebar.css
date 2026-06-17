@@ -193,3 +193,31 @@ jp-tree-item {
 .jp-DirListing-item:hover:not(.jp-mod-selected) {
   background-color: var(--hover-color) !important;
 }
+
+/* 커스텀 사이드 바 위젯 본문 */
+.jp-CustomSidebar {
+  padding: 16px;
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-CustomSidebar-title {
+  font-size: var(--jp-ui-font-size2);
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.jp-CustomSidebar-desc {
+  color: var(--jp-ui-font-color2);
+  margin: 0 0 12px;
+}
+
+.jp-CustomSidebar-list {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.jp-CustomSidebar-list li {
+  margin-bottom: 4px;
+}

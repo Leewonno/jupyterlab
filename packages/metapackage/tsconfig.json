@@ -70,12 +70,6 @@
       "path": "../custom-api-extension"
     },
     {
-      "path": "../custom-sidebar-extension"
-    },
-    {
-      "path": "../custom-toolbar-extension"
-    },
-    {
       "path": "../custom-ui-extension"
     },
     {

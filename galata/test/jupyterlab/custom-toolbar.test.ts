@@ -5,7 +5,8 @@ import { expect, test } from '@jupyterlab/galata';
 import type { Page } from '@playwright/test';
 
 /**
- * E2E tests for the `@jupyterlab/custom-toolbar-extension` package.
+ * E2E tests for the toolbar submit button provided by the
+ * `@jupyterlab/custom-ui-extension` package.
  *
  * The extension adds a "저장 및 제출" button to document toolbars. Clicking it
  * fetches subject/week metadata from a local API, opens a submit dialog, and
@@ -52,7 +53,7 @@ function collectAlerts(page: Page): string[] {
   return messages;
 }
 
-test.describe('custom-toolbar-extension', () => {
+test.describe('custom-ui-extension: toolbar', () => {
   test('adds the submit button to a notebook toolbar', async ({ page }) => {
     await page.notebook.createNew();
 

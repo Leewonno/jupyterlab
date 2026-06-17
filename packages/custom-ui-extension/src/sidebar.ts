@@ -1,9 +1,7 @@
-// Copyright (c) Jupyter Development Team.
-// Distributed under the terms of the Modified BSD License.
-/**
- * @packageDocumentation
- * @module custom-sidebar-extension
- */
+/*-----------------------------------------------------------------------------
+| Copyright (c) Jupyter Development Team.
+| Distributed under the terms of the Modified BSD License.
+|----------------------------------------------------------------------------*/
 
 import type {
   JupyterFrontEnd,
@@ -34,10 +32,10 @@ class CustomSidebarWidget extends Widget {
 }
 
 /**
- * The hello sidebar plugin.
+ * The custom sidebar plugin.
  */
-const plugin: JupyterFrontEndPlugin<void> = {
-  id: '@jupyterlab/custom-sidebar-extension:plugin',
+export const sidebarPlugin: JupyterFrontEndPlugin<void> = {
+  id: '@jupyterlab/custom-ui-extension:sidebar',
   description: 'Adds a hello world panel to the left sidebar.',
   autoStart: true,
   optional: [ILayoutRestorer, ITranslator],
@@ -56,5 +54,3 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.shell.add(panel, 'left', { rank: 500 });
   }
 };
-
-export default [plugin];

@@ -2369,8 +2369,6 @@ __metadata:
     "@jupyterlab/coreutils": ~6.6.0-beta.1
     "@jupyterlab/csvviewer-extension": ~4.6.0-beta.1
     "@jupyterlab/custom-api-extension": ~4.6.0-beta.1
-    "@jupyterlab/custom-sidebar-extension": ~4.6.0-beta.1
-    "@jupyterlab/custom-toolbar-extension": ~4.6.0-beta.1
     "@jupyterlab/custom-ui-extension": ~4.6.0-beta.1
     "@jupyterlab/debugger-extension": ~4.6.0-beta.1
     "@jupyterlab/docmanager-extension": ~4.6.0-beta.1
@@ -3015,22 +3013,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@jupyterlab/custom-sidebar-extension@^4.6.0-beta.1, @jupyterlab/custom-sidebar-extension@workspace:packages/custom-sidebar-extension, @jupyterlab/custom-sidebar-extension@~4.6.0-beta.1":
+"@jupyterlab/custom-ui-extension@^4.6.0-beta.1, @jupyterlab/custom-ui-extension@workspace:packages/custom-ui-extension, @jupyterlab/custom-ui-extension@~4.6.0-beta.1":
   version: 0.0.0-use.local
-  resolution: "@jupyterlab/custom-sidebar-extension@workspace:packages/custom-sidebar-extension"
-  dependencies:
-    "@jupyterlab/application": ^4.6.0-beta.1
-    "@jupyterlab/translation": ^4.6.0-beta.1
-    "@jupyterlab/ui-components": ^4.6.0-beta.1
-    "@lumino/widgets": ^2.8.0
-    rimraf: ~5.0.5
-    typescript: ~5.9.3
-  languageName: unknown
-  linkType: soft
-
-"@jupyterlab/custom-toolbar-extension@^4.6.0-beta.1, @jupyterlab/custom-toolbar-extension@workspace:packages/custom-toolbar-extension, @jupyterlab/custom-toolbar-extension@~4.6.0-beta.1":
-  version: 0.0.0-use.local
-  resolution: "@jupyterlab/custom-toolbar-extension@workspace:packages/custom-toolbar-extension"
+  resolution: "@jupyterlab/custom-ui-extension@workspace:packages/custom-ui-extension"
   dependencies:
     "@jupyterlab/application": ^4.6.0-beta.1
     "@jupyterlab/apputils": ^4.7.0-beta.1
@@ -3039,19 +3024,9 @@ __metadata:
     "@jupyterlab/fileeditor": ^4.6.0-beta.1
     "@jupyterlab/notebook": ^4.6.0-beta.1
     "@jupyterlab/services": ^7.6.0-beta.1
+    "@jupyterlab/translation": ^4.6.0-beta.1
     "@jupyterlab/ui-components": ^4.6.0-beta.1
     "@lumino/widgets": ^2.8.0
-    rimraf: ~5.0.5
-    typescript: ~5.9.3
-  languageName: unknown
-  linkType: soft
-
-"@jupyterlab/custom-ui-extension@^4.6.0-beta.1, @jupyterlab/custom-ui-extension@workspace:packages/custom-ui-extension, @jupyterlab/custom-ui-extension@~4.6.0-beta.1":
-  version: 0.0.0-use.local
-  resolution: "@jupyterlab/custom-ui-extension@workspace:packages/custom-ui-extension"
-  dependencies:
-    "@jupyterlab/application": ^4.6.0-beta.1
-    "@jupyterlab/apputils": ^4.7.0-beta.1
     rimraf: ~5.0.5
     typescript: ~5.9.3
   languageName: unknown
@@ -4331,8 +4306,6 @@ __metadata:
     "@jupyterlab/csvviewer": ^4.6.0-beta.1
     "@jupyterlab/csvviewer-extension": ^4.6.0-beta.1
     "@jupyterlab/custom-api-extension": ^4.6.0-beta.1
-    "@jupyterlab/custom-sidebar-extension": ^4.6.0-beta.1
-    "@jupyterlab/custom-toolbar-extension": ^4.6.0-beta.1
     "@jupyterlab/custom-ui-extension": ^4.6.0-beta.1
     "@jupyterlab/debugger": ^4.6.0-beta.1
     "@jupyterlab/debugger-extension": ^4.6.0-beta.1

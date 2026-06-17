@@ -1,9 +1,7 @@
-// Copyright (c) Jupyter Development Team.
-// Distributed under the terms of the Modified BSD License.
-/**
- * @packageDocumentation
- * @module custom-toolbar-extension
- */
+/*-----------------------------------------------------------------------------
+| Copyright (c) Jupyter Development Team.
+| Distributed under the terms of the Modified BSD License.
+|----------------------------------------------------------------------------*/
 
 import type {
   JupyterFrontEnd,
@@ -253,8 +251,8 @@ function addButton(
 }
 
 // 노트북, 파일 열릴 때 감지해서 필요한 버튼 주입
-const plugin: JupyterFrontEndPlugin<void> = {
-  id: '@jupyterlab/custom-toolbar-extension:plugin',
+export const toolbarPlugin: JupyterFrontEndPlugin<void> = {
+  id: '@jupyterlab/custom-ui-extension:toolbar',
   description:
     'Sends the currently active document to the submission API when clicked.',
   autoStart: true,
@@ -278,5 +276,3 @@ const plugin: JupyterFrontEndPlugin<void> = {
     );
   }
 };
-
-export default [plugin];
