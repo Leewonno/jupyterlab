@@ -1,0 +1,75 @@
+# Copyright (c) Jupyter Development Team.
+# Distributed under the terms of the Modified BSD License.
+#
+# 실행 전용(런타임) 이미지 — 멀티스테이지로 빌드 도구/소스/node_modules 를 제외한다.
+# 개발은 로컬에서 수행하므로 이 이미지는 JupyterLab 실행만 담당한다.
+#
+# 빌드:   docker build -f docker/Dockerfile.runtime -t jupyterlab-runtime .
+# (컨텍스트는 리포 루트여야 함)
+
+# ============================================================
+# Stage 1: builder — 소스에서 prod wheel 생성 (최종 이미지엔 미포함)
+# ============================================================
+FROM mambaorg/micromamba:1.5.5-jammy AS builder
+
+USER root
+
+# 빌드 toolchain (node/yarn/git/python). 최종 이미지엔 들어가지 않는다.
+RUN micromamba install -yn base -c nodefaults -c conda-forge \
+        nodejs=22 yarn=3 git python=3 && \
+    micromamba clean -a -y
+
+# wheel 빌드용 python 패키지 (--no-isolation 이라 미리 설치)
+RUN micromamba run python -m pip install --no-cache-dir \
+        build packaging "hatchling>=1.21.1" "jupyter-builder>=1.0.2" "hatch-jupyter-builder>=0.3.2"
+
+WORKDIR /src
+COPY . /src
+
+# 1) 프론트엔드 의존성 설치 → 2) 패키지 lib 컴파일 → 3) prod wheel 빌드
+# wheel 빌드(build:prod:minimize)는 패키지 lib 을 직접 컴파일하지 않으므로 build:packages 를 먼저 실행한다.
+RUN micromamba run yarn install && \
+    micromamba run jlpm build:packages && \
+    micromamba run python -m build --wheel --no-isolation --outdir /export
+
+# ============================================================
+# Stage 2: runtime — 실행에 필요한 것만 (python + jupyterlab wheel)
+# ============================================================
+FROM mambaorg/micromamba:1.5.5-jammy AS runtime
+
+ARG NEW_MAMBA_USER_ID=57440
+ARG NEW_MAMBA_USER_GID=57440
+USER root
+
+# 기존 이미지와 동일한 uid/gid 정렬
+RUN if [ "$(id ${MAMBA_USER} -u)" != "$NEW_MAMBA_USER_ID" ]; then \
+      usermod "-u ${NEW_MAMBA_USER_ID}" "${MAMBA_USER}"; fi && \
+    if [ "$(id ${MAMBA_USER} -g)" != "$NEW_MAMBA_USER_GID" ]; then \
+      groupmod -o -g ${NEW_MAMBA_USER_GID} ${MAMBA_USER} && \
+      usermod -g ${NEW_MAMBA_USER_GID} ${MAMBA_USER}; fi
+
+# 런타임 python 만 설치 (node/yarn/git/vim 등 불포함)
+RUN micromamba install -yn base -c nodefaults -c conda-forge python=3 && \
+    micromamba clean -a -y
+
+# 빌더에서 만든 wheel 만 가져와 설치 (jupyter_server 등 런타임 의존성 자동 설치)
+COPY --from=builder /export/*.whl /tmp/
+RUN micromamba run python -m pip install --no-cache-dir /tmp/*.whl && \
+    rm -rf /tmp/*.whl /home/$MAMBA_USER/.cache
+
+# favicon 커스텀 (jupyter_server 정적 파일 교체)
+COPY docker/favicon.ico /tmp/favicon.ico
+RUN cp /tmp/favicon.ico \
+      "$(micromamba run python -c 'import jupyter_server, os; print(os.path.dirname(jupyter_server.__file__))')/static/favicons/favicon.ico" && \
+    rm /tmp/favicon.ico
+
+USER $MAMBA_USER
+
+# JupyterLab 이 사용할 루트 작업 디렉터리 미리 생성
+RUN mkdir -p /home/$MAMBA_USER/jlab_root
+
+EXPOSE 8888
+
+# wheel 설치로 앱이 기본 위치(share/jupyter/lab)에 들어가므로 --app-dir 불필요.
+# 나중에 지워야 할 코드: --IdentityProvider.token='' (토큰 없이 접속 목적)
+CMD ["bash", "-lc", "jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --ServerApp.root_dir=/home/mambauser/jlab_root --IdentityProvider.token=''"]
