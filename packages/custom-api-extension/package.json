@@ -1,6 +1,6 @@
 {
   "name": "@jupyterlab/custom-api-extension",
-  "version": "4.6.0-rc.0",
+  "version": "4.6.0-rc.1",
   "description": "JupyterLab - Custom API Extension (central client for external API connections)",
   "homepage": "https://github.com/jupyterlab/jupyterlab",
   "bugs": {
@@ -33,8 +33,8 @@
     "watch": "tsc -b --watch"
   },
   "dependencies": {
-    "@jupyterlab/application": "^4.6.0-rc.0",
-    "@jupyterlab/docmanager": "^4.6.0-rc.0",
+    "@jupyterlab/application": "^4.6.0-rc.1",
+    "@jupyterlab/docmanager": "^4.6.0-rc.1",
     "@lumino/coreutils": "^2.2.2"
   },
   "devDependencies": {
