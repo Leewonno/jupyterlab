@@ -5,9 +5,9 @@
 /* 사이드 바 컨테이너 */
 .jp-SideBar.lm-TabBar[data-orientation='vertical'] {
   max-width: 50px !important;
-  border-radius: 2rem;
-  height: auto !important;
-  contain: content !important;
+  background-color: var(--container-color);
+  /*height: auto !important;*/
+  /*contain: content !important;*/
 }
 
 /* 사이드 바 컨테이너 테두리 */
@@ -28,8 +28,8 @@
 
 /* 사이드 바 선택된 탭 버튼 */
 .jp-SideBar .lm-TabBar-tab.lm-mod-current::after {
-  margin: 5px;
-  border-radius: var(--box-radius);
+  margin: 7px;
+  border-radius: calc(var(--item-radius) - 5px);
   background-color: var(--selected-color);
   z-index: -1;
   border: none;
@@ -38,15 +38,16 @@
 /* 사이드 바 선택된 탭 버튼 :: 바로 위 항목의 내부 요소 */
 .lm-TabBar-tab.lm-mod-current {
   background-color: transparent !important;
+  color: var(--brand-normal-color);
 }
 
 /* 사이드 바 탭 버튼 hover */
 .jp-SideBar .lm-TabBar-tab:hover:not(.lm-mod-current) {
-  width: 40px;
-  height: 42px;
-  border-radius: var(--box-radius);
+  width: 36px;
+  height: 38px;
+  border-radius: calc(var(--item-radius) - 5px);
   background-color: var(--hover-color) !important;
-  margin: 5px;
+  margin: 7px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,13 +69,13 @@
 
 /* 커스텀 사이드 바 */
 #jp-custom-sidebar {
-  background-color: transparent !important;
+  background-color: var(--layout-color) !important;
 }
 
 /* 우측 디버그 사이드 바 */
 .jp-SideArea {
-  border-radius: var(--box-radius) !important;
-  background-color: var(--container-color) !important;
+  /*border-radius: var(--box-radius) !important;*/
+  background-color: var(--layout-color) !important;
   border: none !important;
 }
 
@@ -104,9 +105,19 @@
   margin-right: 1px;
 }
 
+/* 파일 컨테이너 툴바 추가 버튼 */
+.jp-FileBrowser-toolbar .jp-ToolbarButtonComponent[data-command='launcher:create'] {
+  color: #fff;
+  padding: 2px 0;
+}
+
+.jp-FileBrowser-toolbar svg[data-icon="ui-components:add"] path {
+  stroke-width: 3;
+}
+
 /* 메인 패널 좌측 컨테이너 내용 */
 .lm-Widget .jp-SidePanel {
-  background-color: transparent !important;
+  background-color: var(--layout-color) !important;
 }
 
 /* 메인 패널 좌측 컨테이너 실행 내용 타이틀 아코디언 */

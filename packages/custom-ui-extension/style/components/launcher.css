@@ -5,6 +5,7 @@
 
 /* 메인 코드 실행 패널 */
 #jp-main-dock-panel {
+  background-color: var(--container-color);
   /*margin-top: var(--box-spacing);*/
 }
 

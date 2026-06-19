@@ -7,8 +7,11 @@
 | ======================================================================= */
 
 #jp-top-panel {
-  background-color: var(--layout-color);
   border-bottom: none !important;
+  padding: 5px 0 !important;
+  display: flex;
+  align-items: center;
+  background-color: var(--layout-white-color);
 }
 
 /* 상단 패널 메인 로고 영역 */
@@ -17,15 +20,22 @@
   width: calc(
     var(--jp-private-sidebar-tab-width) + var(--jp-border-width) + 17px
   ) !important;
+  background-color: var(--layout-white-color);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* 상단 패널 메인 로고 */
+#jp-MainLogo svg {
+  margin: 0 !important;
+  width: 16px;
+}
+
 /* 상단 패널 메뉴 영역 Wrapper */
 #jp-menu-panel {
   height: 100%;
-  background-color: var(--layout-color);
+  background-color: var(--layout-white-color);
   display: flex;
   align-items: flex-end;
 }
@@ -58,8 +68,8 @@
 
 /* 중앙 패널 전체 (사이드 바 포함) */
 #jp-main-content-panel {
-  padding-top: var(--box-spacing);
-  padding-bottom: var(--box-spacing);
+  /*padding-top: var(--box-spacing);*/
+  /*padding-bottom: var(--box-spacing);*/
 }
 
 /* 중앙 패널의 중앙 패널 (사이드 바 제외한 가운데 패널) */
@@ -69,7 +79,7 @@
 
 /* 중앙 패널의 중앙 패널의 중앙 패널 (jp-main-vsplit-panel 내부 컨테이너) */
 #jp-main-split-panel {
-  padding: 0 var(--box-spacing) !important;
+  /*padding: 0 var(--box-spacing) !important;*/
 }
 
 /* =======================================================================

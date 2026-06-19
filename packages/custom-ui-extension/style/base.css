@@ -21,7 +21,9 @@
   --item-radius: 15px;
   --box-spacing: 8px;
 
+
   /* 라이트 모드 색상 */
+  --layout-white-color: #fff;
   --layout-color: #f8f5fc;
   --container-color: #f0ebf9;
   --selected-color: #d9ccf0;
@@ -32,6 +34,7 @@
 
   /* 다크 모드 오버라이드 */
   [data-jp-theme-light='false'] {
+    --layout-white-color: #000;
     --layout-color: #130f1a;
     --container-color: #1a1424;
     --selected-color: #271a3d;
@@ -55,5 +58,5 @@
 
 #main {
   border: none;
-  margin: 8px 12px 0;
+  /*margin: 8px 12px 0;*/
 }

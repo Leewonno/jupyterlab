@@ -23,3 +23,8 @@
 .jp-ThemedContainer select {
   border-radius: var(--item-radius) !important;
 }
+
+/* 전체 svg 굵기 조절 */
+svg path {
+  stroke-width: 2;
+}
