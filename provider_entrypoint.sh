@@ -10,6 +10,17 @@ VENV_DIR="/dev/shm/provider_venv"
 # 환경 변수 경로 설정
 export PATH="/workspace/.local/bin:$VENV_DIR/bin:$PATH"
 
+# PIP 인스톨 패키지를 system 디렉토리가 아닌 PVC에 설치하도록 설정
+export PIP_PREFIX="/workspace/.local"
+
+# 라이브러리 이미지의 python version과 상이 대비
+if command -v python3 >/dev/null 2>&1; then
+    PY_VER=$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
+    # python 커널 재시작 시 최적화로 인한 문제 수정
+    SITE_PKG="/workspace/.local/lib/python${PY_VER}/site-packages"
+    mkdir -p "$SITE_PKG"
+    export PYTHONPATH="$SITE_PKG:/opt/venv/lib/python${PY_VER}/site-packages${PYTHONPATH:+:$PYTHONPATH}"
+fi
 
 mkdir -p /opt/gpuguard
 #  파일이 존재하지 않는다면, 처음 실행되는 상태이므로 아래의 Shim 주입 로직을 탑니다.(이미 존재한다면 주입 로직을 건너뜀)
