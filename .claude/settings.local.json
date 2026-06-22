@@ -5,7 +5,10 @@
       "Bash(python3 *)",
       "Skill(notion-save)",
       "Bash(jlpm build *)",
-      "Bash(jlpm install *)"
+      "Bash(jlpm install *)",
+      "Bash(npx tsc *)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(node -e \"const {buildIcon}=require\\('@jupyterlab/ui-components'\\); const s=buildIcon.svgstr; console.log\\(s.match\\(/fill=\\\\\"[^\\\\\"]*\\\\\"|class=\\\\\"[^\\\\\"]*\\\\\"|currentColor|stroke=\\\\\"[^\\\\\"]*\\\\\"/g\\)\\);\")"
     ]
   }
 }
