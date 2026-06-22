@@ -153,11 +153,11 @@
   border-radius: var(--box-radius);
 }
 
- /* 노트북 툴바 커스텀 */
- #jp-main-dock-panel .jp-NotebookPanel .jp-Toolbar {
-   margin-top: calc(var(--box-spacing) * 1);
-   background-color: var(--layout-white-color) !important;
- }
+/* 노트북 툴바 커스텀 */
+#jp-main-dock-panel .jp-NotebookPanel .jp-Toolbar {
+  margin-top: calc(var(--box-spacing) * 1);
+  background-color: var(--layout-white-color) !important;
+}
 
 /* =======================================================================
 | Contextual Helper
@@ -186,6 +186,7 @@
 /* Contextual Help (도움말) 텍스트 출력 영역 */
 #jp-main-dock-panel .jp-RenderedText {
   /*height: calc(100% - var(--box-spacing)) !important;*/
+
   /*margin-top: var(--box-spacing);*/
   background-color: var(--launcher-background-gradient);
   border-radius: var(--box-radius);
@@ -264,8 +265,11 @@
   border-radius: var(--box-radius) !important;
 
   /*margin-top: calc(var(--box-spacing) * 2);*/
+
   /* 저장 및 제출 추가 시 아래 주석 풀기 */
+
   /*margin-top: calc(var(--box-spacing) * 1);*/
+
   /*background-color: var(--layout-white-color) !important;*/
 }
 
@@ -275,10 +279,13 @@
   border-radius: var(--box-radius);
 
   /*margin-top: calc(var(--box-spacing) * 3);*/
+
   /*height: calc(100% - var(--box-spacing) * 7) !important;*/
 
   /* 저장 및 제출 추가 시 아래 주석 풀기 */
+
   /*margin-top: calc(var(--box-spacing) * 2);*/
+
   /*height: calc(100% - var(--box-spacing) * 6) !important;*/
 }
 
@@ -289,12 +296,11 @@
 }
 
 /* 파일 편집할 때, 다크 모드인 경우 커서 안보이는 문제 해결용 */
-body[data-jp-theme-light="false"] {
+body[data-jp-theme-light='false'] {
   #jp-main-dock-panel .jp-FileEditor .ͼ4 .cm-line {
     caret-color: var(--black-color) !important;
   }
 }
-
 
 /* =======================================================================
 | 코드 입력 영역
@@ -328,6 +334,7 @@ body[data-jp-theme-light="false"] {
 | ======================================================================= */
 
 /* 터미널 컨테이너 */
+
 /* 터미널 배경에 그라디언트 주려면 JS 수정해야해서 마지막에 작업 */
 #jp-main-dock-panel .jp-Terminal {
   padding: 8px 0;
