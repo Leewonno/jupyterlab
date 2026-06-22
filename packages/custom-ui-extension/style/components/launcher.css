@@ -105,6 +105,8 @@
 #jp-main-dock-panel .lm-TabBar-addButton {
   border-radius: var(--item-radius);
   background-color: var(--layout-color) !important;
+  width: 16px;
+  height: 16px;
 }
 
 /* 런처 상단 파일 상태 바 선택되지 않은 요소 */
