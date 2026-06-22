@@ -31,6 +31,8 @@ COPY . .
 # 설치 가능한 1개의 배포용 파일(.whl 파일)로 압축하여 /export 폴더에 저장
 RUN corepack enable && \
     yarn install && \
+    jlpm build:all && \
+    node buildutils/lib/update-core-mode.js --skip-assets && \
     python3 -m build --wheel --no-isolation --outdir /export
 
 # 3. Final Stage: Provider Image
