@@ -54,6 +54,10 @@
   border-radius: 0;
 }
 
+.lm-Menu-item.lm-mod-active {
+  background-color: var(--deep-hover-color) !important;
+}
+
 /* 상단 메뉴 바 메뉴에 display : table 이라 border 보이는 문제 -> 배경과 그림자로 덮어서 해결 */
 .lm-Menu-item.lm-mod-active > div {
   background: var(--deep-hover-color);
@@ -106,8 +110,7 @@
 
 /* 하단 패널 헤더 목록 리스트 */
 #jp-down-stack .lm-TabBar-content {
-  background-color: var(--container-color);
-  padding: 5px;
+  background-color: var(--layout-color);
 }
 
 /* 하단 패널 헤더 탭 아이템 */
@@ -124,7 +127,8 @@
 
 /* 하단 패널 본문 */
 #jp-down-stack > .lm-TabPanel-stackedPanel {
-  margin-top: calc(var(--box-spacing) * 2);
+  margin-top: calc(var(--box-spacing));
   border-radius: var(--box-radius);
-  height: calc(100% - 50px) !important;
+  height: calc(100% - 42px) !important;
+  background: var(--launcher-background-gradient);
 }

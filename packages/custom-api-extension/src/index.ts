@@ -41,7 +41,7 @@ const apiPlugin: JupyterFrontEndPlugin<ICustomApi> = {
 const fileOpenReporterPlugin: JupyterFrontEndPlugin<void> = {
   id: '@jupyterlab/custom-api-extension:file-open-reporter',
   description: 'Reports opened file names to the external server.',
-  autoStart: true,
+  autoStart: false,
   requires: [ICustomApi, IDocumentManager, IDocumentWidgetOpener],
   activate: (
     _app: JupyterFrontEnd,

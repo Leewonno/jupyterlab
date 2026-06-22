@@ -263,7 +263,7 @@ export const toolbarPlugin: JupyterFrontEndPlugin<void> = {
   id: '@jupyterlab/custom-ui-extension:toolbar',
   description:
     'Sends the currently active document to the submission API when clicked.',
-  autoStart: true,
+  autoStart: false,
   requires: [INotebookTracker, IEditorTracker, ICustomApi],
   activate: (
     _app: JupyterFrontEnd,

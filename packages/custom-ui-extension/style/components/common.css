@@ -31,5 +31,5 @@ svg path {
 
 /* 선택된(Pressed) 버튼 */
 .jp-ToolbarButtonComponent[aria-pressed='true'] {
-  box-shadow: inset 0px 0px 2px 2px var(--pressed-color);
+  box-shadow: inset 0 0 2px 2px var(--pressed-color);
 }

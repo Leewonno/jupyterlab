@@ -37,13 +37,15 @@
 #jp-main-dock-panel .jp-Launcher {
   border-radius: var(--box-radius);
   background: none !important;
+
   /*margin-top: var(--box-spacing);*/
 }
 
 /* 기본 런처 컨테이너 내부 컨테이너 */
 .jp-Launcher-body {
-  background: var(--jp-layout-color0);
+  background: var(--launcher-background-gradient);
   border-radius: 20px;
+
   /*height: calc(100% - var(--box-spacing));*/
 }
 
@@ -52,10 +54,12 @@
   border-radius: var(--item-radius);
   box-shadow: 0 0 4px -3px var(--brand-normal-color);
   border: 1px solid var(--container-color);
+  background: var(--button-background-gradient);
 }
 
 .jp-LauncherCard:hover {
   box-shadow: 0 0 6px -3px var(--brand-normal-color);
+  background: var(--button-reverse-background-gradient);
 }
 
 /* =======================================================================
@@ -65,6 +69,7 @@
 /* 파일 목록 영역 */
 #jp-main-dock-panel .lm-DockPanel-tabBar {
   /*background-color: var(--container-color) !important;*/
+
   /*padding: 5px;*/
   contain: content !important;
   border-radius: var(--box-radius);
@@ -144,9 +149,15 @@
 
 /* 노트북 영역 입력영역 내부 컨테이너 */
 .jp-WindowedPanel-outer {
-  background: var(--jp-layout-color0) !important;
+  background: var(--launcher-background-gradient) !important;
   border-radius: var(--box-radius);
 }
+
+ /* 노트북 툴바 커스텀 */
+ #jp-main-dock-panel .jp-NotebookPanel .jp-Toolbar {
+   margin-top: calc(var(--box-spacing) * 1);
+   background-color: var(--layout-white-color) !important;
+ }
 
 /* =======================================================================
 | Contextual Helper
@@ -157,6 +168,7 @@
   /*height: calc(100% - var(--box-spacing)) !important;*/
   overflow: auto;
   border-radius: var(--box-radius);
+
   /*margin-top: var(--box-spacing);*/
 }
 
@@ -168,13 +180,14 @@
 /* Contextual Help (도움말) 텍스트 출력 박스 */
 #jp-main-dock-panel .jp-Inspector-content {
   border-radius: var(--box-radius);
+  background: var(--launcher-background-gradient);
 }
 
 /* Contextual Help (도움말) 텍스트 출력 영역 */
 #jp-main-dock-panel .jp-RenderedText {
   /*height: calc(100% - var(--box-spacing)) !important;*/
   /*margin-top: var(--box-spacing);*/
-  background-color: var(--jp-layout-color0);
+  background-color: var(--launcher-background-gradient);
   border-radius: var(--box-radius);
 }
 
@@ -185,6 +198,7 @@
 /* 콘솔 박스 */
 #jp-main-dock-panel .jp-ConsolePanel {
   margin-top: 8px !important;
+
   /*margin-top: 16px !important;*/
 }
 
@@ -193,6 +207,8 @@
   margin-top: var(--box-spacing);
   border-radius: var(--box-radius);
   height: calc(100% - var(--box-spacing) * 2) !important;
+  background: var(--launcher-background-gradient);
+
   /*height: calc(100% - var(--box-spacing) * 3) !important;*/
 }
 
@@ -221,7 +237,17 @@
 #jp-main-dock-panel .jp-DebugConsole .jp-CodeConsole-split {
   margin-top: 0;
   height: 100% !important;
+  background: var(--launcher-background-gradient);
+
   /*height: calc(100% - var(--box-spacing) * 1) !important;*/
+}
+
+.jp-CodeConsole-content {
+  background: none !important;
+}
+
+.jp-CodeConsole-input {
+  background: none !important;
 }
 
 /* 디버그로 콘솔 박스 여는 경우 버튼 박스 */
@@ -236,25 +262,39 @@
 /* 기타 파일 커스텀 툴바 컨테이너 */
 #jp-main-dock-panel .jp-Document .jp-Toolbar {
   border-radius: var(--box-radius) !important;
-  background-color: var(--layout-white-color) !important;
+
   /*margin-top: calc(var(--box-spacing) * 2);*/
-  margin-top: calc(var(--box-spacing) * 1);
+  /* 저장 및 제출 추가 시 아래 주석 풀기 */
+  /*margin-top: calc(var(--box-spacing) * 1);*/
+  /*background-color: var(--layout-white-color) !important;*/
 }
 
 /* 기타 파일 컨테이너 */
 #jp-main-dock-panel .jp-FileEditor {
-  background-color: var(--jp-layout-color0) !important;
+  background: var(--launcher-background-gradient) !important;
   border-radius: var(--box-radius);
+
   /*margin-top: calc(var(--box-spacing) * 3);*/
-  margin-top: calc(var(--box-spacing) * 2);
   /*height: calc(100% - var(--box-spacing) * 7) !important;*/
-  height: calc(100% - var(--box-spacing) * 6) !important;
+
+  /* 저장 및 제출 추가 시 아래 주석 풀기 */
+  /*margin-top: calc(var(--box-spacing) * 2);*/
+  /*height: calc(100% - var(--box-spacing) * 6) !important;*/
 }
 
 /* 파일 라인 카운트 컨테이너 */
 #jp-main-dock-panel .ͼ2 .cm-gutters {
   background-color: var(--layout-color);
+  border-right: 1px solid var(--hover-color);
 }
+
+/* 파일 편집할 때, 다크 모드인 경우 커서 안보이는 문제 해결용 */
+body[data-jp-theme-light="false"] {
+  #jp-main-dock-panel .jp-FileEditor .ͼ4 .cm-line {
+    caret-color: var(--black-color) !important;
+  }
+}
+
 
 /* =======================================================================
 | 코드 입력 영역
@@ -288,6 +328,7 @@
 | ======================================================================= */
 
 /* 터미널 컨테이너 */
+/* 터미널 배경에 그라디언트 주려면 JS 수정해야해서 마지막에 작업 */
 #jp-main-dock-panel .jp-Terminal {
   padding: 8px 0;
   padding-top: 0;

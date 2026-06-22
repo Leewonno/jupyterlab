@@ -37,7 +37,7 @@ class CustomSidebarWidget extends Widget {
 export const sidebarPlugin: JupyterFrontEndPlugin<void> = {
   id: '@jupyterlab/custom-ui-extension:sidebar',
   description: 'Adds a hello world panel to the left sidebar.',
-  autoStart: true,
+  autoStart: false,
   optional: [ILayoutRestorer, ITranslator],
   activate: (
     app: JupyterFrontEnd,

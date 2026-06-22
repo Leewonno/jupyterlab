@@ -22,5 +22,14 @@ import { stylePlugin } from './style';
 import { splashPlugin } from './splash';
 import { sidebarPlugin } from './sidebar';
 import { toolbarPlugin } from './toolbar';
+import { iconPlugin } from './icons';
+import { launcherPlugin } from './launcher';
 
-export default [stylePlugin, splashPlugin, sidebarPlugin, toolbarPlugin];
+export default [
+  stylePlugin,
+  splashPlugin,
+  sidebarPlugin,
+  toolbarPlugin,
+  iconPlugin,
+  launcherPlugin
+];

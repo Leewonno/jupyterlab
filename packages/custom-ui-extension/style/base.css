@@ -23,25 +23,46 @@
 
   /* 라이트 모드 색상 */
   --layout-white-color: #fff;
+  --black-color: #000;
   --layout-color: #f8f5fc;
   --container-color: #f0ebf9;
   --selected-color: #d9ccf0;
   --hover-color: #e2dee8;
   --deep-hover-color: #beaddc;
-  --pressed-color: #7C3AED80;
+  --pressed-color: #7c3aed80;
   --brand-normal-color: #7c3aed;
   --brand-accent-color: #6d28d9;
+  --launcher-background-gradient: var(--jp-layout-color0);
+  --button-background-gradient: var(--jp-layout-color0);
+  --button-reverse-background-gradient: var(--jp-layout-color0);
+
+  /* 다크 모드에서 사용되면서, 라이트에는 영향 미치지 않는 컬러 */
+  --brand-dark-border-color: var(--selected-color);
 
   /* 다크 모드 오버라이드 */
   [data-jp-theme-light='false'] {
     --layout-white-color: #000;
+    --black-color: #fff;
     --layout-color: #130f1a;
     --container-color: #1a1424;
-    --selected-color: #271a3d;
+    --selected-color: #3d265e;
     --hover-color: #272130;
     --deep-hover-color: #382a51;
+    --pressed-color: rgb(223 202 255 / 0.75);
     --brand-normal-color: #9e74e7;
     --brand-accent-color: #c3abed;
+    --launcher-background-gradient: radial-gradient(0.11% 0.17% at 12% 22%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 100%),
+    radial-gradient(0.11% 0.17% at 28% 68%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 100%),
+    radial-gradient(0.07% 0.11% at 46% 36%, rgba(255,255,255,0.5)  0%, rgba(255,255,255,0) 100%),
+    radial-gradient(0.11% 0.17% at 63% 80%, rgba(255,255,255,0.3)  0%, rgba(255,255,255,0) 100%),
+    radial-gradient(0.07% 0.11% at 78% 26%, rgba(255,255,255,0.5)  0%, rgba(255,255,255,0) 100%),
+    radial-gradient(0.11% 0.17% at 88% 62%, rgba(255,255,255,0.4)  0%, rgba(255,255,255,0) 100%),
+    radial-gradient(0.07% 0.11% at 56% 14%, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 100%),
+    radial-gradient(0.07% 0.11% at 36% 88%, rgba(255,255,255,0.4)  0%, rgba(255,255,255,0) 100%),
+    radial-gradient(88.82% 70.45% at 80% 6%, rgba(120,70,210,0.22) 0%, rgba(120,70,210,0) 60%),
+    linear-gradient(180deg, #0B1120 0%, #080D18 100%);
+    --button-background-gradient: linear-gradient(161.4deg, #141D2E 0%, #0E1521 100%);
+    --button-reverse-background-gradient: linear-gradient(161.4deg, #0E1521 0%, #141D2E 100%);
   }
 
   /* jupyter 전역 변수 커스텀 */
@@ -53,7 +74,7 @@
   --jp-accept-color-normal: var(--brand-normal-color) !important;
   --jp-accept-color-hover: var(--brand-accent-color) !important;
   --jp-private-notebook-selected-color: var(--brand-normal-color) !important;
-  --jp-layout-color2: var(--deep-hover-color) !important ;
+  --jp-layout-color2: var(--deep-hover-color) !important;
 }
 
 #main {

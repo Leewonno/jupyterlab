@@ -34,7 +34,7 @@
   border-radius: calc(var(--item-radius) - 5px);
   background-color: var(--selected-color);
   z-index: -1;
-  border: none;
+  border: 1px solid var(--brand-dark-border-color) !important;
 }
 
 /* 사이드 바 선택된 탭 버튼 :: 바로 위 항목의 내부 요소 */
@@ -115,8 +115,13 @@
   box-shadow: 0 0 15px -5px var(--brand-normal-color) !important;
 }
 
+/* 추가 버튼 아이콘 굵기 수정 */
 .jp-FileBrowser-toolbar svg[data-icon='ui-components:add'] path {
   stroke-width: 3;
+}
+
+.jp-DirListing-item.jp-mod-running .jp-DirListing-itemIcon::before {
+  color: var(--brand-normal-color);
 }
 
 /* 메인 패널 좌측 컨테이너 내용 */
