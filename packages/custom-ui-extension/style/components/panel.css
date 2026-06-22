@@ -69,6 +69,7 @@
 /* 중앙 패널 전체 (사이드 바 포함) */
 #jp-main-content-panel {
   /*padding-top: var(--box-spacing);*/
+
   /*padding-bottom: var(--box-spacing);*/
 }
 

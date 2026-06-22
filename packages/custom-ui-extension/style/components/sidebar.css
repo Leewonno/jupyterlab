@@ -6,7 +6,9 @@
 .jp-SideBar.lm-TabBar[data-orientation='vertical'] {
   max-width: 50px !important;
   background-color: var(--container-color);
+
   /*height: auto !important;*/
+
   /*contain: content !important;*/
 }
 
@@ -106,12 +108,14 @@
 }
 
 /* 파일 컨테이너 툴바 추가 버튼 */
-.jp-FileBrowser-toolbar .jp-ToolbarButtonComponent[data-command='launcher:create'] {
+.jp-FileBrowser-toolbar
+  .jp-ToolbarButtonComponent[data-command='launcher:create'] {
   color: #fff;
   padding: 2px 0;
+  box-shadow: 0 0 15px -5px var(--brand-normal-color) !important;
 }
 
-.jp-FileBrowser-toolbar svg[data-icon="ui-components:add"] path {
+.jp-FileBrowser-toolbar svg[data-icon='ui-components:add'] path {
   stroke-width: 3;
 }
 

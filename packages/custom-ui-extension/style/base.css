@@ -21,7 +21,6 @@
   --item-radius: 15px;
   --box-spacing: 8px;
 
-
   /* 라이트 모드 색상 */
   --layout-white-color: #fff;
   --layout-color: #f8f5fc;
@@ -29,6 +28,7 @@
   --selected-color: #d9ccf0;
   --hover-color: #e2dee8;
   --deep-hover-color: #beaddc;
+  --pressed-color: #7C3AED80;
   --brand-normal-color: #7c3aed;
   --brand-accent-color: #6d28d9;
 
@@ -58,5 +58,6 @@
 
 #main {
   border: none;
+
   /*margin: 8px 12px 0;*/
 }

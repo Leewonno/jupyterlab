@@ -6,11 +6,6 @@
 | 노트북 영역 스크롤 바 커스텀
 | ======================================================================= */
 
-.jp-WindowedPanel-outer::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
 .jp-WindowedPanel-outer::-webkit-scrollbar-track {
   background: transparent;
   margin: 1rem;
@@ -19,11 +14,6 @@
 /* =======================================================================
 | 터미널 영역 스크롤 바 커스텀
 | ======================================================================= */
-
-.xterm .xterm-viewport::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
 
 .xterm .xterm-viewport::-webkit-scrollbar-track {
   background: transparent;
@@ -34,11 +24,6 @@
 | 파일 영역 스크롤 바 커스텀
 | ======================================================================= */
 
-.jp-DirListing-content::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
 .jp-DirListing-content::-webkit-scrollbar-track {
   background: transparent;
   margin-bottom: 1rem;
@@ -48,11 +33,6 @@
 | 코드 영역 스크롤 바 커스텀
 | ======================================================================= */
 
-.jp-zoom-target::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
 .jp-zoom-target::-webkit-scrollbar-track {
   background: transparent;
   margin: 1rem;
@@ -61,11 +41,6 @@
 /* =======================================================================
 | 기타 파일 영역 스크롤 바 커스텀
 | ======================================================================= */
-
-.cm-scroller .jp-zoom-target::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
 
 /* 기타 파일 영역 스크롤 바 커스텀 */
 .cm-scroller .jp-zoom-target::-webkit-scrollbar-track {
@@ -77,11 +52,21 @@
 | 공통 스크롤 커스텀
 | ======================================================================= */
 
+.jp-WindowedPanel-outer::-webkit-scrollbar,
+.cm-scroller .jp-zoom-target::-webkit-scrollbar,
+.jp-DirListing-content::-webkit-scrollbar,
+.jp-zoom-target::-webkit-scrollbar,
+.xterm .xterm-viewport::-webkit-scrollbar
+{
+  width: 6px;
+  height: 6px;
+}
+
 .jp-WindowedPanel-outer::-webkit-scrollbar-thumb,
 .xterm .xterm-viewport::-webkit-scrollbar-thumb,
 .jp-DirListing-content::-webkit-scrollbar-thumb,
 .jp-zoom-target::-webkit-scrollbar-thumb,
 .cm-scroller .jp-zoom-target::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--pressed-color);
   border-radius: 4px;
 }
