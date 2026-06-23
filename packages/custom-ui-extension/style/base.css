@@ -13,6 +13,7 @@
 @import url('./components/scroll.css');
 @import url('components/loading.css');
 @import url('./components/toolbar.css');
+@import url('./components/commandpalette.css');
 
 /* 전역 설정 */
 :root {
