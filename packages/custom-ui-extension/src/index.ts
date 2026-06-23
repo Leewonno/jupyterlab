@@ -6,10 +6,6 @@
 /**
  * @packageDocumentation
  * @module custom-ui-extension
- *
- * Centralized package for custom UI additions (styles, splash screen,
- * sidebar panel, toolbar submit button). Each feature is a separate plugin
- * so it can be enabled/disabled independently via its plugin id.
  */
 
 import '../style/components/sidebar.css';
@@ -24,6 +20,7 @@ import { sidebarPlugin } from './sidebar';
 import { toolbarPlugin } from './toolbar';
 import { iconPlugin } from './icons';
 import { launcherPlugin } from './launcher';
+import { placeholderPlugin } from './placeholder';
 
 export default [
   stylePlugin,
@@ -31,5 +28,6 @@ export default [
   sidebarPlugin,
   toolbarPlugin,
   iconPlugin,
-  launcherPlugin
+  launcherPlugin,
+  placeholderPlugin
 ];

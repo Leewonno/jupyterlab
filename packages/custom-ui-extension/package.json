@@ -33,8 +33,10 @@
     "watch": "tsc -b --watch"
   },
   "dependencies": {
+    "@codemirror/view": "^6.39.14",
     "@jupyterlab/application": "^4.6.0-rc.1",
     "@jupyterlab/apputils": "^4.7.0-rc.1",
+    "@jupyterlab/codemirror": "^4.6.0-rc.1",
     "@jupyterlab/custom-api-extension": "^4.6.0-rc.1",
     "@jupyterlab/docregistry": "^4.6.0-rc.1",
     "@jupyterlab/fileeditor": "^4.6.0-rc.1",
