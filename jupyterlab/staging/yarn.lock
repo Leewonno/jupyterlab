@@ -1188,7 +1188,7 @@ __metadata:
 
 "@jupyterlab/custom-ui-extension@file:../../packages/custom-ui-extension::locator=%40jupyterlab%2Fapplication-top%40workspace%3A.":
   version: 4.6.0-rc.1
-  resolution: "@jupyterlab/custom-ui-extension@file:../../packages/custom-ui-extension#../../packages/custom-ui-extension::hash=6df850&locator=%40jupyterlab%2Fapplication-top%40workspace%3A."
+  resolution: "@jupyterlab/custom-ui-extension@file:../../packages/custom-ui-extension#../../packages/custom-ui-extension::hash=2776ba&locator=%40jupyterlab%2Fapplication-top%40workspace%3A."
   dependencies:
     "@codemirror/view": ^6.39.14
     "@jupyterlab/application": ^4.6.0-rc.1
@@ -1202,7 +1202,7 @@ __metadata:
     "@jupyterlab/translation": ^4.6.0-rc.1
     "@jupyterlab/ui-components": ^4.6.0-rc.1
     "@lumino/widgets": ^2.8.0
-  checksum: 3cbf70f58b5735518c123a200726cf68ffef124646b9dc14983774e2ef6596ce0d564ed1858856f6178f3da6adcc878fbbb5b5e5b6103a60b2d26b885be12ecc
+  checksum: 349ceeb18b479fc2a11608b77880d3d961c0dbbea60e5ad01a0d016ce4caa7d866532e75d250bca6ddfc7a5a240fcf95f59f26e259393806a5eec091da93535b
   languageName: node
   linkType: hard
 
