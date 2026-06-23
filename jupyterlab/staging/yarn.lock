@@ -583,9 +583,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/application-extension@npm:~4.6.0-rc.1":
+"@jupyterlab/application-extension@file:../../packages/application-extension::locator=%40jupyterlab%2Fapplication-top%40workspace%3A.":
   version: 4.6.0-rc.1
-  resolution: "@jupyterlab/application-extension@npm:4.6.0-rc.1"
+  resolution: "@jupyterlab/application-extension@file:../../packages/application-extension#../../packages/application-extension::hash=531ed3&locator=%40jupyterlab%2Fapplication-top%40workspace%3A."
   dependencies:
     "@jupyterlab/application": ^4.6.0-rc.1
     "@jupyterlab/apputils": ^4.7.0-rc.1
@@ -601,7 +601,7 @@ __metadata:
     "@lumino/disposable": ^2.1.5
     "@lumino/widgets": ^2.8.0
     react: ^18.2.0
-  checksum: 5d744d4691943171d5fe226f6b8caf861b90ca8dffa1a24a0e741a7a4003a0b91e07ca52863b0ec2f11bf0e942cdbe5e60ef140b7bbc99b5f062d6979a2c1efc
+  checksum: 95c221597447baf490ecc5867f81d35c39b94ed6ad60733d210a207e5ce8d4fa49e994d5ba11dabbd74718922b9ef651353472ef61d9ead6de3f2ba8d3019644
   languageName: node
   linkType: hard
 
@@ -611,7 +611,7 @@ __metadata:
   dependencies:
     "@jupyter/builder": ^1.0.0-beta.1
     "@jupyterlab/application": ~4.6.0-rc.1
-    "@jupyterlab/application-extension": ~4.6.0-rc.1
+    "@jupyterlab/application-extension": "file:../../packages/application-extension"
     "@jupyterlab/apputils-extension": ~4.6.0-rc.1
     "@jupyterlab/audio-extension": ~4.6.0-rc.1
     "@jupyterlab/buildutils": ^4.6.0-rc.1
@@ -622,6 +622,8 @@ __metadata:
     "@jupyterlab/console-extension": ~4.6.0-rc.1
     "@jupyterlab/coreutils": ~6.6.0-rc.1
     "@jupyterlab/csvviewer-extension": ~4.6.0-rc.1
+    "@jupyterlab/custom-api-extension": "file:../../packages/custom-api-extension"
+    "@jupyterlab/custom-ui-extension": "file:../../packages/custom-ui-extension"
     "@jupyterlab/debugger-extension": ~4.6.0-rc.1
     "@jupyterlab/docmanager-extension": ~4.6.0-rc.1
     "@jupyterlab/documentsearch-extension": ~4.6.0-rc.1
@@ -1170,6 +1172,37 @@ __metadata:
     "@lumino/signaling": ^2.1.5
     "@lumino/widgets": ^2.8.0
   checksum: 885ef8e2ca2a6c27af7a6af0f063a52db07b33f344d7b5928c025e816e7adc5ac7ad09248dac6bd525b680070ce41d79feac1fb53d65992d87bf256a3dde5155
+  languageName: node
+  linkType: hard
+
+"@jupyterlab/custom-api-extension@file:../../packages/custom-api-extension::locator=%40jupyterlab%2Fapplication-top%40workspace%3A.":
+  version: 4.6.0-rc.1
+  resolution: "@jupyterlab/custom-api-extension@file:../../packages/custom-api-extension#../../packages/custom-api-extension::hash=afa41b&locator=%40jupyterlab%2Fapplication-top%40workspace%3A."
+  dependencies:
+    "@jupyterlab/application": ^4.6.0-rc.1
+    "@jupyterlab/docmanager": ^4.6.0-rc.1
+    "@lumino/coreutils": ^2.2.2
+  checksum: a7c7873c462388b738324fbcd40fe31f13a8d985354d1fe40c234e3df8e0565269a668a883a03aa27d9f1a7fa05eda82c8976bb7b7fd1a6b99bbbe1ff1166cf5
+  languageName: node
+  linkType: hard
+
+"@jupyterlab/custom-ui-extension@file:../../packages/custom-ui-extension::locator=%40jupyterlab%2Fapplication-top%40workspace%3A.":
+  version: 4.6.0-rc.1
+  resolution: "@jupyterlab/custom-ui-extension@file:../../packages/custom-ui-extension#../../packages/custom-ui-extension::hash=6df850&locator=%40jupyterlab%2Fapplication-top%40workspace%3A."
+  dependencies:
+    "@codemirror/view": ^6.39.14
+    "@jupyterlab/application": ^4.6.0-rc.1
+    "@jupyterlab/apputils": ^4.7.0-rc.1
+    "@jupyterlab/codemirror": ^4.6.0-rc.1
+    "@jupyterlab/custom-api-extension": ^4.6.0-rc.1
+    "@jupyterlab/docregistry": ^4.6.0-rc.1
+    "@jupyterlab/fileeditor": ^4.6.0-rc.1
+    "@jupyterlab/notebook": ^4.6.0-rc.1
+    "@jupyterlab/services": ^7.6.0-rc.1
+    "@jupyterlab/translation": ^4.6.0-rc.1
+    "@jupyterlab/ui-components": ^4.6.0-rc.1
+    "@lumino/widgets": ^2.8.0
+  checksum: 3cbf70f58b5735518c123a200726cf68ffef124646b9dc14983774e2ef6596ce0d564ed1858856f6178f3da6adcc878fbbb5b5e5b6103a60b2d26b885be12ecc
   languageName: node
   linkType: hard
 

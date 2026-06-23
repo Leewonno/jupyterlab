@@ -58,7 +58,7 @@ export const announcements: JupyterFrontEndPlugin<void> = {
   id: '@jupyterlab/apputils-extension:announcements',
   description:
     'Add the announcement feature. It will fetch news on the internet and check for application updates.',
-  autoStart: true,
+  autoStart: false,
   optional: [IConfigSectionManager, ISettingRegistry, ITranslator],
   activate: (
     app: JupyterFrontEnd,
@@ -105,7 +105,7 @@ export const announcements: JupyterFrontEndPlugin<void> = {
       if (mustFetchNews === 'none') {
         const notificationId = Notification.emit(
           trans.__(
-            'Would you like to get notified about official Jupyter news?'
+            'Would you like to get notified about official Jupyter news22212?'
           ),
           'default',
           {

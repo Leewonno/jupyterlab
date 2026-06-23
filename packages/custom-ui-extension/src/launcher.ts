@@ -23,23 +23,39 @@ const HEADER_TITLE = '시작하기';
 
 /**
  * 카드 이름 변경 규칙.
- * 이름을 바꾸려면 이 배열의 `label` 값만 수정하면 된다.
+ * 언어팩을 켜도 command id/args 값은 바뀌지 않으므로 locale 와 무관하게 동작
+ * 이름을 바꾸려면 각 규칙의 `label` 값만 수정
  */
 const RENAME_RULES: ReadonlyArray<{
-  category: string;
-  match: string;
+  command: string;
+  match?: (args: Record<string, unknown>) => boolean;
   label: string;
 }> = [
-  { category: 'Other', match: 'Python File', label: 'Python' },
-  { category: 'Notebook', match: 'Python', label: 'Python (Notebook)' },
-  { category: 'Console', match: 'Python', label: 'Python (Console)' },
-  { category: 'Other', match: 'Terminal', label: 'Terminal' },
-  { category: 'Other', match: 'Text', label: 'Text File' },
-  { category: 'Other', match: 'Markdown', label: 'Markdown File' }
+  {
+    command: 'fileeditor:create-new',
+    match: a => normExt(a.fileExt) === 'py',
+    label: 'Python'
+  },
+  { command: 'notebook:create-new', label: 'Python (Notebook)' },
+  { command: 'console:create', label: 'Python (Console)' },
+  { command: 'terminal:create-new', label: 'Terminal' },
+  {
+    command: 'fileeditor:create-new',
+    match: a => !a.fileExt,
+    label: 'Text File'
+  },
+  { command: 'fileeditor:create-new-markdown-file', label: 'Markdown File' }
 ];
 
 /**
- * 카드의 원본 라벨을 읽는다(최초 1회 data-launcher-original 에 저장).
+ * fileExt 값을 정규화한다
+ */
+function normExt(value: unknown): string {
+  return typeof value === 'string' ? value.replace(/^\./, '') : '';
+}
+
+/**
+ * 카드의 원본 라벨을 읽는다(최초 1회 data-launcher-original 에 저장)
  */
 function getCardLabel(
   card: HTMLElement
@@ -54,6 +70,23 @@ function getCardLabel(
     node.setAttribute('data-launcher-original', original);
   }
   return { node, original };
+}
+
+/**
+ * 카드에서 command id 와 args 를 읽는다(표준 런처가 data 속성으로 노출)
+ */
+function getCardCommand(card: HTMLElement): {
+  command: string;
+  args: Record<string, unknown>;
+} {
+  const command = card.getAttribute('data-command') ?? '';
+  let args: Record<string, unknown>;
+  try {
+    args = JSON.parse(card.getAttribute('data-launcher-args') ?? '{}');
+  } catch {
+    args = {};
+  }
+  return { command, args };
 }
 
 /**
@@ -100,17 +133,18 @@ function applyCustomizations(root: HTMLElement): void {
       if (placed.has(card)) {
         continue;
       }
-      const category = card.getAttribute('data-category') ?? '';
-      const info = getCardLabel(card);
-      if (
-        info &&
-        category === rule.category &&
-        info.original.includes(rule.match)
-      ) {
+      const { command, args } = getCardCommand(card);
+      if (command === rule.command && (!rule.match || rule.match(args))) {
         placed.add(card);
         ordered.push({ card, label: rule.label });
       }
     }
+  }
+
+  // 매칭이 하나도 안 되면(예: data 속성 누락) 카드를 전부 지우는 대신
+  // 원본 런처를 그대로 둔다 — 빈 런처 방지용 안전장치.
+  if (ordered.length === 0) {
+    return;
   }
 
   // 규칙에 없는 카드는 제거한다(노출하지 않음).

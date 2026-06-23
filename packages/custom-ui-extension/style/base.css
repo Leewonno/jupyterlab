@@ -121,6 +121,13 @@
   --jp-accept-color-hover: var(--brand-accent-color) !important;
   --jp-private-notebook-selected-color: var(--brand-normal-color) !important;
   --jp-layout-color2: var(--deep-hover-color) !important;
+
+  /* 스크롤 바 커스텀 */
+  --jp-scrollbar-background-color: transparent;
+  --jp-scrollbar-thumb-color: 149, 117, 205;   /* 보라 (예: md-deep-purple-300) */
+  --jp-scrollbar-thumb-margin: 3.5px;
+  --jp-scrollbar-thumb-radius: 9px;
+  --jp-scrollbar-endpad: 3px;
 }
 
 #main {

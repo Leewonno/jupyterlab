@@ -311,6 +311,8 @@ function Card(
       onKeyDown={onkeypress}
       tabIndex={0}
       data-category={item.category || trans.__('Other')}
+      data-command={command}
+      data-launcher-args={JSON.stringify(item.args ?? {})}
       key={Private.keyProperty.get(item)}
     >
       <div className="jp-LauncherCard-icon">
