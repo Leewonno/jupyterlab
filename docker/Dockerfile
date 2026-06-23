@@ -65,13 +65,7 @@ RUN micromamba install -n base -c conda-forge rsync -y && \
 RUN cd packages/application-extension && micromamba run jlpm run build && cd ../..
 RUN micromamba run jlpm build:core
 
-# favicon 변경
-USER root
-RUN cp /home/$MAMBA_USER/jupyterlab/docker/favicon.ico \
-    "$(micromamba run python -c 'import jupyter_server, os; print(os.path.dirname(jupyter_server.__file__))')/static/favicons/favicon.ico"
-
-# 일반 사용자로 전환
-USER $MAMBA_USER
+# favicon 은 partial.html 에 data URI 로 인라인되어 있어 별도 교체 불필요
 
 # JupyterLab이 사용할 루트 작업 디렉터리 미리 생성
 RUN mkdir -p /home/$MAMBA_USER/jlab_root

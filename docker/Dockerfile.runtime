@@ -57,11 +57,7 @@ COPY --from=builder /export/*.whl /tmp/
 RUN micromamba run python -m pip install --no-cache-dir /tmp/*.whl && \
     rm -rf /tmp/*.whl /home/$MAMBA_USER/.cache
 
-# favicon 커스텀 (jupyter_server 정적 파일 교체)
-COPY docker/favicon.ico /tmp/favicon.ico
-RUN cp /tmp/favicon.ico \
-      "$(micromamba run python -c 'import jupyter_server, os; print(os.path.dirname(jupyter_server.__file__))')/static/favicons/favicon.ico" && \
-    rm /tmp/favicon.ico
+# favicon 은 partial.html 에 data URI 로 인라인되어 있어 별도 교체 불필요
 
 USER $MAMBA_USER
 
