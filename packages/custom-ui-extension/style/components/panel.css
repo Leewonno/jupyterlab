@@ -132,3 +132,8 @@
   height: calc(100% - 42px) !important;
   background: var(--launcher-background-gradient);
 }
+
+/* 하단 상태바 */
+#jp-bottom-panel .jp-StatusBar-Widget {
+  border-top: 1px solid var(--container-color);
+}
