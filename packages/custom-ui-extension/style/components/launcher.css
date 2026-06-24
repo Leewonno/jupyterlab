@@ -408,20 +408,21 @@ body[data-jp-theme-light='false'] {
 
 /* 라이센스 영역 전체 컨테이너 */
 .jp-MainAreaWidget:has(.jp-Licenses) {
-  margin-top: calc(var(--box-spacing) * 2);
+  margin-top: calc(var(--box-spacing));
 }
 
 /* 라이센스 컨테이너*/
 .jp-Licenses {
   border-radius: var(--box-radius);
   margin-top: var(--box-spacing);
-  height: calc(100% - var(--box-spacing) * 7) !important;
+  height: calc(100% - var(--box-spacing) * 6) !important;
 }
 
 /* 라이센스 영역의 툴바 */
 .jp-MainAreaWidget:has(.jp-Licenses) > jp-toolbar {
   border-radius: var(--box-radius);
-  background-color: var(--container-color) !important;
+  background-color: var(--layout-white-color) !important;
+  /*background-color: var(--container-color) !important;*/
 }
 
 /* =======================================================================
