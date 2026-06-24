@@ -422,6 +422,7 @@ body[data-jp-theme-light='false'] {
 .jp-MainAreaWidget:has(.jp-Licenses) > jp-toolbar {
   border-radius: var(--box-radius);
   background-color: var(--layout-white-color) !important;
+
   /*background-color: var(--container-color) !important;*/
 }
 
