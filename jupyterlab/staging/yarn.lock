@@ -612,7 +612,7 @@ __metadata:
     "@jupyter/builder": ^1.0.0-beta.1
     "@jupyterlab/application": ~4.6.0-rc.1
     "@jupyterlab/application-extension": "file:../../packages/application-extension"
-    "@jupyterlab/apputils-extension": ~4.6.0-rc.1
+    "@jupyterlab/apputils-extension": "file:../../packages/apputils-extension"
     "@jupyterlab/audio-extension": ~4.6.0-rc.1
     "@jupyterlab/buildutils": ^4.6.0-rc.1
     "@jupyterlab/cell-toolbar-extension": ~4.6.0-rc.1
@@ -717,9 +717,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/apputils-extension@npm:~4.6.0-rc.1":
+"@jupyterlab/apputils-extension@file:../../packages/apputils-extension::locator=%40jupyterlab%2Fapplication-top%40workspace%3A.":
   version: 4.6.0-rc.1
-  resolution: "@jupyterlab/apputils-extension@npm:4.6.0-rc.1"
+  resolution: "@jupyterlab/apputils-extension@file:../../packages/apputils-extension#../../packages/apputils-extension::hash=b368d5&locator=%40jupyterlab%2Fapplication-top%40workspace%3A."
   dependencies:
     "@jupyterlab/application": ^4.6.0-rc.1
     "@jupyterlab/apputils": ^4.7.0-rc.1
@@ -744,7 +744,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-toastify: ^9.0.8
-  checksum: a58e60ccab494ad85067540254200a3cfcaa8cd047446600546984e5bfef896a1d846e19ad8d67091caa34b6294d69f001fd50454711a27fd41347195f952fc3
+  checksum: be77f67174f96ac0494700781c6210b352c7c1d730e20f3973fa7c0d5ae85259ebeb3c0381dca636262e4c27877f0eeacc660502733e82ce5d9f83a72b668d0b
   languageName: node
   linkType: hard
 
@@ -1188,7 +1188,7 @@ __metadata:
 
 "@jupyterlab/custom-ui-extension@file:../../packages/custom-ui-extension::locator=%40jupyterlab%2Fapplication-top%40workspace%3A.":
   version: 4.6.0-rc.1
-  resolution: "@jupyterlab/custom-ui-extension@file:../../packages/custom-ui-extension#../../packages/custom-ui-extension::hash=2776ba&locator=%40jupyterlab%2Fapplication-top%40workspace%3A."
+  resolution: "@jupyterlab/custom-ui-extension@file:../../packages/custom-ui-extension#../../packages/custom-ui-extension::hash=c5afbd&locator=%40jupyterlab%2Fapplication-top%40workspace%3A."
   dependencies:
     "@codemirror/view": ^6.39.14
     "@jupyterlab/application": ^4.6.0-rc.1
@@ -1202,7 +1202,7 @@ __metadata:
     "@jupyterlab/translation": ^4.6.0-rc.1
     "@jupyterlab/ui-components": ^4.6.0-rc.1
     "@lumino/widgets": ^2.8.0
-  checksum: 349ceeb18b479fc2a11608b77880d3d961c0dbbea60e5ad01a0d016ce4caa7d866532e75d250bca6ddfc7a5a240fcf95f59f26e259393806a5eec091da93535b
+  checksum: 3408dd5339a7e3697829881d425c93bb0bd1dddddf474f766a6350fd82d680e2468e710038b2269d2226848e213d0c29785d73314281e9cab4907c1935a39e9f
   languageName: node
   linkType: hard
 

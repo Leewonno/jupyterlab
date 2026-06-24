@@ -28,7 +28,7 @@
     "@jupyterlab/application": "~4.6.0-rc.1",
     "@jupyterlab/application-extension": "file:../../packages/application-extension",
     "@jupyterlab/apputils": "~4.7.0-rc.1",
-    "@jupyterlab/apputils-extension": "~4.6.0-rc.1",
+    "@jupyterlab/apputils-extension": "file:../../packages/apputils-extension",
     "@jupyterlab/attachments": "~4.6.0-rc.1",
     "@jupyterlab/audio-extension": "~4.6.0-rc.1",
     "@jupyterlab/cell-toolbar": "~4.6.0-rc.1",
@@ -154,7 +154,7 @@
   "dependencies": {
     "@jupyterlab/application": "~4.6.0-rc.1",
     "@jupyterlab/application-extension": "file:../../packages/application-extension",
-    "@jupyterlab/apputils-extension": "~4.6.0-rc.1",
+    "@jupyterlab/apputils-extension": "file:../../packages/apputils-extension",
     "@jupyterlab/audio-extension": "~4.6.0-rc.1",
     "@jupyterlab/cell-toolbar-extension": "~4.6.0-rc.1",
     "@jupyterlab/celltags-extension": "~4.6.0-rc.1",
@@ -369,6 +369,7 @@
     ],
     "linkedPackages": {
       "@jupyterlab/application-extension": "../../packages/application-extension",
+      "@jupyterlab/apputils-extension": "../../packages/apputils-extension",
       "@jupyterlab/custom-api-extension": "../../packages/custom-api-extension",
       "@jupyterlab/custom-ui-extension": "../../packages/custom-ui-extension"
     },
