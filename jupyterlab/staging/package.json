@@ -70,7 +70,7 @@
     "@jupyterlab/inspector-extension": "~4.6.0-rc.1",
     "@jupyterlab/javascript-extension": "~4.6.0-rc.1",
     "@jupyterlab/json-extension": "~4.6.0-rc.1",
-    "@jupyterlab/launcher": "~4.6.0-rc.1",
+    "@jupyterlab/launcher": "file:../../packages/launcher",
     "@jupyterlab/launcher-extension": "~4.6.0-rc.1",
     "@jupyterlab/logconsole": "~4.6.0-rc.1",
     "@jupyterlab/logconsole-extension": "~4.6.0-rc.1",
@@ -371,7 +371,8 @@
       "@jupyterlab/application-extension": "../../packages/application-extension",
       "@jupyterlab/apputils-extension": "../../packages/apputils-extension",
       "@jupyterlab/custom-api-extension": "../../packages/custom-api-extension",
-      "@jupyterlab/custom-ui-extension": "../../packages/custom-ui-extension"
+      "@jupyterlab/custom-ui-extension": "../../packages/custom-ui-extension",
+      "@jupyterlab/launcher": "../../packages/launcher"
     },
     "staticDir": "../static"
   }

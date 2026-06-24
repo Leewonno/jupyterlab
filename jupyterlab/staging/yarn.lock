@@ -1712,9 +1712,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jupyterlab/launcher@npm:~4.6.0-rc.1":
+"@jupyterlab/launcher@file:../../packages/launcher::locator=%40jupyterlab%2Fapplication-top%40workspace%3A.":
   version: 4.6.0-rc.1
-  resolution: "@jupyterlab/launcher@npm:4.6.0-rc.1"
+  resolution: "@jupyterlab/launcher@file:../../packages/launcher#../../packages/launcher::hash=072a1f&locator=%40jupyterlab%2Fapplication-top%40workspace%3A."
   dependencies:
     "@jupyterlab/apputils": ^4.7.0-rc.1
     "@jupyterlab/translation": ^4.6.0-rc.1
@@ -1726,7 +1726,7 @@ __metadata:
     "@lumino/properties": ^2.0.4
     "@lumino/widgets": ^2.8.0
     react: ^18.2.0
-  checksum: ef75052d2ff5ed665b8cdcd61f502d4a64df8cd71d56732109aa5399664eba42bcd5841938e011249867d9237756fb0f177cd5dd9726bcbe5edf29e4c299ffe5
+  checksum: dd557b32b800ddb70e0cbab09d2a37c24e4dff2b01a96c39963b12eb35a8157c0352e6f7f7db3dc288cf694550d359d2adc549868fbb6dc74b4c81d5f97a1ad8
   languageName: node
   linkType: hard
 
