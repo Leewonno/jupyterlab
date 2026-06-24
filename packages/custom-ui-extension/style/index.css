@@ -12,5 +12,6 @@
 @import url('~@jupyterlab/codemirror/style/index.css');
 @import url('~@jupyterlab/custom-api-extension/style/index.css');
 @import url('~@jupyterlab/fileeditor/style/index.css');
+@import url('~@jupyterlab/mainmenu/style/index.css');
 @import url('~@jupyterlab/notebook/style/index.css');
 @import url('./base.css');

@@ -15,6 +15,14 @@ import type {
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { ILabShell } from '@jupyterlab/application';
+import { LabIcon } from '@jupyterlab/ui-components';
+
+import appWindowSvg from '../style/icons/app-window.svg';
+
+const appWindowIcon = new LabIcon({
+  name: '@jupyterlab/custom-ui-extension:app-window',
+  svgstr: appWindowSvg
+});
 
 /**
  * 병합된 단일 섹션 헤더의 제목.
@@ -22,9 +30,7 @@ import { ILabShell } from '@jupyterlab/application';
 const HEADER_TITLE = '시작하기';
 
 /**
- * 카드 이름 변경 규칙.
- * 언어팩을 켜도 command id/args 값은 바뀌지 않으므로 locale 와 무관하게 동작
- * 이름을 바꾸려면 각 규칙의 `label` 값만 수정
+ * 카드 이름 변경
  */
 const RENAME_RULES: ReadonlyArray<{
   command: string;
@@ -48,14 +54,14 @@ const RENAME_RULES: ReadonlyArray<{
 ];
 
 /**
- * fileExt 값을 정규화한다
+ * fileExt 값 정규화
  */
 function normExt(value: unknown): string {
   return typeof value === 'string' ? value.replace(/^\./, '') : '';
 }
 
 /**
- * 카드의 원본 라벨을 읽는다(최초 1회 data-launcher-original 에 저장)
+ * 카드의 원본 라벨 읽기(최초 1회 data-launcher-original 에 저장)
  */
 function getCardLabel(
   card: HTMLElement
@@ -113,10 +119,19 @@ function applyCustomizations(root: HTMLElement): void {
     return;
   }
 
-  // 단일 헤더 제목 교체 (아이콘은 그대로 둔다)
+  // 단일 헤더 제목 교체
   const title = first.querySelector<HTMLElement>('.jp-Launcher-sectionTitle');
   if (title && title.textContent !== HEADER_TITLE) {
     title.textContent = HEADER_TITLE;
+  }
+
+  // 런처 섹션 헤더 아이콘을 app-window 아이콘으로 교체
+  const sectionTitle = first.querySelector<HTMLElement>('.jp-Launcher-sectionTitle');
+  const iconContainer = sectionTitle?.previousElementSibling as HTMLElement | null;
+  if (iconContainer && !iconContainer.hasAttribute('data-custom-icon')) {
+    const next = appWindowIcon.element({ stylesheet: 'launcherSection' });
+    next.setAttribute('data-custom-icon', 'app-window');
+    iconContainer.replaceWith(next);
   }
 
   // 모든 섹션의 카드를 모은다.

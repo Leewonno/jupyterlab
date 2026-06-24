@@ -27,6 +27,9 @@
       "path": "../fileeditor"
     },
     {
+      "path": "../mainmenu"
+    },
+    {
       "path": "../notebook"
     },
     {

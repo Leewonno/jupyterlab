@@ -20,7 +20,9 @@ import { sidebarPlugin } from './sidebar';
 import { toolbarPlugin } from './toolbar';
 import { iconPlugin } from './icons';
 import { launcherPlugin } from './launcher';
+import { menuPlugin } from './menu';
 import { placeholderPlugin } from './placeholder';
+import { aboutPlugin } from './about';
 
 export default [
   stylePlugin,
@@ -29,5 +31,7 @@ export default [
   toolbarPlugin,
   iconPlugin,
   launcherPlugin,
-  placeholderPlugin
+  menuPlugin,
+  placeholderPlugin,
+  aboutPlugin
 ];
