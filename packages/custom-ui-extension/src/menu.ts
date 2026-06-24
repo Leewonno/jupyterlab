@@ -7,7 +7,7 @@ import type {
   JupyterFrontEnd,
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
-import type { HelpMenu} from '@jupyterlab/mainmenu';
+import type { HelpMenu } from '@jupyterlab/mainmenu';
 import { IMainMenu } from '@jupyterlab/mainmenu';
 import type { IRankedMenu } from '@jupyterlab/ui-components';
 import type { Menu } from '@lumino/widgets';

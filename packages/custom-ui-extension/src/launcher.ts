@@ -126,8 +126,11 @@ function applyCustomizations(root: HTMLElement): void {
   }
 
   // 런처 섹션 헤더 아이콘을 app-window 아이콘으로 교체
-  const sectionTitle = first.querySelector<HTMLElement>('.jp-Launcher-sectionTitle');
-  const iconContainer = sectionTitle?.previousElementSibling as HTMLElement | null;
+  const sectionTitle = first.querySelector<HTMLElement>(
+    '.jp-Launcher-sectionTitle'
+  );
+  const iconContainer =
+    sectionTitle?.previousElementSibling as HTMLElement | null;
   if (iconContainer && !iconContainer.hasAttribute('data-custom-icon')) {
     const next = appWindowIcon.element({ stylesheet: 'launcherSection' });
     next.setAttribute('data-custom-icon', 'app-window');
