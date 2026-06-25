@@ -151,7 +151,7 @@
 
 /* 노트북 영역 입력영역 내부 컨테이너 */
 .jp-WindowedPanel-outer {
-  background: var(--launcher-background-gradient) !important;
+  background: var(--launcher-background-color) !important;
   border-radius: var(--box-radius);
 }
 
@@ -210,7 +210,7 @@
   margin-top: var(--box-spacing);
   border-radius: var(--box-radius);
   height: calc(100% - var(--box-spacing) * 2) !important;
-  background: var(--launcher-background-gradient);
+  background: var(--launcher-background-color);
 
   /*height: calc(100% - var(--box-spacing) * 3) !important;*/
 }
@@ -277,7 +277,7 @@
 
 /* 기타 파일 컨테이너 */
 #jp-main-dock-panel .jp-FileEditor {
-  background: var(--launcher-background-gradient) !important;
+  background: var(--launcher-background-color) !important;
   border-radius: var(--box-radius);
 
   /*margin-top: calc(var(--box-spacing) * 3);*/
@@ -302,6 +302,11 @@ body[data-jp-theme-light='false'] {
   #jp-main-dock-panel .jp-FileEditor .ͼ4 .cm-line {
     caret-color: var(--black-color) !important;
   }
+}
+
+/* 기타 파일 수정 영역 배경 */
+#jp-main-dock-panel .jp-FileEditor .ͼo .cm-scroller {
+  background-color: var(--launcher-background-color) !important;
 }
 
 /* =======================================================================
@@ -350,6 +355,7 @@ body[data-jp-theme-light='false'] {
 #jp-main-dock-panel .xterm-viewport {
   border-radius: var(--box-radius);
   height: calc(100% - var(--box-spacing) * 2) !important;
+  background-color: var(--launcher-background-color) !important;
 }
 
 /* 터미널 컨테이너 body */

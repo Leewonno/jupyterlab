@@ -33,6 +33,7 @@
   --pressed-color: #7c3aed80;
   --brand-normal-color: #7c3aed;
   --brand-accent-color: #6d28d9;
+  --launcher-background-color: var(--jp-layout-color0);
   --launcher-background-gradient: var(--jp-layout-color0);
   --button-background-gradient: var(--jp-layout-color0);
   --button-reverse-background-gradient: var(--jp-layout-color0);
@@ -52,6 +53,7 @@
     --pressed-color: rgb(223 202 255 / 0.75);
     --brand-normal-color: #9e74e7;
     --brand-accent-color: #c3abed;
+    --launcher-background-color: #272231;
     --launcher-background-gradient:
       radial-gradient(
         0.11% 0.17% at 12% 22%,

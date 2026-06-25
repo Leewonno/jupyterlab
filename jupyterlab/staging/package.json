@@ -111,7 +111,7 @@
     "@jupyterlab/statedb": "~4.6.0-rc.1",
     "@jupyterlab/statusbar": "~4.6.0-rc.1",
     "@jupyterlab/statusbar-extension": "~4.6.0-rc.1",
-    "@jupyterlab/terminal": "~4.6.0-rc.1",
+    "@jupyterlab/terminal": "file:../../packages/terminal",
     "@jupyterlab/terminal-extension": "~4.6.0-rc.1",
     "@jupyterlab/theme-dark-extension": "~4.6.0-rc.1",
     "@jupyterlab/theme-dark-high-contrast-extension": "~4.6.0-rc.1",
@@ -196,6 +196,7 @@
     "@jupyterlab/settingeditor-extension": "~4.6.0-rc.1",
     "@jupyterlab/shortcuts-extension": "~5.4.0-rc.1",
     "@jupyterlab/statusbar-extension": "~4.6.0-rc.1",
+    "@jupyterlab/terminal": "file:../../packages/terminal",
     "@jupyterlab/terminal-extension": "~4.6.0-rc.1",
     "@jupyterlab/theme-dark-extension": "~4.6.0-rc.1",
     "@jupyterlab/theme-dark-high-contrast-extension": "~4.6.0-rc.1",
@@ -372,7 +373,8 @@
       "@jupyterlab/apputils-extension": "../../packages/apputils-extension",
       "@jupyterlab/custom-api-extension": "../../packages/custom-api-extension",
       "@jupyterlab/custom-ui-extension": "../../packages/custom-ui-extension",
-      "@jupyterlab/launcher": "../../packages/launcher"
+      "@jupyterlab/launcher": "../../packages/launcher",
+      "@jupyterlab/terminal": "../../packages/terminal"
     },
     "staticDir": "../static"
   }
