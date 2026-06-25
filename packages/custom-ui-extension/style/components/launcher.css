@@ -240,7 +240,7 @@
 #jp-main-dock-panel .jp-DebugConsole .jp-CodeConsole-split {
   margin-top: 0;
   height: 100% !important;
-  background: var(--launcher-background-gradient);
+  background: var(--launcher-background-color);
 
   /*height: calc(100% - var(--box-spacing) * 1) !important;*/
 }
@@ -255,7 +255,7 @@
 
 /* 디버그로 콘솔 박스 여는 경우 버튼 박스 */
 #jp-main-dock-panel .jp-DebugConsole .jp-Toolbar::part(positioning-region) {
-  background-color: var(--layout-color) !important;
+  background-color: var(--launcher-background-color) !important;
 }
 
 /* =======================================================================
@@ -293,7 +293,7 @@
 
 /* 파일 라인 카운트 컨테이너 */
 #jp-main-dock-panel .ͼ2 .cm-gutters {
-  background-color: var(--layout-color);
+  background-color: var(--container-color);
   border-right: 1px solid var(--hover-color);
 }
 
@@ -328,7 +328,7 @@ body[data-jp-theme-light='false'] {
 
 /* 코드 입력란 디버그 모드 실행 시 */
 #jp-main-dock-panel .ͼo .cm-gutter {
-  background-color: var(--container-color) !important;
+  background-color: var(--layout-color) !important;
 }
 
 /* 라인 추가 버튼 */
@@ -405,7 +405,7 @@ body[data-jp-theme-light='false'] {
 [data-jp-debugger='true'].jp-Editor .jp-mod-readOnly .cm-scroller {
   height: calc(100% - var(--box-spacing));
   border-radius: var(--box-radius);
-  background: var(--deep-hover-color) !important;
+  background: var(--launcher-background-color) !important;
 }
 
 /* =======================================================================
