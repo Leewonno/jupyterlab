@@ -31,7 +31,9 @@ import {
   caseSensitiveIcon,
   checkIcon,
   clearIcon,
+  closeAllIcon,
   closeIcon,
+  codeIcon,
   collapseAllIcon,
   consoleIcon,
   copyIcon,
@@ -42,6 +44,7 @@ import {
   duplicateIcon,
   editIcon,
   ellipsesIcon,
+  exceptionsIcon,
   expandAllIcon,
   extensionIcon,
   fastForwardIcon,
@@ -68,8 +71,10 @@ import {
   newFolderIcon,
   notebookIcon,
   notTrustedIcon,
+  openKernelSourceIcon,
   paletteIcon,
   pasteIcon,
+  pauseIcon,
   pdfIcon,
   pythonIcon,
   redoIcon,
@@ -81,12 +86,19 @@ import {
   searchIcon,
   settingsIcon,
   spreadsheetIcon,
+  stepIntoIcon,
+  stepOutIcon,
+  stepOverIcon,
   stopIcon,
+  tableRowsIcon,
   terminalIcon,
   textEditorIcon,
   tocIcon,
+  treeViewIcon,
   trustedIcon,
   undoIcon,
+  variableIcon,
+  viewBreakpointIcon,
   wordIcon,
   yamlIcon
 } from '@jupyterlab/ui-components';
@@ -165,6 +177,19 @@ import terminalSvg from '../style/icons/terminal.svg';
 import casesensitiveSvg from '../style/icons/case-sensitive.svg';
 import regexSvg from '../style/icons/regex.svg';
 import wordSvg from '../style/icons/word.svg';
+// Debugger panel icons
+import closeallSvg from '../style/icons/close-all.svg';
+import codeSvg from '../style/icons/code.svg';
+import exceptionsSvg from '../style/icons/exceptions.svg';
+import openKernelSourceSvg from '../style/icons/open-kernel-source.svg';
+import pauseSvg from '../style/icons/pause.svg';
+import stepintoSvg from '../style/icons/step-into.svg';
+import stepoutSvg from '../style/icons/step-out.svg';
+import stepoverSvg from '../style/icons/step-over.svg';
+import tablerowsSvg from '../style/icons/table-rows.svg';
+import treeviewSvg from '../style/icons/tree-view.svg';
+import variableSvg from '../style/icons/variable.svg';
+import viewbreakpointSvg from '../style/icons/view-breakpoint.svg';
 
 const propertyInspectorIcon = new LabIcon({
   name: '@jupyterlab/custom-ui-extension:property-inspector',
@@ -254,7 +279,20 @@ const OVERRIDES: Array<[LabIcon, string]> = [
   // Search overlay
   [caseSensitiveIcon, casesensitiveSvg],
   [regexIcon, regexSvg],
-  [wordIcon, wordSvg]
+  [wordIcon, wordSvg],
+  // Debugger panel
+  [closeAllIcon, closeallSvg],
+  [codeIcon, codeSvg],
+  [exceptionsIcon, exceptionsSvg],
+  [openKernelSourceIcon, openKernelSourceSvg],
+  [pauseIcon, pauseSvg],
+  [stepIntoIcon, stepintoSvg],
+  [stepOutIcon, stepoutSvg],
+  [stepOverIcon, stepoverSvg],
+  [tableRowsIcon, tablerowsSvg],
+  [treeViewIcon, treeviewSvg],
+  [variableIcon, variableSvg],
+  [viewBreakpointIcon, viewbreakpointSvg]
 ];
 
 export const iconPlugin: JupyterFrontEndPlugin<void> = {

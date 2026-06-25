@@ -398,7 +398,7 @@ body[data-jp-theme-light='false'] {
 /* 컨테이너 */
 [data-jp-debugger='true'].jp-Editor .jp-mod-readOnly {
   margin-top: var(--box-spacing) !important;
-  background: var(--layout-color) !important;
+  background: var(--container-color) !important;
 }
 
 /* 내부 코드 영역 컨테이너 */
