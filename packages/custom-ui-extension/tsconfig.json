@@ -36,6 +36,9 @@
       "path": "../services"
     },
     {
+      "path": "../settingregistry"
+    },
+    {
       "path": "../translation"
     },
     {
