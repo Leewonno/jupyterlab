@@ -49,6 +49,28 @@ export const menuPlugin: JupyterFrontEndPlugin<void> = {
       for (const item of [...itemsToRemove]) {
         menu.removeItem(item);
       }
+
+      // 언어 추가 메뉴 제거(마이크로태스크 이후 실행)
+      setTimeout(() => {
+        const settingsMenu = mainMenu.settingsMenu as unknown as Menu;
+        for (const item of settingsMenu.items) {
+          if (item.submenu?.id === 'jp-mainmenu-settings-language') {
+            const langMenu = item.submenu as Menu;
+            const installItem = langMenu.items.find(
+              i => i.command === 'jupyterlab-translation:install-languages'
+            );
+            if (installItem) {
+              const idx = langMenu.items.indexOf(installItem);
+              // 바로 앞 separator도 함께 제거
+              if (idx > 0 && langMenu.items[idx - 1].type === 'separator') {
+                langMenu.removeItem(langMenu.items[idx - 1]);
+              }
+              langMenu.removeItem(installItem);
+            }
+            break;
+          }
+        }
+      }, 0);
     });
   }
 };

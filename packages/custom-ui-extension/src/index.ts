@@ -16,7 +16,7 @@ import '../style/components/toolbar.css';
 
 import { stylePlugin } from './style';
 import { splashPlugin } from './splash';
-import { sidebarPlugin } from './sidebar';
+import { hideExtensionManagerPlugin, sidebarPlugin } from './sidebar';
 import { toolbarPlugin } from './toolbar';
 import { iconPlugin } from './icons';
 import { launcherPlugin } from './launcher';
@@ -28,6 +28,7 @@ export default [
   stylePlugin,
   splashPlugin,
   sidebarPlugin,
+  hideExtensionManagerPlugin,
   toolbarPlugin,
   iconPlugin,
   launcherPlugin,

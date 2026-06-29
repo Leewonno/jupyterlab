@@ -8,13 +8,11 @@ import type {
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { ILayoutRestorer } from '@jupyterlab/application';
+import { ISettingRegistry } from '@jupyterlab/settingregistry';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import { listIcon } from '@jupyterlab/ui-components';
 import { Widget } from '@lumino/widgets';
 
-/**
- * A simple panel widget shown in the left sidebar.
- */
 class CustomSidebarWidget extends Widget {
   constructor(translator?: ITranslator) {
     super();
@@ -31,9 +29,24 @@ class CustomSidebarWidget extends Widget {
   }
 }
 
-/**
- * The custom sidebar plugin.
- */
+// 사이드바 Extension 버튼 및 기능 비활성화
+export const hideExtensionManagerPlugin: JupyterFrontEndPlugin<void> = {
+  id: '@jupyterlab/custom-ui-extension:hide-extension-manager',
+  description: 'Disables the Extension Manager from the left sidebar.',
+  autoStart: true,
+  requires: [ISettingRegistry],
+  activate: async (app: JupyterFrontEnd, registry: ISettingRegistry) => {
+    try {
+      const settings = await registry.load(
+        '@jupyterlab/extensionmanager-extension:plugin'
+      );
+      await settings.set('enabled', false);
+    } catch (e) {
+      console.warn('Failed to disable Extension Manager:', e);
+    }
+  }
+};
+
 export const sidebarPlugin: JupyterFrontEndPlugin<void> = {
   id: '@jupyterlab/custom-ui-extension:sidebar',
   description: 'Adds a hello world panel to the left sidebar.',
