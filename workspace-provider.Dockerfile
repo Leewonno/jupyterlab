@@ -6,7 +6,12 @@ WORKDIR /build
 COPY shim/cudart_shim.c cudart_shim.c
 
 # cudart_shim.c을 컴파일하여 libcudart_shim.so 생성
-RUN gcc -shared -fPIC -O2 \
+# 기본값 4GB. --build-arg LIMIT_GB=6,8,10 등 으로 오버라이드 가능
+ARG LIMIT_GB=4
+RUN export LIMIT_BYTES=$(( LIMIT_GB * 1024 * 1024 * 1024 )) && \
+    sed -i "s/\${LIMIT_GB}/${LIMIT_GB}/g" cudart_shim.c && \
+    sed -i "s/\${LIMIT_BYTES}/${LIMIT_BYTES}/g" cudart_shim.c && \
+    gcc -shared -fPIC -O2 \
     -DREAL_LIBCUDART=\"/opt/gpuguard/libcudart_real.so\" \
     -o libcudart_shim.so \
     cudart_shim.c \
