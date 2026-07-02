@@ -3,20 +3,7 @@
 | Distributed under the terms of the Modified BSD License.
 |----------------------------------------------------------------------------*/
 
-/**
- * Overrides the SVG of selected built-in JupyterLab icons with custom artwork.
- *
- * How it works: every JupyterLab icon is a shared `LabIcon` instance. Setting
- * `icon.svgstr` swaps the artwork everywhere that icon is rendered (sidebar,
- * toolbars, file browser, tabs, status bar, ...), including already-mounted
- * icons. We only touch icons here, never the upstream `ui-components` sources,
- * so this stays merge-clean against upstream.
- *
- * To customize an icon: replace the matching file in `style/icons/<name>.svg`
- * with your own SVG and rebuild. To stop overriding one, delete its line in
- * `OVERRIDES` below (and optionally its svg + import).
- */
-
+/* 아이콘 오버라이드 */
 import {
   addAboveIcon,
   addBelowIcon,
@@ -304,8 +291,6 @@ export const iconPlugin: JupyterFrontEndPlugin<void> = {
       icon.svgstr = svgstr;
     }
 
-    // Property Inspector uses the shared buildIcon, which is also used by
-    // Notebook Tools. Override only this sidebar widget to avoid changing both.
     void app.started.then(() => {
       const propertyInspector = Array.from(app.shell.widgets('right')).find(
         widget => widget.id === 'jp-property-inspector'

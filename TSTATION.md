@@ -28,43 +28,44 @@
 | `:api` | ✅ | 중앙 API 클라이언트(`ICustomApi`)를 provide. 다른 확장은 이 토큰을 `requires`로 주입받아 사용. |
 | `:file-open-reporter` | ❌ | 파일이 열릴 때 파일명을 외부 서버로 보고(현재 기본 비활성). |
 
-> `ICustomApi`는 앱 전역에서 단 하나만 존재해야 하므로 **singleton 패키지**로 등록되어 있음(아래 5절 참고).
+> `ICustomApi`는 앱 전역에서 단 하나만 존재해야 하므로 **singleton 패키지**로 등록되어 있음.
 
 <br />
 
 ## 3. custom-ui-extension
 
-**목적**: tstation 용도에 맞춘 UI/스타일/브랜딩 커스터마이징을 하나의 확장으로 모으기 위해 생성한 패키지. core나 개별 extension을 직접 고치는 대신 여기서 override.
+**목적**: Tstation 용도에 맞춘 UI/스타일/브랜딩 커스터마이징을 하나의 확장으로 모으기 위해 생성한 패키지. core나 개별 extension을 직접 고치는 대신 여기서 override.
 
 **주요 구성 (`src/index.ts`에서 등록하는 플러그인)**
 | 플러그인 id | 설명 |
 | --- | --- |
-| `:plugin` (style) | 중앙 커스텀 스타일 적용 |
-| `:splash` | 커스텀 로고 스플래시 화면 |
-| `:sidebar` | 좌측 사이드바 패널 커스터마이징 |
-| `:hide-extension-manager` | 좌측 사이드바의 Extension Manager 비활성화 |
-| `:toolbar` | 활성 문서를 제출 API로 전송하는 툴바 버튼 |
-| `:icons` | 내장 아이콘 SVG를 커스텀 아트워크로 교체 |
-| `:launcher` | 런처 카테고리를 단일 섹션으로 병합/이름 변경 |
-| `:menu` | 메인 메뉴 커스터마이징 |
+| `:style` | 중앙 커스텀 스타일 적용 |
+| `:splash` | 로딩 UI 변경 |
+| `:sidebar` | 좌측 사이드바 패널 커스터마이징 (Extension 비활성화 / 사이드 바 목록 추가) |
+| `:toolbar` | 제출 API로 전송하는 툴바 버튼 커스터마이징 |
+| `:icons` | 내장 아이콘 SVG를 커스텀 아이콘으로 교체 (Lucid 아이콘 사용 중) |
+| `:launcher` | 런처(Launcher) 커스터마이징 |
+| `:menu` | 상단 메뉴 커스터마이징 |
 | `:placeholder` | 빈 노트북 코드 셀에 안내 placeholder 표시 |
-| `:about` | About 다이얼로그를 커스텀 버전으로 교체 |
+| `:about` | 상단 메뉴 `About Tstation`의 모달을 커스터마이징 |
 
 **스타일 구성**
-- `style/components/*.css` — 컴포넌트별 커스텀 CSS(`sidebar`, `panel`, `launcher`, `loading`, `toolbar` 등)를 `src/index.ts` 상단에서 import.
-- `style/icons/*.svg` — 교체용 아이콘 SVG.
+- `style/components/*.css` — 컴포넌트별 커스텀 CSS(`sidebar`, `panel`, `launcher`, `loading`, `toolbar` 등)를 `src/index.ts` 상단에서 import
+- `style/icons/*.svg` — 교체용 아이콘 SVG
 
----
+<br />
 
 ## 4. 새 커스텀 패키지를 추가할 때 (체크리스트)
 
-이 저장소는 Lerna + Yarn workspaces 모노레포이며, `dev_mode/package.json`, `jupyterlab/staging/package.json`은 대부분 **integrity 스크립트가 생성/동기화**합니다. 그래도 아래 파일들은 신규 커스텀 패키지를 추가할 때 확인/수정 대상입니다.
+- 이 저장소는 Lerna + Yarn workspaces 모노레포
+- `dev_mode/package.json`, `jupyterlab/staging/package.json`은 대부분 **integrity 스크립트가 생성/동기화**
+- 단, 아래 파일들은 신규 커스텀 패키지를 추가할 때 확인/수정 대상입니다.
 
 ### 4-1. 패키지 자체 생성
 1. `packages/<이름>-extension/` 디렉터리 생성.
 2. `package.json` — 기존 커스텀 패키지를 복사해 다음을 맞춤:
-   - `"name": "@jupyterlab/<이름>-extension"`, `version`은 다른 패키지와 동일.
-   - `"jupyterlab": { "extension": true }` (필수 — 이게 있어야 labextension으로 인식).
+   - `"name": "@jupyterlab/<이름>-extension"`, `version`은 다른 패키지와 동일하게 맞춰 사용했음 / 별도 버전 지정해서 맞추기만 해도 사용가능할 걸로 보임
+   - `"jupyterlab": { "extension": true }` (필수 — 이게 있어야 labextension으로 인식)
    - 토큰을 provide 한다면 `styleModule`/`sideEffects` 등도 기존 패키지 참고.
 3. `tsconfig.json` — 기존 패키지 것을 복사하고 `references`에 의존 패키지 추가.
 4. `src/index.ts` — `export default [ ...plugins ]` 형태로 플러그인 배열 export.
@@ -87,9 +88,9 @@ jlpm run integrity    # dev_mode·staging package.json 동기화 + 무결성 검
 jlpm run build        # 전체 빌드
 ```
 
----
+<br />
 
-## 5. 기존(core/upstream) 패키지를 수정하고 배포에 반영하기 (staging)
+## 5. 기존(core/upstream) 패키지를 수정하고 배포에 반영하기
 
 새 패키지가 아니라 **이미 존재하는 패키지**(`packages/<pkg>/src/...`)를 직접 고쳤을 때의 흐름입니다. 소스만 고친다고 배포 앱에 반영되지 않으며, 아래 단계를 거쳐야 합니다.
 
@@ -101,43 +102,15 @@ jlpm run build        # 전체 빌드
 
 > `jupyterlab/static`은 커밋 대상이 아니라 배포 시점에 빌드로 생성/갱신합니다. 반대로 `jupyterlab/staging/`의 `package.json`, `webpack.config.js`, `yarn.lock` 등은 커밋됩니다.
 
-### 5-2. 수정 → 반영 절차
-1. **소스 수정**: `packages/<pkg>/src/` 편집.
-2. **TS 빌드**: 해당 패키지(및 의존 패키지)를 다시 컴파일.
-   ```bash
-   jlpm run build:packages     # metapackage 기준 전체 패키지 빌드
-   # 또는 개발 중이라면
-   jlpm watch                  # 저장 시 자동 재빌드 (개발 확인용)
-   ```
-3. **개발 확인(선택)**: `jlpm run build:dev` 로 `dev_mode` 번들을 만들어 동작 확인.
-4. **배포 번들 재생성**: `jupyterlab/staging`에서 webpack을 돌려 `jupyterlab/static`을 갱신.
-   ```bash
-   jlpm run build:core         # cd jupyterlab/staging && ... && rspack 빌드 → jupyterlab/static 갱신
-   ```
-   프로덕션(최적화/릴리스) 번들이 필요하면:
-   ```bash
-   jlpm run build:dev:prod:release   # integrity + 전체 빌드 + 프로덕션 번들
-   ```
-
-### 5-3. staging에서 확인/수정할 파일
+### 5-2. staging에서 확인/수정할 파일
 대부분 `jlpm run integrity`가 `packages/metapackage/package.json`을 기준으로 `jupyterlab/staging/package.json`을 동기화하므로 직접 편집은 지양합니다. 다만 아래는 인지하고 있어야 합니다.
 
 | 파일 | 내용 |
 | --- | --- |
 | `jupyterlab/staging/package.json` | 배포 앱에 포함되는 패키지 목록/버전, `jupyterlab.singletonPackages` 등. **integrity가 metapackage 기준으로 동기화** (직접 수정하지 말고 metapackage를 고칠 것). |
 | `jupyterlab/staging/yarn.lock` | `build:core` 실행 시 갱신될 수 있음. 변경분은 커밋 필요. |
-| `jupyterlab/staging/webpack.config.js` (및 `webpack.prod.*.config.js`) | 번들링 설정. 빌드 커스터마이징이 필요할 때만 수정. `outputDir`/`staticDir` 설정이 `jupyterlab/static`을 가리킴. |
-| `jupyterlab/static/` | 빌드 산출물. **직접 수정 금지**, 위 빌드로만 생성. |
 
-### 5-4. 요약 명령
-```bash
-jlpm install
-jlpm run integrity          # metapackage → dev_mode/staging package.json 동기화
-jlpm run build:packages     # 수정한 패키지 컴파일
-jlpm run build:core         # jupyterlab/static 배포 번들 재생성
-```
-
-> core 패키지를 직접 수정한 경우, 어떤 파일을 왜 고쳤는지 이 문서(또는 커밋 메시지)에 남겨 upstream 병합 시 충돌 지점을 추적할 수 있게 하세요.
+> core 패키지를 직접 수정한 경우, jupyterlab/staging/package.json, jupyterlab/staging/yarn.lock 쪽에서 로컬 경로를 지정해주지 않으면 배포 환경에서 수정한 패키지가 아닌, 배포 시 npm으로 지정된 버전 패키지를 가져옴오 (패키지 당 최초 1회 등록해야함 / 최초 1회 등록하면 다음부턴 배포시에도 반영됨)
 
 ---
 

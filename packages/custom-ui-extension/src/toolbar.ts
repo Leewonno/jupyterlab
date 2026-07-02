@@ -32,7 +32,7 @@ interface ISubmitValue {
   filename: string;
 }
 
-/** 제출 모달의 본문 위젯 (과목명 select, 주차 select, 파일명 input). */
+/** 제출 모달의 본문 위젯 (과목명 select, 주차 select, 파일명 input) */
 class SubmitDialogBody
   extends Widget
   implements Dialog.IBodyWidget<ISubmitValue>
