@@ -6,7 +6,7 @@
 /**
  * 런처 커스터마이즈 플러그인
  *   1. 여러 섹션(Notebook, Console 등)을 단일 섹션(시작하기)으로 병합 (첫 섹션에 모든 카드를 모음)
- *   2. 단일 헤더 제목을 "시작하기"로 변경 (아이콘은 창 모양 아이콘으로 변경)
+ *   2. 단일 헤더 제목을 "시작하기"(로케일별 번역)로 변경 (아이콘은 창 모양 아이콘으로 변경)
  *   3. 개별 카드 이름을 RENAME_RULES 매핑대로 교체
  */
 
@@ -15,6 +15,7 @@ import type {
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 import { ILabShell } from '@jupyterlab/application';
+import { ITranslator } from '@jupyterlab/translation';
 import { LabIcon } from '@jupyterlab/ui-components';
 
 import appWindowSvg from '../style/icons/app-window.svg';
@@ -25,9 +26,34 @@ const appWindowIcon = new LabIcon({
 });
 
 /**
- * 병합된 단일 섹션 헤더의 제목.
+ * 병합된 단일 섹션 헤더 제목의 로케일별 번역.
  */
-const HEADER_TITLE = '시작하기';
+const HEADER_TITLES: Readonly<Record<string, string>> = {
+  ko: '시작하기',
+  en: 'Get Started',
+  ja: 'はじめる',
+  'zh-cn': '开始使用',
+  'zh-tw': '開始使用'
+};
+
+/**
+ * 로케일 코드('ko_KR', 'zh-CN' 등)에 맞는 헤더 제목을 고른다.
+ * 정확한 코드 → 기본 언어(zh 는 간체) 순으로 매칭하고, 없으면 영어를 쓴다.
+ */
+function resolveHeaderTitle(languageCode: string): string {
+  const locale = languageCode.toLowerCase().replace(/_/g, '-');
+  const base = locale.split('-')[0];
+  return (
+    HEADER_TITLES[locale] ??
+    HEADER_TITLES[base] ??
+    (base === 'zh' ? HEADER_TITLES['zh-cn'] : HEADER_TITLES.en)
+  );
+}
+
+/**
+ * 병합된 단일 섹션 헤더의 제목. activate 시 현재 로케일로 결정된다.
+ */
+let headerTitle = HEADER_TITLES.ko;
 
 /**
  * 카드 이름 변경
@@ -121,8 +147,8 @@ function applyCustomizations(root: HTMLElement): void {
 
   // 단일 헤더 제목 교체
   const title = first.querySelector<HTMLElement>('.jp-Launcher-sectionTitle');
-  if (title && title.textContent !== HEADER_TITLE) {
-    title.textContent = HEADER_TITLE;
+  if (title && title.textContent !== headerTitle) {
+    title.textContent = headerTitle;
   }
 
   // 런처 섹션 헤더 아이콘을 app-window 아이콘으로 교체
@@ -222,8 +248,14 @@ export const launcherPlugin: JupyterFrontEndPlugin<void> = {
   description:
     'Merges launcher categories into a single section and renames items.',
   autoStart: true,
-  optional: [ILabShell],
-  activate: (app: JupyterFrontEnd, labShell: ILabShell | null): void => {
+  optional: [ILabShell, ITranslator],
+  activate: (
+    app: JupyterFrontEnd,
+    labShell: ILabShell | null,
+    translator: ITranslator | null
+  ): void => {
+    headerTitle = resolveHeaderTitle(translator?.languageCode ?? 'ko');
+
     const observed = new WeakSet<Element>();
 
     const scan = (): void => {
