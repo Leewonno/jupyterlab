@@ -416,7 +416,7 @@ class LabApp(NotebookConfigShimMixin, LabServerApp):
     version = version
 
     name = "lab"
-    app_name = "TStation"
+    app_name = "Tstation"
 
     # Should your extension expose other server extensions when launched directly?
     load_other_extensions = True

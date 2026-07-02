@@ -120,7 +120,7 @@ jlpm run build        # 전체 빌드
 
 | 파일 | 변경 내용 | 이유 |
 | --- | --- | --- |
-| `jupyterlab/labapp.py` | `LabApp.app_name` `"JupyterLab"` → `"TStation"` | 앱/페이지 타이틀 브랜딩 |
+| `jupyterlab/labapp.py` | `LabApp.app_name` `"JupyterLab"` → `"Tstation"` | 앱/페이지 타이틀 브랜딩 |
 | `packages/terminal/src/widget.ts` | 터미널 배경색을 `--launcher-background-color`(없으면 `--jp-layout-color0`) 우선 사용 | 다크모드 입력영역 배경색 통일 |
 | `packages/launcher/src/widget.tsx` | 런처 카드에 `data-command`, `data-launcher-args` 속성 추가 | custom-ui-extension의 launcher 커스터마이징에서 카드 식별/재구성에 사용 |
 | `packages/application-extension/schema/move-widget.json` | 탭 컨텍스트 메뉴의 "Move Widget To" 서브메뉴 제거 | 불필요 메뉴 숨김 |
