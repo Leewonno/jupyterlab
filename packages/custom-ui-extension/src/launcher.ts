@@ -217,23 +217,19 @@ function applyCustomizations(root: HTMLElement): void {
  * 런처 노드 하나에 대해 MutationObserver 를 붙여 재렌더 시마다 커스터마이즈를
  * 다시 적용한다. 자기 변경으로 인한 무한 루프를 막기 위해 적용 중에는 observer
  * 를 잠시 끊는다.
+ *
+ * MutationObserver 콜백은 마이크로태스크라서 브라우저 페인트 전에 실행된다.
+ * 여기서 rAF 등으로 미루면 원본 런처가 한 프레임 그려진 뒤에야 커스터마이즈가
+ * 적용되어 깜빡임이 생기므로 반드시 동기적으로 적용한다.
  */
 function enhanceLauncher(node: HTMLElement): MutationObserver {
-  let scheduled = false;
   const observer = new MutationObserver(() => {
-    if (scheduled) {
-      return;
+    observer.disconnect();
+    try {
+      applyCustomizations(node);
+    } finally {
+      observer.observe(node, { childList: true, subtree: true });
     }
-    scheduled = true;
-    requestAnimationFrame(() => {
-      scheduled = false;
-      observer.disconnect();
-      try {
-        applyCustomizations(node);
-      } finally {
-        observer.observe(node, { childList: true, subtree: true });
-      }
-    });
   });
   observer.observe(node, { childList: true, subtree: true });
   applyCustomizations(node);
@@ -256,16 +252,58 @@ export const launcherPlugin: JupyterFrontEndPlugin<void> = {
   ): void => {
     headerTitle = resolveHeaderTitle(translator?.languageCode ?? 'ko');
 
-    const observed = new WeakSet<Element>();
+    const observers = new Map<HTMLElement, MutationObserver>();
 
-    const scan = (): void => {
-      for (const widget of app.shell.widgets('main')) {
-        const node = widget.node.querySelector<HTMLElement>('.jp-Launcher');
-        if (node && !observed.has(node)) {
-          observed.add(node);
-          const observer = enhanceLauncher(node);
-          widget.disposed.connect(() => observer.disconnect());
+    const attach = (node: HTMLElement): void => {
+      if (!observers.has(node)) {
+        observers.set(node, enhanceLauncher(node));
+      }
+    };
+
+    const detach = (node: HTMLElement): void => {
+      const observer = observers.get(node);
+      if (observer) {
+        observer.disconnect();
+        observers.delete(node);
+      }
+    };
+
+    const collectLaunchers = (node: Node): HTMLElement[] => {
+      if (!(node instanceof HTMLElement)) {
+        return [];
+      }
+      if (node.classList.contains('jp-Launcher')) {
+        return [node];
+      }
+      return Array.from(node.querySelectorAll<HTMLElement>('.jp-Launcher'));
+    };
+
+    // 셸 전체를 관찰해 런처 노드가 DOM 에 추가되는 즉시(첫 페인트 전에)
+    // 커스터마이즈 observer 를 붙인다. layoutModified 는 디바운스되고
+    // app.restored 는 복원 후에야 resolve 되어 첫 페인트보다 늦을 수 있으므로
+    // 그 시점에 붙이면 원본 런처가 잠깐 보이는 깜빡임이 생긴다.
+    const shellObserver = new MutationObserver(records => {
+      for (const record of records) {
+        for (const removed of record.removedNodes) {
+          for (const launcher of collectLaunchers(removed)) {
+            detach(launcher);
+          }
         }
+        for (const added of record.addedNodes) {
+          for (const launcher of collectLaunchers(added)) {
+            attach(launcher);
+          }
+        }
+      }
+    });
+    shellObserver.observe(app.shell.node, { childList: true, subtree: true });
+
+    // 이미 DOM 에 존재하는 런처(플러그인이 늦게 활성화된 경우 등)를 위한 보조 스캔.
+    const scan = (): void => {
+      for (const launcher of app.shell.node.querySelectorAll<HTMLElement>(
+        '.jp-Launcher'
+      )) {
+        attach(launcher);
       }
     };
 
