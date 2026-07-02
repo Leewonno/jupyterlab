@@ -110,13 +110,13 @@ jlpm run build        # 전체 빌드
 | `jupyterlab/staging/package.json` | 배포 앱에 포함되는 패키지 목록/버전, `jupyterlab.singletonPackages` 등. **integrity가 metapackage 기준으로 동기화** (직접 수정하지 말고 metapackage를 고칠 것). |
 | `jupyterlab/staging/yarn.lock` | `build:core` 실행 시 갱신될 수 있음. 변경분은 커밋 필요. |
 
-> core 패키지를 직접 수정한 경우, jupyterlab/staging/package.json, jupyterlab/staging/yarn.lock 쪽에서 로컬 경로를 지정해주지 않으면 배포 환경에서 수정한 패키지가 아닌, 배포 시 npm으로 지정된 버전 패키지를 가져옴오 (패키지 당 최초 1회 등록해야함 / 최초 1회 등록하면 다음부턴 배포시에도 반영됨)
+> core 패키지를 직접 수정한 경우, jupyterlab/staging/package.json, jupyterlab/staging/yarn.lock 쪽에서 로컬 경로를 지정해주지 않으면 배포 환경에서는 수정한 패키지가 아닌, npm으로 지정된 버전 패키지를 가져옴 (패키지 당 최초 1회 등록해야함 / 최초 1회 등록하면 다음부턴 배포시에도 반영됨)
 
----
+<br />
 
-## 6. Core 직접 수정 내역
+## 6. Core(JupyterLab 원본 코드) 직접 수정 내역
 
-확장 패키지로 처리할 수 없어 **upstream core를 직접 고친** 부분입니다. upstream 버전을 올릴 때 아래 파일들이 충돌/원복 대상이니 우선 확인하세요. 반영 방법은 [5. staging](#5-기존coreupstream-패키지를-수정하고-배포에-반영하기-staging)을 따릅니다.
+확장 패키지로 처리할 수 없어 **core를 직접 고친** 부분입니다. upstream 버전을 올릴 때 아래 파일들이 충돌/원복 대상이라 확인이 필요합니다.
 
 | 파일 | 변경 내용 | 이유 |
 | --- | --- | --- |
@@ -125,27 +125,55 @@ jlpm run build        # 전체 빌드
 | `packages/launcher/src/widget.tsx` | 런처 카드에 `data-command`, `data-launcher-args` 속성 추가 | custom-ui-extension의 launcher 커스터마이징에서 카드 식별/재구성에 사용 |
 | `packages/application-extension/schema/move-widget.json` | 탭 컨텍스트 메뉴의 "Move Widget To" 서브메뉴 제거 | 불필요 메뉴 숨김 |
 | `packages/apputils-extension/schema/notification.json` | `checkForUpdates` 기본값 `true` → `false`, `fetchNews` 기본값 `"none"` → `"false"` | 업데이트 확인/뉴스 알림(하단 Jupyter 알람) 비활성 |
-| `jupyter-config/labconfig/default_setting_overrides.json` | 설정 기본값 override 파일 (기본 언어 등 배포용 기본 설정 지점) | core 설정 스키마를 건드리지 않고 기본값만 덮어쓰기 위함 |
 
-**빌드 산출물(자동 생성) — 직접 편집 금지**
-- `packages/metapackage/style/index.css`, `packages/metapackage/style/index.js` — 커스텀 패키지의 style import를 모으는 파일. `ensurePackage()`/`jlpm run integrity`가 의존 패키지 기준으로 **자동 생성**하므로 직접 수정하지 말 것. (제거된 `custom-sidebar`/`custom-toolbar` 대신 `custom-api`/`custom-ui`만 import되도록 정리됨.)
+> **주의**: 위 파일들은 `packages/custom-*`와 달리 upstream(원본 경로)과 같은 경로를 공유하므로, JupyterLab 버전 업 시 merge 충돌이 나거나 변경이 조용히 덮일 수 있습니다. upstream 병합 후 반드시 이 표의 항목들이 유지됐는지 확인하세요.
 
-> **주의**: 위 파일들은 `packages/custom-*`와 달리 upstream과 같은 경로를 공유하므로, JupyterLab 버전 업 시 merge 충돌이 나거나 변경이 조용히 덮일 수 있습니다. upstream 병합 후 반드시 이 표의 항목들이 유지됐는지 확인하세요.
+<br />
 
----
 
-## 7. singletonPackages 주의사항
-
-토큰(`Token`)을 `provides` 하는 확장(예: `custom-api-extension`)은 앱 전역에서 **인스턴스가 하나만** 존재해야 하므로 `dev_mode/package.json`(및 staging)의 `jupyterlab.singletonPackages` 목록에 반드시 포함되어야 합니다.
-
-- `custom-api-extension` → `ICustomApi` 토큰을 provide → **singletonPackages에 포함**.
-- `custom-ui-extension` → 토큰을 provide 하지 않음 → singletonPackages에는 불필요.
-
-새 패키지가 토큰을 provide 한다면 singletonPackages 등록을 잊지 마세요. 누락 시 토큰이 중복 로드되어 주입이 실패할 수 있습니다.
-
----
-
-## 8. 참고
+## 7. 참고
 - 확장 플러그인 패턴: `packages/*-extension/src/index.ts`
 - Lumino 패턴(토큰/시그널/disposable): `docs/source/developer/patterns.md`
 - 모노레포 구조: `docs/source/developer/repo.md`
+
+## 8. 실행 코드
+
+### 8-1. Docker로 실행 시
+- Jupyter 권장 및 기본 Dockerfile은 docker/Dockerfile
+- Jupyter 기본 경량 버전은 docker/Dockerfile.runtime
+- Tstation 전용 dockerfile은 workspace-provider.Dockerfile
+- Tstation 에서 사용할 거기 때문에, workspace-provider.Dockerfile 만 빌드 성공해서 띄울 수 있으면 됨
+- 실제 서버에서 사용하는 명령어는 아니고, 프론트에서 테스트용 명령어
+```bash
+# 빌드 명령어
+docker build -f workspace-provider.Dockerfile -t workspace-provider:latest .
+
+# 빌드 후 컨테이너 실행 명령어
+docker run --rm -it -p 8888:8888 workspace-provider:latest /provider_venv/bin/python /provider_venv/bin/jupyter-lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --ServerApp.root_dir=/tmp --IdentityProvider.token=
+```
+
+### 8-2. 로컬 개발 서버 실행 시
+```bash
+# 가상환경 세팅
+python3 -m venv .venv
+source .venv/bin/activate
+
+pip install -e ".[dev,test]"
+
+jlpm
+jlpm build
+
+# 터미널1 (안켜도됨)
+jlpm watch
+또는
+python scripts/watch_dev.py
+
+# 터미널2
+
+# 개발모드로 여는 경우 (--watch 는 코드 감지용 (수정사항 바로 안봐도 되면 빼고 실행))
+jupyter lab --dev-mode --watch
+# 개발모드 끄고 여는 경우
+jupyter lab
+# 개발모드 끄고 열 때, 수정사항들이 반영되지 않으면 아래 빌드 명령어 이용
+jupyter lab build --splice-source
+```
