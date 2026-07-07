@@ -31,39 +31,39 @@ export const aboutPlugin: JupyterFrontEndPlugin<void> = {
     const trans = (translator ?? nullTranslator).load('jupyterlab');
 
     commands.addCommand(COMMAND_ID, {
-      label: trans.__('About %1', app.name),
+      label: `About ${app.name}`,
       execute: () => {
         const title = (
           <span className="jp-About-header">
             <div className="jp-About-header-info">
               <h2>{app.name}</h2>
-              <div
-                className="jp-About-body"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1rem'
-                }}
-              >
-                <span className="jp-About-version-info">
-                  <span className="jp-About-version">Version 0.0.1</span>
-                </span>
-                <span
-                  className="jp-About-copyright"
-                  style={{
-                    paddingTop: '0'
-                  }}
-                >
-                  © 2026 TILON Co., Ltd. All Rights Reserved.
-                </span>
-              </div>
             </div>
           </span>
         );
 
         const body = (
-          <div className="jp-About-body">
-            <span className="jp-About-copyright"></span>
+          <div
+            className="jp-About-body"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem',
+              paddingLeft: '1rem',
+              boxSizing: 'border-box',
+              paddingBottom: '1rem'
+            }}
+          >
+            <span className="jp-About-version-info">
+              <span className="jp-About-version">Version 0.0.1</span>
+            </span>
+            <span
+              className="jp-About-copyright"
+              style={{
+                paddingTop: '0'
+              }}
+            >
+              © 2026 TILON Co., Ltd. All Rights Reserved.
+            </span>
           </div>
         );
 
