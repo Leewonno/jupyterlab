@@ -37,9 +37,26 @@ export const aboutPlugin: JupyterFrontEndPlugin<void> = {
           <span className="jp-About-header">
             <div className="jp-About-header-info">
               <h2>{app.name}</h2>
-              <span className="jp-About-version-info">
-                <span className="jp-About-version"></span>
-              </span>
+              <div
+                className="jp-About-body"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '1rem'
+                }}
+              >
+                <span className="jp-About-version-info">
+                  <span className="jp-About-version">Version 0.0.1</span>
+                </span>
+                <span
+                  className="jp-About-copyright"
+                  style={{
+                    paddingTop: '0'
+                  }}
+                >
+                  © 2026 TILON Co., Ltd. All Rights Reserved.
+                </span>
+              </div>
             </div>
           </span>
         );
@@ -49,8 +66,6 @@ export const aboutPlugin: JupyterFrontEndPlugin<void> = {
             <span className="jp-About-copyright"></span>
           </div>
         );
-
-        // =====================================================================
 
         return showDialog({
           title,
