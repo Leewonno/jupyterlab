@@ -716,7 +716,9 @@ namespace Private {
    */
   export const inheritTheme = (): ITerminal.IThemeObject => {
     const bodyStyle = getComputedStyle(document.body);
-    const background = bodyStyle.getPropertyValue('--jp-layout-color0').trim();
+    const background =
+      bodyStyle.getPropertyValue('--launcher-background-color').trim() ||
+      bodyStyle.getPropertyValue('--jp-layout-color0').trim();
 
     let activeMatchBackground = '#ffee58'; // md-yellow-400 for light mode background
     try {

@@ -10,6 +10,8 @@ import '@jupyterlab/codemirror-extension/style/index.js';
 import '@jupyterlab/completer-extension/style/index.js';
 import '@jupyterlab/console-extension/style/index.js';
 import '@jupyterlab/csvviewer-extension/style/index.js';
+import '@jupyterlab/custom-api-extension/style/index.js';
+import '@jupyterlab/custom-ui-extension/style/index.js';
 import '@jupyterlab/debugger-extension/style/index.js';
 import '@jupyterlab/docmanager-extension/style/index.js';
 import '@jupyterlab/documentsearch-extension/style/index.js';

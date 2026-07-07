@@ -1,0 +1,94 @@
+/*-----------------------------------------------------------------------------
+| 스크롤 스타일 오버라이드 파일
+|----------------------------------------------------------------------------*/
+
+/* =======================================================================
+| 노트북 영역 스크롤 바 커스텀
+| ======================================================================= */
+
+.jp-WindowedPanel-outer::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 1rem;
+}
+
+/* =======================================================================
+| 터미널 영역 스크롤 바 커스텀
+| ======================================================================= */
+
+.xterm .xterm-viewport::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 1rem;
+}
+
+/* =======================================================================
+| 파일 영역 스크롤 바 커스텀
+| ======================================================================= */
+
+.jp-DirListing-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* =======================================================================
+| 코드 영역 스크롤 바 커스텀
+| ======================================================================= */
+
+.jp-zoom-target::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 1rem;
+}
+
+/* =======================================================================
+| 기타 파일 영역 스크롤 바 커스텀
+| ======================================================================= */
+
+/* 기타 파일 영역 스크롤 바 커스텀 */
+.cm-scroller .jp-zoom-target::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 1rem;
+}
+
+/* =======================================================================
+| 하단 로그 컨테이너 스크롤 바 커스텀
+| ======================================================================= */
+
+/* 하단 로그 컨테이너 스크롤 바 커스텀 */
+#jp-down-stack .jp-Scrolling::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 1rem;
+}
+
+/* =======================================================================
+| Contextual Help 스크롤 바 커스텀
+| ======================================================================= */
+
+/* Contextual Help 스크롤 바 커스텀 */
+#jp-main-dock-panel .jp-RenderedText::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 1rem;
+}
+
+/* =======================================================================
+| 공통 스크롤 커스텀
+| ======================================================================= */
+
+.jp-WindowedPanel-outer::-webkit-scrollbar,
+.cm-scroller .jp-zoom-target::-webkit-scrollbar,
+.jp-DirListing-content::-webkit-scrollbar,
+.jp-zoom-target::-webkit-scrollbar,
+.xterm .xterm-viewport::-webkit-scrollbar,
+#jp-down-stack .jp-Scrolling::-webkit-scrollbar,
+#jp-main-dock-panel .jp-RenderedText::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.jp-WindowedPanel-outer::-webkit-scrollbar-thumb,
+.xterm .xterm-viewport::-webkit-scrollbar-thumb,
+.jp-DirListing-content::-webkit-scrollbar-thumb,
+.jp-zoom-target::-webkit-scrollbar-thumb,
+.cm-scroller .jp-zoom-target::-webkit-scrollbar-thumb,
+#jp-down-stack .jp-Scrolling::-webkit-scrollbar-thumb,
+#jp-main-dock-panel .jp-RenderedText::-webkit-scrollbar-thumb {
+  background: var(--pressed-color);
+  border-radius: 4px;
+}

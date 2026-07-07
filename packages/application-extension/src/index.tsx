@@ -40,7 +40,8 @@ import { IStateDB } from '@jupyterlab/statedb';
 import type { TranslationBundle } from '@jupyterlab/translation';
 import { ITranslator, nullTranslator } from '@jupyterlab/translation';
 import type { ContextMenuSvg } from '@jupyterlab/ui-components';
-import { buildIcon, jupyterIcon, RankedMenu } from '@jupyterlab/ui-components';
+import { buildIcon, LabIcon, RankedMenu } from '@jupyterlab/ui-components';
+import logoSvgStr from '../style/logo.svg';
 import { find, some } from '@lumino/algorithm';
 import type {
   PartialJSONValue,
@@ -1760,6 +1761,11 @@ const propertyInspector: JupyterFrontEndPlugin<IPropertyInspectorProvider> = {
   }
 };
 
+const customLogoIcon = new LabIcon({
+  name: '@jupyterlab/application-extension:custom-logo',
+  svgstr: logoSvgStr
+});
+
 const jupyterLogo: JupyterFrontEndPlugin<void> = {
   id: '@jupyterlab/application-extension:logo',
   description: 'Sets the application logo.',
@@ -1767,12 +1773,12 @@ const jupyterLogo: JupyterFrontEndPlugin<void> = {
   requires: [ILabShell],
   activate: (app: JupyterFrontEnd, shell: ILabShell) => {
     const logo = new Widget();
-    jupyterIcon.element({
+    customLogoIcon.element({
       container: logo.node,
       elementPosition: 'center',
       margin: '2px 2px 2px 8px',
       height: 'auto',
-      width: '16px'
+      width: '24px'
     });
     logo.id = 'jp-MainLogo';
     shell.add(logo, 'top', { rank: 0 });

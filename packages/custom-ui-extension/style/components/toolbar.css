@@ -1,0 +1,67 @@
+/*-----------------------------------------------------------------------------
+| 툴바 제출 버튼 및 제출 모달 스타일
+|----------------------------------------------------------------------------*/
+
+.jp-submit-button {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.jp-submit-button[aria-pressed='true'] {
+  /* pressed 스타일 무효화 */
+  box-shadow: none;
+}
+
+.jp-submit-dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 280px;
+}
+
+.jp-submit-dialog-note {
+  margin: 0;
+  color: var(--jp-ui-font-color2);
+  font-size: var(--jp-ui-font-size1);
+}
+
+.jp-submit-dialog-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--jp-ui-font-size1);
+}
+
+.jp-submit-dialog-field select,
+.jp-submit-dialog-field input {
+  width: 100%;
+}
+
+/* 마감된 주차: 글자는 보이되 선택 불가임을 회색으로 표시 */
+.jp-submit-option-disabled {
+  color: var(--jp-ui-font-color3);
+}
+
+/*-----------------------------------------------------------------------------
+| 파일 브라우저 경로 표시줄(브레드크럼) root 아이콘 교체
+| 기존 folderIcon 인라인 svg를 숨기고 left.svg를 mask로 덮음 / folderIcon을 사용하지 않게하려면 코드를 직접 수정해야함
+|----------------------------------------------------------------------------*/
+
+.jp-BreadCrumbs-home svg {
+  display: none;
+}
+
+.jp-BreadCrumbs-home {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: var(--jp-inverse-layout-color3);
+  color: var(--jp-inverse-layout-color3);
+  -webkit-mask: url('../icons/left.svg') no-repeat center / 16px 16px;
+  mask: url('../icons/left.svg') no-repeat center / 16px 16px;
+}
+
+.jp-BreadCrumbs-home:hover {
+  color: var(--brand-accent-color);
+  background-color: var(--brand-accent-color) !important;
+}

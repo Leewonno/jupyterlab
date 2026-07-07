@@ -1,0 +1,139 @@
+/*-----------------------------------------------------------------------------
+| 패널 스타일 오버라이드 파일
+|----------------------------------------------------------------------------*/
+
+/* =======================================================================
+| 상단 패널
+| ======================================================================= */
+
+#jp-top-panel {
+  border-bottom: none !important;
+  padding: 5px 0 !important;
+  display: flex;
+  align-items: center;
+  background-color: var(--layout-white-color);
+}
+
+/* 상단 패널 메인 로고 영역 */
+#jp-MainLogo {
+  /* 50px */
+  width: calc(
+    var(--jp-private-sidebar-tab-width) + var(--jp-border-width) + 17px
+  ) !important;
+  background-color: var(--layout-white-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 상단 패널 메인 로고 */
+#jp-MainLogo svg {
+  margin: 0 !important;
+  width: 16px;
+}
+
+/* 상단 패널 메뉴 영역 Wrapper */
+#jp-menu-panel {
+  height: 100%;
+  background-color: var(--layout-white-color);
+  display: flex;
+  align-items: flex-end;
+}
+
+/* 상단 패널 메뉴 영역 (File, Edit, View, Run...) */
+#jp-MainMenu {
+  background-color: transparent;
+}
+
+/* 상단 패널 메뉴 요소 */
+.lm-MenuBar-item {
+  border-radius: var(--item-radius);
+}
+
+.lm-MenuBar-item.lm-mod-active {
+  border-radius: 0;
+}
+
+.lm-Menu-item.lm-mod-active {
+  background-color: var(--deep-hover-color) !important;
+}
+
+/* 상단 메뉴 바 메뉴에 display : table 이라 border 보이는 문제 -> 배경과 그림자로 덮어서 해결 */
+.lm-Menu-item.lm-mod-active > div {
+  background: var(--deep-hover-color);
+  box-shadow:
+    1px 0 0 0 var(--deep-hover-color),
+    -1px 0 0 0 var(--deep-hover-color);
+}
+
+/* =======================================================================
+| 중앙 패널
+| ======================================================================= */
+
+/* 중앙 패널 전체 (사이드 바 포함) */
+#jp-main-content-panel {
+  /*padding-top: var(--box-spacing);*/
+
+  /*padding-bottom: var(--box-spacing);*/
+}
+
+/* 중앙 패널의 중앙 패널 (사이드 바 제외한 가운데 패널) */
+#jp-main-vsplit-panel {
+  /*background-color: var(--layout-color);*/
+}
+
+/* 중앙 패널의 중앙 패널의 중앙 패널 (jp-main-vsplit-panel 내부 컨테이너) */
+#jp-main-split-panel {
+  /*padding: 0 var(--box-spacing) !important;*/
+}
+
+/* =======================================================================
+| 하단 패널
+| ======================================================================= */
+
+/* 하단 패널 */
+#jp-down-stack {
+  padding: var(--box-spacing) !important;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--box-spacing);
+}
+
+/* 하단 패널 컨테이너 */
+#jp-down-stack > .lm-TabBar {
+  border: none;
+  border-radius: var(--box-radius);
+  contain: content !important;
+  height: auto !important;
+}
+
+/* 하단 패널 헤더 목록 리스트 */
+#jp-down-stack .lm-TabBar-content {
+  background-color: var(--layout-color);
+}
+
+/* 하단 패널 헤더 탭 아이템 */
+#jp-down-stack .lm-TabPanel-tabBar .lm-TabBar-tab.lm-mod-current {
+  background-color: var(--selected-color) !important;
+  border-radius: var(--item-radius);
+  border: none !important;
+}
+
+/* 하단 패널 헤더 탭 선택된 아이템 */
+#jp-down-stack > .lm-TabBar .lm-TabBar-tab.lm-mod-current {
+  transform: translateY(0);
+}
+
+/* 하단 패널 본문 */
+#jp-down-stack > .lm-TabPanel-stackedPanel {
+  margin-top: calc(var(--box-spacing));
+  border-radius: var(--box-radius);
+  height: calc(100% - 42px) !important;
+  background: var(--launcher-background-gradient);
+}
+
+/* 하단 상태바 */
+#jp-bottom-panel .jp-StatusBar-Widget {
+  border-top: 1px solid var(--container-color);
+}

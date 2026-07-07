@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title><%= htmlWebpackPlugin.options.title %></title>
+  <title>{{ page_config['appName'] | e }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= require('html-loader!./partial.html') %>
 </head>

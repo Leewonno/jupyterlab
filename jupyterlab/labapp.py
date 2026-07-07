@@ -416,7 +416,7 @@ class LabApp(NotebookConfigShimMixin, LabServerApp):
     version = version
 
     name = "lab"
-    app_name = "JupyterLab"
+    app_name = "Tstation"
 
     # Should your extension expose other server extensions when launched directly?
     load_other_extensions = True
@@ -803,7 +803,7 @@ class LabApp(NotebookConfigShimMixin, LabServerApp):
             entry_point = EXT_MANAGERS.get(provider)
             if entry_point is None:
                 self.log.error(f"Extension Manager: No manager defined for provider '{provider}'.")
-                raise NotImplementedError()
+                raise NotImplementedError
             else:
                 self.log.info(f"Extension Manager is '{provider}'.")
             manager_factory = entry_point.load()

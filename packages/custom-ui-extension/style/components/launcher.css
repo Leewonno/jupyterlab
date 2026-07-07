@@ -1,0 +1,469 @@
+/*-----------------------------------------------------------------------------
+| Launcher overrides
+| 중앙 실행 영역 오버라이드
+|----------------------------------------------------------------------------*/
+
+/* 메인 코드 실행 패널 */
+#jp-main-dock-panel {
+  background-color: var(--container-color);
+
+  /*margin-top: var(--box-spacing);*/
+}
+
+/* 내부 공통 패널 컨테이너 */
+#jp-main-dock-panel .lm-DockPanel-widget {
+  border: none;
+  background-color: var(--container-color);
+}
+
+/* =======================================================================
+| 저장 및 제출 버튼
+| ======================================================================= */
+
+/* 제출(전송) 버튼 */
+#jp-main-dock-panel .jp-Toolbar .jp-ToolbarButtonComponent {
+  /*background-color: var(--container-color);*/
+}
+
+#jp-main-dock-panel .jp-Toolbar .jp-ToolbarButtonComponent:hover {
+  background-color: var(--hover-color);
+}
+
+/* =======================================================================
+| 런처(Launcher) ::: 초기 페이지
+| ======================================================================= */
+
+/* 기본 런처 컨테이너 */
+#jp-main-dock-panel .jp-Launcher {
+  border-radius: var(--box-radius);
+  background: none !important;
+
+  /*margin-top: var(--box-spacing);*/
+}
+
+/* 기본 런처 컨테이너 내부 컨테이너 */
+.jp-Launcher-body {
+  background: var(--launcher-background-gradient);
+  border-radius: 20px;
+
+  /*height: calc(100% - var(--box-spacing));*/
+}
+
+/* 런처 초기 페이지 */
+.jp-LauncherCard {
+  border-radius: var(--item-radius);
+  box-shadow: 0 0 4px -3px var(--brand-normal-color);
+  border: 1px solid var(--container-color);
+  background: var(--button-background-gradient);
+}
+
+.jp-LauncherCard:hover {
+  box-shadow: 0 0 6px -3px var(--brand-normal-color);
+  background: var(--button-reverse-background-gradient);
+}
+
+/* =======================================================================
+| 파일 탭 바
+| ======================================================================= */
+
+/* 파일 목록 영역 */
+#jp-main-dock-panel .lm-DockPanel-tabBar {
+  /*background-color: var(--container-color) !important;*/
+
+  /*padding: 5px;*/
+  contain: content !important;
+  border-radius: var(--box-radius);
+  height: auto !important;
+  display: flex;
+  gap: 5px;
+}
+
+/* 파일 목록 영역 정렬 */
+#jp-main-dock-panel .lm-DockPanel-tabBar[data-orientation='horizontal'] {
+  flex: none;
+}
+
+/* 런처 상단 파일 상태 바 요소 컨테이너 */
+#jp-main-dock-panel .lm-TabBar-content {
+  display: flex;
+  gap: 5px;
+}
+
+/* 런처 상단 파일 상태 바 선택된 요소 */
+#jp-main-dock-panel .lm-TabBar-tab.lm-mod-current {
+  border-radius: var(--item-radius);
+  border: none;
+  background-color: var(--selected-color) !important;
+}
+
+/* 런처 상단 파일 상태 바 선택된 요소 강조 */
+#jp-main-dock-panel .lm-TabBar-tab.jp-mod-current::before {
+  height: 0;
+}
+
+/* 런처 상단 파일 상태 바 파일 추가 버튼 */
+#jp-main-dock-panel .lm-TabBar-addButton {
+  border-radius: var(--item-radius);
+  background-color: var(--layout-color) !important;
+  width: 16px;
+  height: 16px;
+}
+
+/* 런처 상단 파일 상태 바 선택되지 않은 요소 */
+#jp-main-dock-panel .lm-mod-closable {
+  border-radius: var(--item-radius);
+  border: none;
+  background-color: var(--layout-white-color) !important;
+}
+
+/* 런처 상단 파일 상태 바 */
+.lm-DockPanel-tabBar .lm-TabBar-tab:not(.lm-mod-current)::after,
+.lm-DockPanel-tabBar .lm-TabBar-addButton::after {
+  border: none;
+}
+
+/* 파일 관리 탭 엑스 버튼 */
+.jp-icon-hover :hover .jp-icon3-hover[fill] {
+  fill: var(--deep-hover-color);
+}
+
+.jp-icon-hover :hover .jp-icon-accent2-hover[fill] {
+  fill: var(--brand-accent-color);
+}
+
+/* 파일 관리 탭 저장되지 않은 파일 표시 아이콘 */
+.lm-TabBar-tab.jp-mod-dirty
+  > .lm-TabBar-tabCloseIcon
+  > :not(:hover)
+  > .jp-icon-busy[fill] {
+  fill: var(--jp-brand-color0) !important;
+}
+
+/* =======================================================================
+| 노트북 영역
+| ======================================================================= */
+
+/* 노트북 영역 입력영역 컨테이너 */
+.jp-Notebook {
+  background: transparent !important;
+  padding-top: 16px;
+}
+
+/* 노트북 영역 입력영역 내부 컨테이너 */
+.jp-WindowedPanel-outer {
+  background: var(--launcher-background-color) !important;
+  border-radius: var(--box-radius);
+}
+
+/* 노트북 툴바 커스텀 */
+#jp-main-dock-panel .jp-NotebookPanel .jp-Toolbar {
+  margin-top: calc(var(--box-spacing) * 1);
+  background-color: var(--layout-white-color) !important;
+}
+
+/* =======================================================================
+| Contextual Helper
+| ======================================================================= */
+
+/* Contextual Help (도움말) 영역 박스 */
+#jp-main-dock-panel .jp-Inspector-placeholderContent {
+  /*height: calc(100% - var(--box-spacing)) !important;*/
+  overflow: auto;
+  border-radius: var(--box-radius);
+
+  /*margin-top: var(--box-spacing);*/
+}
+
+/* Contextual Help (도움말) 데이터 출력 박스 */
+#jp-main-dock-panel .jp-Inspector {
+  /*padding-top: var(--box-spacing);*/
+}
+
+/* Contextual Help (도움말) 텍스트 출력 박스 */
+#jp-main-dock-panel .jp-Inspector-content {
+  border-radius: var(--box-radius);
+  background: var(--launcher-background-gradient);
+}
+
+/* Contextual Help (도움말) 텍스트 출력 영역 */
+#jp-main-dock-panel .jp-RenderedText {
+  /*height: calc(100% - var(--box-spacing)) !important;*/
+
+  /*margin-top: var(--box-spacing);*/
+  background-color: var(--launcher-background-gradient);
+  border-radius: var(--box-radius);
+}
+
+/* =======================================================================
+| (Python) 콘솔 박스
+| ======================================================================= */
+
+/* 콘솔 박스 */
+#jp-main-dock-panel .jp-ConsolePanel {
+  margin-top: 8px !important;
+
+  /*margin-top: 16px !important;*/
+}
+
+/* 콘솔 박스 내용 및 입력 컨테이너 */
+#jp-main-dock-panel .jp-CodeConsole-split {
+  margin-top: var(--box-spacing);
+  border-radius: var(--box-radius);
+  height: calc(100% - var(--box-spacing) * 2) !important;
+  background: var(--launcher-background-color);
+
+  /*height: calc(100% - var(--box-spacing) * 3) !important;*/
+}
+
+/* 콘솔 박스 구분 선 */
+.jp-CodeConsole-split.lm-SplitPanel .lm-SplitPanel-handle::after {
+  background-color: transparent !important;
+}
+
+/* 콘솔 박스 버튼 박스 */
+#jp-main-dock-panel .jp-ConsolePanel .jp-Toolbar {
+  background-color: var(--layout-white-color) !important;
+  border-radius: var(--box-radius);
+}
+
+/* 디버그로 콘솔 박스 여는 경우 콘솔 박스 */
+#jp-main-dock-panel .jp-DebugConsole {
+  margin-top: 0 !important;
+}
+
+/* 디버그로 콘솔 박스 여는 경우 버튼 박스 */
+#jp-main-dock-panel .jp-DebugConsole jp-toolbar {
+  display: none;
+}
+
+/* 디버그로 콘솔 박스 여는 경우 콘솔 박스 내부 컨테이너 */
+#jp-main-dock-panel .jp-DebugConsole .jp-CodeConsole-split {
+  margin-top: 0;
+  height: 100% !important;
+  background: var(--launcher-background-color);
+
+  /*height: calc(100% - var(--box-spacing) * 1) !important;*/
+}
+
+.jp-CodeConsole-content {
+  background: none !important;
+}
+
+.jp-CodeConsole-input {
+  background: none !important;
+}
+
+/* 디버그로 콘솔 박스 여는 경우 버튼 박스 */
+#jp-main-dock-panel .jp-DebugConsole .jp-Toolbar::part(positioning-region) {
+  background-color: var(--launcher-background-color) !important;
+}
+
+/* =======================================================================
+| (py, js, txt...) 기타 파일
+| ======================================================================= */
+
+/* 기타 파일 커스텀 툴바 컨테이너 */
+#jp-main-dock-panel .jp-Document .jp-Toolbar {
+  border-radius: var(--box-radius) !important;
+
+  /*margin-top: calc(var(--box-spacing) * 2);*/
+
+  /* 저장 및 제출 추가 시 아래 주석 풀기 */
+
+  /*margin-top: calc(var(--box-spacing) * 1);*/
+
+  /*background-color: var(--layout-white-color) !important;*/
+}
+
+/* 기타 파일 컨테이너 */
+#jp-main-dock-panel .jp-FileEditor {
+  background: var(--launcher-background-color) !important;
+  border-radius: var(--box-radius);
+
+  /*margin-top: calc(var(--box-spacing) * 3);*/
+
+  /*height: calc(100% - var(--box-spacing) * 7) !important;*/
+
+  /* 저장 및 제출 추가 시 아래 주석 풀기 */
+
+  /*margin-top: calc(var(--box-spacing) * 2);*/
+
+  /*height: calc(100% - var(--box-spacing) * 6) !important;*/
+}
+
+/* 파일 라인 카운트 컨테이너 */
+#jp-main-dock-panel .ͼ2 .cm-gutters {
+  background-color: var(--container-color);
+  border-right: 1px solid var(--hover-color);
+}
+
+/* 파일 편집할 때, 다크 모드인 경우 커서 안보이는 문제 해결용 */
+body[data-jp-theme-light='false'] {
+  #jp-main-dock-panel .jp-FileEditor .ͼ4 .cm-line {
+    caret-color: var(--black-color) !important;
+  }
+}
+
+/* 기타 파일 수정 영역 배경 */
+#jp-main-dock-panel .jp-FileEditor .ͼo .cm-scroller {
+  background-color: var(--launcher-background-color) !important;
+}
+
+/* =======================================================================
+| 코드 입력 영역
+| ======================================================================= */
+
+/* 입력 영역 */
+.jp-InputArea-editor {
+  /*border-radius: var(--box-radius);*/
+
+  /*padding: 0 10px;*/
+}
+
+/* 코드 입력란 오른쪽 버튼 툴바 */
+#jp-main-dock-panel .jp-Document .lm-Widget .jp-Toolbar {
+  background-color: transparent !important;
+  margin-top: 0;
+}
+
+/* 코드 입력란 디버그 모드 실행 시 */
+#jp-main-dock-panel .ͼo .cm-gutter {
+  background-color: var(--layout-color) !important;
+}
+
+/* 라인 추가 버튼 */
+.jp-ThemedContainer button {
+  border-radius: var(--item-radius);
+}
+
+/* =======================================================================
+| 터미널 영역
+| ======================================================================= */
+
+/* 터미널 컨테이너 */
+
+/* 터미널 배경에 그라디언트 주려면 JS 수정해야해서 마지막에 작업 */
+#jp-main-dock-panel .jp-Terminal {
+  padding: 8px 0;
+  padding-top: 0;
+}
+
+#jp-main-dock-panel .jp-Terminal-body {
+  padding: 12px;
+}
+
+#jp-main-dock-panel .xterm-viewport {
+  border-radius: var(--box-radius);
+  height: calc(100% - var(--box-spacing) * 2) !important;
+  background-color: var(--launcher-background-color) !important;
+}
+
+/* 터미널 컨테이너 body */
+.jp-Terminal-body {
+  height: 100%;
+}
+
+/* 터미널 입력 canvas — 크기/패딩은 xterm이 직접 관리하므로 건드리지 않는다 */
+#jp-main-dock-panel .jp-Terminal canvas {
+  border: none;
+}
+
+/* =======================================================================
+| 버튼(기능) 컨테이너
+| ======================================================================= */
+
+/* 버튼 영역 컨테이너 */
+#jp-main-dock-panel .jp-NotebookPanel-toolbar {
+  background-color: var(--container-color) !important;
+  border-radius: var(--box-radius);
+  margin-top: 2rem;
+}
+
+/* 버튼 툴바 hover */
+.jp-ToolbarButtonComponent:hover {
+  background-color: var(--hover-color);
+  border-radius: var(--item-radius);
+}
+
+/* 반응형 대응 컨테이너 */
+.jp-Toolbar-responsive-popup.jp-ThemedContainer {
+  border-radius: var(--box-radius);
+  background-color: var(--layout-white-color) !important;
+}
+
+/* =======================================================================
+| 디버그를 통해 파일을 보는 영역
+| ======================================================================= */
+
+/* 컨테이너 */
+[data-jp-debugger='true'].jp-Editor .jp-mod-readOnly {
+  margin-top: var(--box-spacing) !important;
+  background: var(--container-color) !important;
+}
+
+/* 내부 코드 영역 컨테이너 */
+[data-jp-debugger='true'].jp-Editor .jp-mod-readOnly .cm-scroller {
+  height: calc(100% - var(--box-spacing));
+  border-radius: var(--box-radius);
+  background: var(--launcher-background-color) !important;
+}
+
+/* =======================================================================
+| 라이센스
+| ======================================================================= */
+
+/* 라이센스 영역 전체 컨테이너 */
+.jp-MainAreaWidget:has(.jp-Licenses) {
+  margin-top: calc(var(--box-spacing));
+}
+
+/* 라이센스 컨테이너*/
+.jp-Licenses {
+  border-radius: var(--box-radius);
+  margin-top: var(--box-spacing);
+  height: calc(100% - var(--box-spacing) * 6) !important;
+}
+
+/* 라이센스 영역의 툴바 */
+.jp-MainAreaWidget:has(.jp-Licenses) > jp-toolbar {
+  border-radius: var(--box-radius);
+  background-color: var(--layout-white-color) !important;
+
+  /*background-color: var(--container-color) !important;*/
+}
+
+/* =======================================================================
+| Jupyter Reference, FAQ 등 Iframe 영역
+| ======================================================================= */
+
+/* Iframe 컨테이너 */
+.jp-MainAreaWidget:has(.jp-IFrame) {
+  margin-top: calc(var(--box-spacing));
+}
+
+#jp-main-dock-panel .jp-IFrame {
+  border-radius: var(--box-radius);
+  height: calc(100% - var(--box-spacing) * 2) !important;
+}
+
+/* =======================================================================
+| Settings Editor
+| ======================================================================= */
+
+/* Settings Editor 컨테이너 */
+#setting-editor {
+  margin-top: var(--box-spacing);
+}
+
+/* Settings Editor Toolbar */
+#setting-editor jp-toolbar {
+  margin-top: var(--box-spacing);
+  background-color: var(--container-color) !important;
+  border-radius: var(--box-radius);
+}
+
+/* Settings Editor 세팅 영역 */
+#setting-editor .lm-SplitPanel {
+  margin-top: calc(var(--box-spacing) * 2);
+  height: calc(100% - var(--box-spacing) * 7) !important;
+}

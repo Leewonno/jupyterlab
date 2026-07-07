@@ -1,0 +1,243 @@
+/*-----------------------------------------------------------------------------
+| 좌측, 우측 사이드 바 스타일 오버라이드 파일
+|----------------------------------------------------------------------------*/
+
+/* 사이드 바 컨테이너 */
+.jp-SideBar.lm-TabBar[data-orientation='vertical'] {
+  max-width: 50px !important;
+  background-color: var(--container-color);
+
+  /*height: auto !important;*/
+
+  /*contain: content !important;*/
+}
+
+/* 사이드 바 컨테이너 테두리 */
+.jp-SideBar.lm-TabBar[data-orientation='vertical']::before {
+  border: none !important;
+}
+
+.jp-SideBar.lm-TabBar[data-orientation='vertical']::after {
+  border: none !important;
+}
+
+/* 사이드 바 내부 컨테이너 */
+.jp-SideBar[data-orientation='vertical'] .lm-TabBar-content {
+  height: auto !important;
+  background-color: var(--container-color);
+  margin: 0 !important;
+}
+
+/* 사이드 바 선택된 탭 버튼 */
+.jp-SideBar .lm-TabBar-tab.lm-mod-current::after {
+  margin: 7px;
+  border-radius: calc(var(--item-radius) - 5px);
+  background-color: var(--selected-color);
+  z-index: -1;
+  border: 1px solid var(--brand-dark-border-color) !important;
+}
+
+/* 사이드 바 선택된 탭 버튼 :: 바로 위 항목의 내부 요소 */
+.lm-TabBar-tab.lm-mod-current {
+  background-color: transparent !important;
+  color: var(--brand-normal-color);
+}
+
+/* 사이드 바 탭 버튼 hover */
+.jp-SideBar .lm-TabBar-tab:hover:not(.lm-mod-current) {
+  width: 36px;
+  height: 38px;
+  border-radius: calc(var(--item-radius) - 5px);
+  background-color: var(--hover-color) !important;
+  margin: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 사이드 바 선택된 탭 버튼 테두리 */
+.jp-SideBar[data-orientation='vertical']
+  .lm-TabBar-tab
+  + .lm-TabBar-tab.lm-mod-current {
+  border: none !important;
+}
+
+/* 사이드 바 선택되지 않은 탭 버튼 */
+.jp-SideBar .lm-TabBar-tab:not(.lm-mod-current),
+#jp-down-stack .lm-TabBar-tab:not(.lm-mod-current) {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+/* 커스텀 사이드 바 */
+#jp-custom-sidebar {
+  background-color: var(--layout-color) !important;
+}
+
+/* 우측 디버그 사이드 바 */
+.jp-SideArea {
+  /*border-radius: var(--box-radius) !important;*/
+  background-color: var(--layout-color) !important;
+  border: none !important;
+}
+
+.jp-PropertyInspector {
+  background: none !important;
+}
+
+.jp-NotebookTools {
+  background: none !important;
+}
+
+/* 좌측 사이드 바 */
+.lm-SplitPanel-child[data-side='left'] {
+  background-color: var(--container-color) !important;
+  border: none;
+}
+
+/* 좌측 컨테이너 파일 목록 컨테이너 */
+.jp-DirListing-content {
+  background-color: transparent !important;
+}
+
+/* 파일 컨테이너 속성 크기 조절 아이템 */
+.jp-DirListing-resizeHandle {
+  border: none !important;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+/* 파일 컨테이너 툴바 추가 버튼 */
+.jp-FileBrowser-toolbar
+  .jp-ToolbarButtonComponent[data-command='launcher:create'] {
+  color: #fff;
+  padding: 2px 0;
+  box-shadow: 0 0 15px -5px var(--brand-normal-color) !important;
+}
+
+/* 추가 버튼 아이콘 굵기 수정 */
+.jp-FileBrowser-toolbar svg[data-icon='ui-components:add'] path {
+  stroke-width: 3;
+}
+
+.jp-DirListing-item.jp-mod-running .jp-DirListing-itemIcon::before {
+  color: var(--brand-normal-color);
+}
+
+/* 메인 패널 좌측 컨테이너 내용 */
+.lm-Widget .jp-SidePanel {
+  background-color: var(--layout-color) !important;
+}
+
+/* 메인 패널 좌측 컨테이너 실행 내용 타이틀 아코디언 */
+.lm-AccordionPanel .jp-AccordionPanel-title {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 좌측 사이드 바 목록 구분 라인 */
+.jp-extensionmanager-pending {
+  background-color: transparent !important;
+}
+
+/* 우측 사이드 바 아코디언 헤더 */
+.jp-Collapse-header-collapsed {
+  background-color: transparent !important;
+}
+
+/* 우측 사이드 바 열린 아코디언 헤더 */
+.jp-Collapse-header {
+  background-color: transparent !important;
+}
+
+/* 우측 사이드 바 아코디언 본문 컨테이너 */
+.jp-Collapse-contents {
+  background-color: transparent !important;
+}
+
+/* 우측 사이드 바 아코디언 본문 */
+.jp-MetadataForm {
+  background-color: transparent !important;
+}
+
+/* 하단 상태 바 */
+.jp-StatusBar-Widget {
+  background-color: var(--layout-color) !important;
+}
+
+/* 하단 상태 바 hover */
+.jp-mod-highlighted:hover {
+  background-color: var(--hover-color) !important;
+}
+
+/* 하단 상태 바 알림 창 헤더 */
+.jp-StatusBar-HoverItem {
+  background-color: var(--container-color) !important;
+}
+
+/* 하단 상태 바 알림 창 버튼 hover */
+.jp-ToolbarButtonComponent:hover {
+  background-color: var(--deep-hover-color) !important;
+}
+
+/* 하단 상태 바 알림 창 본문 */
+.jp-Notification-List {
+  background-color: var(--layout-color) !important;
+}
+
+/* 사이드 바 헤더 */
+.jp-SidePanel-header {
+  padding: 10px 0;
+}
+
+/* 트리 아이템 */
+jp-tree-item.jp-RunningSessions-item.jp-TreeItem.nested.expanded {
+  background: none !important;
+}
+
+jp-tree-item::part(positioning-region) {
+  background: none;
+}
+
+jp-tree-item {
+  background: none;
+}
+
+/* 현재 열린 탭 목록 사이드 패널 */
+.jp-TableOfContents-content {
+  background-color: transparent !important;
+}
+
+/* 사이드 패널 파일, 폴더 hover */
+.jp-DirListing-item:hover:not(.jp-mod-selected) {
+  background-color: var(--hover-color) !important;
+}
+
+/* 커스텀 사이드 바 위젯 본문 */
+.jp-CustomSidebar {
+  padding: 16px;
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  color: var(--jp-ui-font-color1);
+}
+
+.jp-CustomSidebar-title {
+  font-size: var(--jp-ui-font-size2);
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.jp-CustomSidebar-desc {
+  color: var(--jp-ui-font-color2);
+  margin: 0 0 12px;
+}
+
+.jp-CustomSidebar-list {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.jp-CustomSidebar-list li {
+  margin-bottom: 4px;
+}

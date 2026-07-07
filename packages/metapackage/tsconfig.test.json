@@ -63,6 +63,12 @@
       "path": "../csvviewer-extension"
     },
     {
+      "path": "../custom-api-extension"
+    },
+    {
+      "path": "../custom-ui-extension"
+    },
+    {
       "path": "../debugger"
     },
     {
